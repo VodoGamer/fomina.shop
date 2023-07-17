@@ -7,15 +7,51 @@ $margin-step: 8px
 // page
 .page__body
 	margin: $margin-step * 3
-	font-family: 'Inter', sans-serif
+	font-family: 'Source Sans 3', sans-serif
 	@media screen and ( max-width: 500px )
 		margin: $margin-step * 3 $margin-step
 
-// herader
+// header
+.header
+	display: grid
+	grid-template-columns: min-content 1fr
+	justify-items: center
+	align-items: center
+
 .header__logo
+	width: 288px
+
+// burger-menu
+.menu, .menu-cross
+	cursor: pointer
+
+.burger-menu
+	position: absolute
+	top: 0
+	left: 0
+	background-color: white
+	padding: $margin-step * 3
+	z-index: 2
+
+.burger-menu__link
 	display: block
-	margin: 0 auto
-	width: 299px
+	text-decoration: none
+	color: black
+	font-size: 40px
+	font-weight: light
+	margin-bottom: $margin-step
+	transition-duration: .2s
+	&:hover
+		color: blue
+
+.burger-menu__outside
+	position: absolute
+	top: 0
+	left: 0
+	height: 100%
+	width: 100%
+	z-index: 1
+	background-color: rgba(0, 0, 0, 0.2)
 
 // main
 .main
@@ -23,70 +59,16 @@ $margin-step: 8px
 
 // hello
 .hello
-	padding: 94px 0
-	background-color: #F4F4F4
-
-.hello__header, .hello__subheader
-	text-align: center
-	font-size: 48px
-	line-height: 1.2
-
-.hello__subheader
-	font-weight: 300
-	display: block
-	height: 100px
-
-// Brands
-.brands
-	margin-top: $margin-step * 3
+	background: url(/static/images/hello-image.webp) no-repeat
+	background-color: grey
+	background-blend-mode: multiply
+	background-size: cover
+	height: 80vh
 	display: grid
-	gap: 16px
-	grid-template-columns: repeat(3, 1fr)
-	@media screen and ( max-width: 768px )
-		grid-template-columns: repeat(2, 1fr)
-	@media screen and ( max-width: 500px )
-		grid-template-columns: repeat(1, 1fr)
 
-.brands__header
-	font-size: 36px
-	grid-column: 1 / 4
-	justify-self: center
+.hello__header
 	text-align: center
-	font-weight: 500
-	@media screen and ( max-width: 768px )
-		grid-column: 1 / 3
-	@media screen and ( max-width: 500px )
-		grid-column: 1
-
-// Brand
-.brand__link
-	text-decoration: none
-	color: black
-
-.brand__title
-	font-weight: 300
-	font-size: 32px
-	text-align: center
-
-.brand__image
-	width: 100%
-	border-radius: .4em
-	object-fit: cover
-
-// Social
-.social
-	margin-top: $margin-step * 3
-
-.social__header
-	font-size: 30px
-	font-weight: 400
-
-.social__paragraph
-	font-size: 20px
-	margin-top: $margin-step
-	font-weight: 300
-
-.social__link
-	font-weight: 500
-	color: #1D59F1
-	text-decoration: underline
+	font-size: 64px
+	font-weight: 600
+	color: white
+	align-self: center
