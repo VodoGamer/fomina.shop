@@ -8,6 +8,10 @@ license = "MIT"
 [tool.poetry.dependencies]
 python = "^3.10"
 fastapi = "^0.100.0"
+sqlalchemy = "^2.0.19"
+alembic = "^1.11.1"
+psycopg2 = "^2.9.6"
+python-dotenv = "^1.0.0"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -22,9 +26,13 @@ target-version = ['py310']
 
 [tool.ruff]
 select = ["I", "E", "F", "B", "Q"]
-exclude = ["alembic"]
+exclude = ["migrations"]
 line-length = 99
 target-version = "py310"
+
+[tool.pyright]
+exclude = ["migrations"]
+pythonVersion = "3.10"
 
 
 [build-system]
