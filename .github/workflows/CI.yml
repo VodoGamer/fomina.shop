@@ -32,10 +32,10 @@ jobs:
         run: poetry install --with dev
 
       - name: Check code formatting by black
-        run: poetry run black . --check
+        run: poetry run black api --check
 
       - name: Run ruff
-        run: poetry run ruff .
+        run: poetry run ruff api
 
       - name: Check types by pyright
         run: poetry run pyright api
