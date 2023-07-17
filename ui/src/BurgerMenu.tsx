@@ -10,9 +10,9 @@ const BurgerMenu: Component = () => {
 			<Show when={burgerState()}>
 				<div class="burger-menu">
 					<img class="menu-cross" onClick={toggle} src="/static/icons/menu-cross.svg" alt="" />
-					<a class="burger-menu__link" href="">Дети 2-7лет</a>
-					<a class="burger-menu__link" href="">Мужчины</a>
-					<a class="burger-menu__link" href="">Женщины</a>
+					<a class="burger-menu__link" href="">Детское</a>
+					<a class="burger-menu__link" href="">Женское</a>
+					<a class="burger-menu__link" href="">Мужское</a>
 				</div>
 				<div class="burger-menu__outside" onClick={toggle}></div>
 			</Show>

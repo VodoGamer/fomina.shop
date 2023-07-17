@@ -9,7 +9,7 @@ $margin-step: 8px
 	margin: $margin-step * 3
 	font-family: 'Source Sans 3', sans-serif
 	@media screen and ( max-width: 500px )
-		margin: $margin-step * 3 $margin-step
+		margin: $margin-step $margin-step
 
 // header
 .header
@@ -19,11 +19,14 @@ $margin-step: 8px
 	align-items: center
 
 .header__logo
-	width: 288px
+	width: 8em
+	@media screen and ( max-width: 500px )
+		width: 4em
 
 // burger-menu
 .menu, .menu-cross
 	cursor: pointer
+	width: 2em
 
 .burger-menu
 	position: absolute
@@ -38,11 +41,13 @@ $margin-step: 8px
 	text-decoration: none
 	color: black
 	font-size: 40px
-	font-weight: light
-	margin-bottom: $margin-step
+	font-weight: 400
+	margin-top: $margin-step
 	transition-duration: .2s
 	&:hover
 		color: blue
+	@media screen and (max-width: 500px)
+		font-size: 1.5em
 
 .burger-menu__outside
 	position: absolute
@@ -55,7 +60,7 @@ $margin-step: 8px
 
 // main
 .main
-	margin-top: $margin-step * 3
+	margin-top: $margin-step
 
 // hello
 .hello
@@ -72,3 +77,5 @@ $margin-step: 8px
 	font-weight: 600
 	color: white
 	align-self: center
+	@media screen and (max-width: 500px)
+		font-size: 2.3em
