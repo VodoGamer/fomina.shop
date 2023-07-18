@@ -16,7 +16,7 @@ class Category(Base):
     image_path: Mapped[str] = mapped_column(String(255), nullable=True)
 
     products: Mapped[list["Product"]] = relationship(
-        back_populates="product", cascade="all, delete-orphan"
+        back_populates="category", cascade="all, delete-orphan"
     )
 
 
@@ -29,4 +29,4 @@ class Product(Base):
     pub_date: Mapped[str] = mapped_column(DateTime(), server_default=func.now())
     category_id: Mapped[int] = mapped_column(ForeignKey("category.id"))
 
-    category: Mapped["Category"] = relationship(back_populates="users")
+    category: Mapped["Category"] = relationship(back_populates="products")
