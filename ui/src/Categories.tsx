@@ -3,11 +3,11 @@ import { type Component, For, createResource } from "solid-js";
 import { type category } from "./types/categoryType";
 
 
-const fetchCategories = async (): Promise<[category]> =>
+const getCategories = async (): Promise<[category]> =>
 	(await fetch(`${import.meta.env.VITE_BASE_API_URL}/categories/`)).json();
 
 const Categories: Component = () => {
-	const [categories] = createResource(1, fetchCategories)
+	const [categories] = createResource(getCategories)
 
 	return (
 		<For each={categories()}>{(category) =>

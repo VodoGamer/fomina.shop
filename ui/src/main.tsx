@@ -1,17 +1,14 @@
 import { type Component } from 'solid-js';
 
-import BurgerMenu from './BurgerMenu';
+import Header from './Header';
 
 const Index: Component = () => {
 	return (
 		<>
-			<header class="header">
-				<BurgerMenu />
-				<img class="header__logo" width="284" src="/static/icons/fomina-logo.svg" alt="" />
-			</header>
+			<Header />
 			<main class="main">
-				<div class="hello">
-					<h1 class="hello__header">Fomina style</h1>
+				<div class="first-look" style="background-image: url(/static/images/hello-image.webp);">
+					<h1 class="first-look__header">Fomina style</h1>
 				</div>
 			</main>
 		</>
