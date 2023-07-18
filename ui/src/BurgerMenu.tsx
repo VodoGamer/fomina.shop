@@ -1,4 +1,5 @@
 import { type Component, createSignal, Show } from "solid-js";
+import Categories from "./Categories";
 
 const BurgerMenu: Component = () => {
 	const [burgerState, setBurgerState] = createSignal<boolean>(false);
@@ -10,9 +11,7 @@ const BurgerMenu: Component = () => {
 			<Show when={burgerState()}>
 				<div class="burger-menu">
 					<img class="menu-cross" onClick={toggle} src="/static/icons/menu-cross.svg" alt="" />
-					<a class="burger-menu__link" href="">Детское</a>
-					<a class="burger-menu__link" href="">Женское</a>
-					<a class="burger-menu__link" href="">Мужское</a>
+					<Categories />
 				</div>
 				<div class="burger-menu__outside" onClick={toggle}></div>
 			</Show>

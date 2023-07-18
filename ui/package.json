@@ -16,6 +16,7 @@
 		"vite-plugin-solid": "^2.7.0"
 	},
 	"dependencies": {
+		"@solidjs/router": "^0.8.2",
 		"@splidejs/splide": "^4.1.4",
 		"solid-js": "^1.7.6"
 	}
