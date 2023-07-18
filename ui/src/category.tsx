@@ -14,12 +14,12 @@ const Category: Component = () => {
 		<>
 			<Header />
 			<main>
-				<div class="first-look" style={`background-image: url('/static/images/hello-image.webp'); height: 60vh;`}>
-					<Show when={category()}>
+				<Show when={category()}>
+					<div class="first-look" style={`background-image: url('/${category().image_path}'); height: 60vh;`}>
 						<h1 class="first-look__header">{category().title}</h1>
-					</Show>
-				</div>
-			</main>
+					</div>
+				</Show>
+			</main >
 		</>
 	);
 }
