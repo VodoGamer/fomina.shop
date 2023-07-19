@@ -1,6 +1,6 @@
 import { type Component } from 'solid-js';
 
-import Header from './Header';
+import Header from '../Header';
 
 const Index: Component = () => {
 	return (

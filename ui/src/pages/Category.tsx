@@ -2,8 +2,8 @@ import { useParams } from "@solidjs/router";
 import { createResource, type Component, Show } from "solid-js";
 import axios from "axios";
 
-import Header from "./Header";
-import Products from "./Products";
+import Header from "../Header";
+import Products from "../Products";
 
 const getCategory = async (categorySlug: string) =>
 	(await axios.get(`${import.meta.env.VITE_BASE_API_URL}/category/${categorySlug}`)).data;
