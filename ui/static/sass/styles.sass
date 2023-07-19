@@ -80,28 +80,49 @@ $margin-step: 8px
 	@media screen and (max-width: 500px)
 		font-size: 2.3em
 
-// products
-.products
+// articles
+.articles
 	margin-top: $margin-step * 3
 	display: grid
 	grid-template-columns: repeat(auto-fit, minmax(300px, 471px))
 	gap: $margin-step * 1
 
-.product
+.article
 	min-width: 300px
 
-.product__link
+.article__link
 	color: black
 	text-decoration: none
+
+.article__image
+	width: 100%
+
+.article__title
+	font-size: 30px
+
+.article__price
+	font-size: 16px
+
+.article__title, .article__price
+	font-weight: 400
+
+// Product
+.product
+	display: grid
+	grid-template-columns: 500px 1fr
+	gap: $margin-step * 2
 
 .product__image
 	width: 100%
 
 .product__title
-	font-size: 30px
+	font-size: 48px
+	font-weight: 600
+
+.product__description
+	font-size: 24px
+	font-weight: 300
 
 .product__price
-	font-size: 16px
-
-.product__title, .product__price
+	font-size: 24px
 	font-weight: 400

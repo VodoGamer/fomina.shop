@@ -12,13 +12,13 @@ export default function Products(props: { categorySlug: string; }) {
 	const [products] = createResource(props.categorySlug, getProducts);
 
 	return (
-		<div class="products">
+		<div class="articles">
 			<For each={products()}>{(product: Product) =>
-				<article class="product">
-					<a class="product__link" href={`/product/${product.id}/`} aria-label={`Перейти на страницу товара: ${product.title}`}>
-						<ProductImages productId={product.id} class="product__image" limit={1} />
-						<h2 class="product__title">{product.title}</h2>
-						<p class="product__price">{product.price}₽</p>
+				<article class="article">
+					<a class="article__link" href={`/product/${product.id}/`} aria-label={`Перейти на страницу товара: ${product.title}`}>
+						<ProductImages productId={product.id} class="article__image" limit={1} />
+						<h2 class="article__title">{product.title}</h2>
+						<p class="article__price">{product.price}₽</p>
 					</a>
 				</article>
 			}</For>
