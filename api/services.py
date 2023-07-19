@@ -32,3 +32,9 @@ async def get_product_images(
             select(Image).where(Image.product_id == product_id).limit(limit)
         )
     return result.scalars().all()
+
+
+async def get_product(db: async_sessionmaker[AsyncSession], product_id: int):
+    async with db() as session:
+        result = await session.execute(select(Product).where(Product.id == product_id))
+    return result.scalar()
