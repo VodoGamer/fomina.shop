@@ -24,7 +24,11 @@ async def get_category_products(db: async_sessionmaker[AsyncSession], category_s
     return result.scalars().fetchall()
 
 
-async def get_product_images(db: async_sessionmaker[AsyncSession], product_id: int):
+async def get_product_images(
+    db: async_sessionmaker[AsyncSession], product_id: int, limit: int | None = None
+):
     async with db() as session:
-        result = await session.execute(select(Image).where(Image.product_id == product_id))
+        result = await session.execute(
+            select(Image).where(Image.product_id == product_id).limit(limit)
+        )
     return result.scalars().all()
