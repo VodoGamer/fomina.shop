@@ -30,4 +30,18 @@ class Product(Base):
     pub_date: Mapped[str] = mapped_column(DateTime(), server_default=func.now())
     category_id: Mapped[int] = mapped_column(ForeignKey("category.id"))
 
+    images: Mapped[list["Image"]] = relationship(
+        back_populates="product", cascade="all, delete-orphan"
+    )
     category: Mapped["Category"] = relationship(back_populates="products")
+
+
+class Image(Base):
+    __tablename__ = "image"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    path: Mapped[str] = mapped_column(String(255))
+    description: Mapped[str] = mapped_column(String(255), nullable=True)
+    product_id: Mapped[int] = mapped_column(ForeignKey("product.id"))
+
+    product: Mapped["Product"] = relationship(back_populates="images")

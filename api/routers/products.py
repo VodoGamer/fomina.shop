@@ -1,11 +1,16 @@
 from fastapi import APIRouter
 
 from api.client import db
-from api.services import get_category_products
+from api.services import get_category_products, get_product_images
 
 router = APIRouter()
 
 
 @router.get("/products/{category_slug}/")
-async def get_product_by_category_slug(category_slug: str):
+async def get_products_by_category_slug(category_slug: str):
     return await get_category_products(db, category_slug)
+
+
+@router.get("/image/{product_id}")
+async def get_images_by_product_id(product_id: int):
+    return await get_product_images(db, product_id)
