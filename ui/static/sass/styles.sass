@@ -79,3 +79,29 @@ $margin-step: 8px
 	align-self: center
 	@media screen and (max-width: 500px)
 		font-size: 2.3em
+
+// products
+.products
+	margin-top: $margin-step * 3
+	display: grid
+	grid-template-columns: repeat(auto-fit, minmax(300px, 471px))
+	gap: $margin-step * 1
+
+.product
+	min-width: 300px
+
+.product__link
+	color: black
+	text-decoration: none
+
+.product__image
+	width: 100%
+
+.product__title
+	font-size: 30px
+
+.product__price
+	font-size: 16px
+
+.product__title, .product__price
+	font-weight: 400

@@ -1,16 +1,17 @@
 import { type Component, For, createResource } from "solid-js";
+import axios from "axios";
 
-import { type category } from "./types/categoryType";
+import { type Category } from "./types/category";
 
 
-const getCategories = async (): Promise<[category]> =>
-	(await fetch(`${import.meta.env.VITE_BASE_API_URL}/categories/`)).json();
+const getCategories = async (): Promise<[Category]> =>
+	(await axios.get(`${import.meta.env.VITE_BASE_API_URL}/categories/`)).data;
 
 const Categories: Component = () => {
 	const [categories] = createResource(getCategories)
 
 	return (
-		<For each={categories()}>{(category) =>
+		<For each={categories()}>{(category: Category) =>
 			<a class="burger-menu__link" href={`/category/${category.slug}`}>{category.title}</a>
 		}</For>
 	)
