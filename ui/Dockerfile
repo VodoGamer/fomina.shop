@@ -7,6 +7,4 @@ COPY ../ui/ /app
 RUN npm i
 RUN npm run build
 
-EXPOSE 4173
-
-CMD ["npm", "run", "serve"]
+CMD ["npm", "run", "serve", "--", "--host"]

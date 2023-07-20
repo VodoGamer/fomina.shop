@@ -8,4 +8,8 @@ RUN poetry install --only main
 
 COPY . /app/
 
-CMD ["poetry", "run", "hypercorn", "api:app"]
+COPY ./api/docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["hypercorn", "api:app", "-b", "0.0.0.0"]
