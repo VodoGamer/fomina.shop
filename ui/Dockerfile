@@ -1,8 +1,8 @@
 FROM node:20-slim
 
-WORKDIR /app
-COPY ../.env /app
-COPY ../ui/ /app
+WORKDIR /app/ui/
+COPY ../.env /app/
+COPY ../ui/ /app/ui/
 
 RUN npm i
 RUN npm run build
