@@ -1,6 +1,6 @@
-from sqlalchemy import DateTime, ForeignKey, String, Text
+from sqlalchemy import Boolean, DateTime, ForeignKey, String, Text
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
-from sqlalchemy.sql import func
+from sqlalchemy.sql import false, func
 
 
 class Base(DeclarativeBase):
@@ -14,6 +14,7 @@ class Category(Base):
     title: Mapped[str] = mapped_column(String(30))
     slug: Mapped[str] = mapped_column(String(30), unique=True)
     image_path: Mapped[str] = mapped_column(String(255), nullable=True)
+    is_coming: Mapped[bool] = mapped_column(Boolean(), server_default=false())
 
     products: Mapped[list["Product"]] = relationship(
         back_populates="category", cascade="all, delete-orphan"

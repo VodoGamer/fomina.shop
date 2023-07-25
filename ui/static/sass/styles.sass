@@ -112,6 +112,8 @@ $margin-step: 8px
 	display: grid
 	grid-template-columns: 500px 1fr
 	gap: $margin-step * 2
+	@media screen and ( max-width: 768px )
+		grid-template-columns: 1fr
 
 .product__image
 	width: 100%

@@ -12,7 +12,7 @@ const Categories: Component = () => {
 
 	return (
 		<For each={categories()}>{(category: Category) =>
-			<a class="burger-menu__link" href={`/category/${category.slug}`}>{category.title}</a>
+			<a class="burger-menu__link" href={!category.is_coming ? `/category/${category.slug}` : "/"}>{!category.is_coming ? category.title : `${category.title} (скоро)`}</a>
 		}</For>
 	)
 }
