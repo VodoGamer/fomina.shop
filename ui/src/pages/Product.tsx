@@ -10,6 +10,11 @@ type Params = { productId: string }
 const getProduct = async (productId: number) =>
 	(await axios.get(`${import.meta.env.VITE_BASE_API_URL}/product/${productId}/`)).data;
 
+const displayDescription = (rawText: string) => {
+	const paragraphs = rawText.split('\n');
+	return paragraphs.map((paragraph) => <p class="product__description">{paragraph}</p>);
+}
+
 const Product: Component = () => {
 	const params = useParams<Params>();
 	const [product] = createResource(Number(params.productId), getProduct);
@@ -22,7 +27,7 @@ const Product: Component = () => {
 					<ProductImages productId={product().id} class="product__image" limit={1} />
 					<div class="product__details">
 						<h1 class="product__title">{product().title}</h1>
-						<p class="product__description">{product().description}</p>
+						{displayDescription(product().description)}
 						<p class="product__price">{product().price}₽</p>
 					</div>
 				</div>
