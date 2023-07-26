@@ -14,4 +14,4 @@ COPY ./api/docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["hypercorn", "api:app", "-b", "0.0.0.0"]
+CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--forwarded-allow-ips='*'", "--proxy-headers"]
