@@ -15,9 +15,16 @@ services:
       - "${API_PORT}:8000"
     depends_on:
       - db
+    volumes:
+      - public:/app/ui/public:rw
   ui:
     build:
       context: ./
       dockerfile: ./ui/Dockerfile
     ports:
       - "${UI_PORT}:4173"
+    volumes:
+      - public:/app/ui/dist/public:ro
+
+volumes:
+  public:

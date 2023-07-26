@@ -8,6 +8,8 @@ RUN poetry install --only main
 
 COPY . /app/
 
+RUN mkdir -p /ui/public/
+
 COPY ./api/docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
 
