@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
 from api.client import db
-from api.services import get_categories, get_category
+from api.services.db import get_categories, get_category
 
 router = APIRouter()
 
