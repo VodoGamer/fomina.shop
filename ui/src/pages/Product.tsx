@@ -29,6 +29,7 @@ const Product: Component = () => {
 						<h1 class="product__title">{product().title}</h1>
 						{displayDescription(product().description)}
 						<p class="product__price">{product().price}₽</p>
+						<button onClick={localStorage.setItem("cartProducts", product().id)}>Добавить в корзину</button>
 					</div>
 				</div>
 			</Show>
