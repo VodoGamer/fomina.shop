@@ -151,17 +151,17 @@ uvloop = ["uvloop (>=0.15.2)"]
 
 [[package]]
 name = "boto3"
-version = "1.28.22"
+version = "1.28.25"
 description = "The AWS SDK for Python"
 optional = false
 python-versions = ">= 3.7"
 files = [
-    {file = "boto3-1.28.22-py3-none-any.whl", hash = "sha256:0c1c1d19232018ac49fd2c0a94aa0b802f5d222e89448ff50734626bce454b32"},
-    {file = "boto3-1.28.22.tar.gz", hash = "sha256:af1ce129f462cdc8dfb1a1c559d7ed725e51344fb0ae4a56d9453196bf416555"},
+    {file = "boto3-1.28.25-py3-none-any.whl", hash = "sha256:f08f6c83608721c2142abd2ccc5f15bd5c98c282ad9e0d39f9efc59d98604658"},
+    {file = "boto3-1.28.25.tar.gz", hash = "sha256:20feedb753e87d6dd55665e2e9dda08b031518291350c9c57b552c86a537fd4e"},
 ]
 
 [package.dependencies]
-botocore = ">=1.31.22,<1.32.0"
+botocore = ">=1.31.25,<1.32.0"
 jmespath = ">=0.7.1,<2.0.0"
 s3transfer = ">=0.6.0,<0.7.0"
 
@@ -170,13 +170,13 @@ crt = ["botocore[crt] (>=1.21.0,<2.0a0)"]
 
 [[package]]
 name = "botocore"
-version = "1.31.22"
+version = "1.31.25"
 description = "Low-level, data-driven core of boto 3."
 optional = false
 python-versions = ">= 3.7"
 files = [
-    {file = "botocore-1.31.22-py3-none-any.whl", hash = "sha256:b91025ca1a16b13ae662bdb46e7c16d2c53619df23bf3583a43791519da14870"},
-    {file = "botocore-1.31.22.tar.gz", hash = "sha256:d193ab0742ddc4af3a3994af4ec993acf5ac75460f298880fe869765e7bc578d"},
+    {file = "botocore-1.31.25-py3-none-any.whl", hash = "sha256:17cc6db84644251a5b519aeccd5eb1c313a18ef2e92616ec16182aa30c877152"},
+    {file = "botocore-1.31.25.tar.gz", hash = "sha256:b8a40b0ca1e3c8290a4c0d473c8e1575d2e8b2ddc3c61dd8814c3976357cac84"},
 ]
 
 [package.dependencies]
@@ -808,13 +808,13 @@ typing-extensions = ">=4.6.0,<4.7.0 || >4.7.0"
 
 [[package]]
 name = "pyright"
-version = "1.1.320"
+version = "1.1.321"
 description = "Command line wrapper for pyright"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "pyright-1.1.320-py3-none-any.whl", hash = "sha256:cdf739f7827374575cefb134311457d08c189793c3da3097c023debec9acaedb"},
-    {file = "pyright-1.1.320.tar.gz", hash = "sha256:94223e3b82d0b4c99c5125bab4d628ec749ce0b5b2ae0471fd4921dd4eff460d"},
+    {file = "pyright-1.1.321-py3-none-any.whl", hash = "sha256:bc8ca2001b9f19b1cf75eb5ace71d833f9266b3981a5d88dac3b9bbcff8d9281"},
+    {file = "pyright-1.1.321.tar.gz", hash = "sha256:f62d54fac611138a407bb302103700eeb37a147ce1a6e915148be9ca5961572a"},
 ]
 
 [package.dependencies]
@@ -1168,13 +1168,13 @@ standard = ["colorama (>=0.4)", "httptools (>=0.5.0)", "python-dotenv (>=0.13)",
 
 [[package]]
 name = "virtualenv"
-version = "20.24.2"
+version = "20.24.3"
 description = "Virtual Python Environment builder"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "virtualenv-20.24.2-py3-none-any.whl", hash = "sha256:43a3052be36080548bdee0b42919c88072037d50d56c28bd3f853cbe92b953ff"},
-    {file = "virtualenv-20.24.2.tar.gz", hash = "sha256:fd8a78f46f6b99a67b7ec5cf73f92357891a7b3a40fd97637c27f854aae3b9e0"},
+    {file = "virtualenv-20.24.3-py3-none-any.whl", hash = "sha256:95a6e9398b4967fbcb5fef2acec5efaf9aa4972049d9ae41f95e0972a683fd02"},
+    {file = "virtualenv-20.24.3.tar.gz", hash = "sha256:e5c3b4ce817b0b328af041506a2a299418c98747c4b1e68cb7527e74ced23efc"},
 ]
 
 [package.dependencies]
