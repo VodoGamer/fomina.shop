@@ -1,6 +1,8 @@
-from fastapi import APIRouter
+from typing import Annotated
 
-from api.services.db.products import get_product, get_products_for_category
+from fastapi import APIRouter, Query
+
+from api.services.db.products import get_product, get_products, get_products_for_category
 
 router = APIRouter(tags=["products"])
 
@@ -13,3 +15,8 @@ async def get_products_by_category_slug(category_slug: str):
 @router.get("/product/{product_id}/")
 async def get_product_by_id(product_id: int):
     return await get_product(product_id)
+
+
+@router.get("/products")
+async def get_products_by_ids(product_ids: Annotated[list[int], Query()]):
+    return await get_products(product_ids)

@@ -16,3 +16,9 @@ async def get_product(product_id: int):
     async with db() as session:
         result = await session.execute(select(Product).where(Product.id == product_id))
     return result.scalar()
+
+
+async def get_products(product_ids: list[int]):
+    async with db() as session:
+        result = await session.execute(select(Product).filter(Product.id.in_(product_ids)))
+    return result.scalars().all()
