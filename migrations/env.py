@@ -4,7 +4,7 @@ from alembic import context
 from sqlalchemy import engine_from_config, pool
 
 from api.env import PSYCOPG_DB_URI
-from api.models import Base
+from api.services.db.models import Base
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

@@ -1,8 +1,9 @@
+import enum
 from typing import Iterable
 
 from fastapi_storages.integrations.sqlalchemy import FileType
 from sqladmin import ModelView
-from sqlalchemy import Boolean, DateTime, ForeignKey, String, Text
+from sqlalchemy import Boolean, DateTime, Enum, ForeignKey, String, Text
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 from sqlalchemy.sql import false, func
 
@@ -44,6 +45,9 @@ class Product(Base):
     images: Mapped[list["Image"]] = relationship(
         back_populates="product", cascade="all, delete-orphan"
     )
+    variations: Mapped[list["ProductVariation"]] = relationship(
+        back_populates="product", cascade="all, delete-orphan"
+    )
     category: Mapped["Category"] = relationship(back_populates="products")
 
 
@@ -66,8 +70,29 @@ class ImageAdmin(ModelView, model=Image):
     column_list = [Image.id]
 
 
+class VariationType(enum.Enum):
+    size = "Возраст, рост: "
+    color = "Цвет: "
+
+
+class ProductVariation(Base):
+    __tablename__ = "product_variation"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    type: Mapped[str] = mapped_column(Enum(VariationType))
+    value: Mapped[str] = mapped_column(String(50))
+    product_id: Mapped[int] = mapped_column(ForeignKey("product.id"))
+
+    product: Mapped["Product"] = relationship(back_populates="variations")
+
+
+class ProductVariationAdmin(ModelView, model=ProductVariation):
+    column_list = [ProductVariation.id, ProductVariation.product]
+
+
 admin_models: Iterable[type[ModelView]] = (
     CategoryAdmin,
     ProductAdmin,
     ImageAdmin,
+    ProductVariationAdmin,
 )
