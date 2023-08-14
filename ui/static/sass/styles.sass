@@ -4,11 +4,11 @@ $margin-step: 8px
 	margin: 0
 	padding: 0
 	box-sizing: border-box
+	font-family: 'Source Sans 3', sans-serif
 
 // page
 .page__body
 	margin: $margin-step * 3 $margin-step * 5
-	font-family: 'Source Sans 3', sans-serif
 	@media screen and ( max-width: 500px )
 		margin: $margin-step * 5 $margin-step * 3
 
@@ -189,13 +189,18 @@ $margin-step: 8px
 	padding: $margin-step * 2
 	color: black
 	text-decoration: none
+	background-color: transparent
+	cursor: pointer
 
 	transition-duration: .2s
 	&:hover
 		border-radius: $margin-step
-	&:hover .order-button__text
-		text-decoration: underline
+		.order-button__text
+			text-decoration: underline
+
+.order-button_active
+	background-color: lightgreen
+	border-radius: $margin-step
 
 .order-button__text
 	font-size: 24px
-	font-weight: 600

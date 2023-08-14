@@ -4,6 +4,7 @@ import { Component, Show, createResource } from "solid-js";
 
 import Header from "../Header";
 import ProductImages from "../ProductImages";
+import AddCartButton from "../components/AddCartButton";
 
 type Params = { productId: string }
 
@@ -15,15 +16,6 @@ const displayDescription = (rawText: string) => {
 	return paragraphs.map((paragraph) => <p class="product__description">{paragraph}</p>);
 }
 
-const addToCart = (newId: number) => {
-	const currentCart = localStorage.getItem("cartProducts")?.split(",");
-	if (currentCart) {
-		currentCart?.push(String(newId));
-		localStorage.setItem("cartProducts", String(currentCart));
-	} else {
-		return localStorage.setItem("cartProducts", String(newId));
-	};
-}
 
 const Product: Component = () => {
 	const params = useParams<Params>();
@@ -39,7 +31,7 @@ const Product: Component = () => {
 						<h1 class="product__title">{product().title}</h1>
 						{displayDescription(product().description)}
 						<p class="product__price">{product().price}₽</p>
-						<button onClick={() => addToCart(product().id)}>Добавить в корзину</button>
+						<AddCartButton productId={product().id} />
 					</div>
 				</div>
 			</Show>
