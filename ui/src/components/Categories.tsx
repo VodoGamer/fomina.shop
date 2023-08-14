@@ -1,7 +1,7 @@
 import { type Component, For, createResource } from "solid-js";
 import axios from "axios";
 
-import { type Category } from "./types/category";
+import { type Category } from "../types/category";
 
 
 const getCategories = async (): Promise<[Category]> =>

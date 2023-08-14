@@ -23,9 +23,9 @@ export default function AddCartButton(props: { productId: number }) {
 
 	return (
 		<Switch fallback={
-			<button class="order-button order-button_active">
+			<a class="order-button order-button_active" href="/cart">
 				<p class="order-button__text">Уже у вас в корзине!</p>
-			</button>
+			</a>
 		}>
 			<Match when={!inCart()}>
 				<button class="order-button" onClick={() => addToCart(props.productId)}>

@@ -2,8 +2,8 @@ import { useParams } from "@solidjs/router";
 import axios from "axios";
 import { Component, Show, createResource } from "solid-js";
 
-import Header from "../Header";
-import ProductImages from "../ProductImages";
+import Header from "../components/Header";
+import ProductImages from "../components/ProductImages";
 import AddCartButton from "../components/AddCartButton";
 
 type Params = { productId: string }

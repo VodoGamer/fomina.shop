@@ -2,7 +2,7 @@ import { Component } from "solid-js";
 
 import BurgerMenu from "./BurgerMenu";
 
-import logo from "../static/icons/fomina-logo.svg";
+import logo from "../../static/icons/fomina-logo.svg";
 
 const Header: Component = () => {
 	return (

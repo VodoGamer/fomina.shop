@@ -1,7 +1,7 @@
 import axios from "axios";
 import { For, createResource } from "solid-js";
 
-import { Image } from "./types/image";
+import { Image } from "../types/image";
 
 
 type Props = {

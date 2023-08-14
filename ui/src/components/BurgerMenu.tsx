@@ -2,8 +2,8 @@ import { type Component, createSignal, Show } from "solid-js";
 
 import Categories from "./Categories";
 
-import menu from "../static/icons/menu.svg";
-import cross from "../static/icons/menu-cross.svg";
+import menu from "../../static/icons/menu.svg";
+import cross from "../../static/icons/menu-cross.svg";
 
 const BurgerMenu: Component = () => {
 	const [burgerState, setBurgerState] = createSignal<boolean>(false);

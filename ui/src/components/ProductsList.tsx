@@ -2,7 +2,7 @@ import axios from "axios";
 import { For, createResource } from "solid-js";
 
 import ProductImages from "./ProductImages";
-import { Product } from "./types/product";
+import { Product } from "../types/product";
 
 
 const getProducts = async (categorySlug: string) =>
