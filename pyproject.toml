@@ -18,6 +18,9 @@ fastapi-storages = "^0.2.0"
 itsdangerous = "^2.1.2"
 uvicorn = "^0.23.0"
 pre-commit = "^3.3.3"
+aiohttp = "^3.8.5"
+ujson = "^5.8.0"
+msgspec = "^0.17.0"
 
 
 [tool.poetry.group.dev.dependencies]

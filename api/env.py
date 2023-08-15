@@ -14,6 +14,9 @@ ADMIN_LOGIN = os.getenv("ADMIN_LOGIN", "admin")
 ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "password!")
 ADMIN_TOKEN = os.getenv("ADMIN_TOKEN", "...")
 
+YOOKASSA_SHOPID = os.getenv("YOOKASSA_SHOPID", "123456")
+YOOKASSA_SECRET_KEY = os.getenv("YOOKASSA_SECRET_KEY", "very_secret")
+
 BASE_DB_URI = f"{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_TABLE}"
 PSYCOPG_DB_URI = f"postgresql://{BASE_DB_URI}"
 ASYNC_DB_URI = f"postgresql+asyncpg://{BASE_DB_URI}"
