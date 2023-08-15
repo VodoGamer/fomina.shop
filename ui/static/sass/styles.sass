@@ -153,9 +153,15 @@ $margin-step: 8px
 
 .cart-product
 	display: grid
-	grid-template-columns: 1fr 1fr
+	grid-template-columns: 25px 1fr 1fr
 	column-gap: $margin-step * 2
 	height: 300px
+
+.cart-product__cross
+	background-color: transparent
+	border: 0
+	height: min-content
+	cursor: pointer
 
 .cart-product__image
 	width: 100%
