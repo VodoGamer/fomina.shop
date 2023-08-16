@@ -1,13 +1,26 @@
 import enum
 from typing import Iterable
+from uuid import UUID
 
 from fastapi_storages.integrations.sqlalchemy import FileType
 from sqladmin import ModelView
-from sqlalchemy import Boolean, DateTime, Enum, ForeignKey, String, Text
+from sqlalchemy import (
+    Boolean,
+    Column,
+    DateTime,
+    Enum,
+    ForeignKey,
+    Integer,
+    String,
+    Table,
+    Text,
+    Uuid,
+)
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 from sqlalchemy.sql import false, func
 
 from api.client import storage
+from api.services.yookassa.models import PaymentStatus
 
 
 class Base(DeclarativeBase):
@@ -88,6 +101,38 @@ class ProductVariation(Base):
 
 class ProductVariationAdmin(ModelView, model=ProductVariation):
     column_list = [ProductVariation.id, ProductVariation.product]
+
+
+product_order_table = Table(
+    "product_order",
+    Base.metadata,
+    Column("order_id", ForeignKey("order.id")),
+    Column("product_id", ForeignKey("product.id")),
+)
+
+
+class Order(Base):
+    __tablename__ = "order"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    full_name: Mapped[str] = mapped_column(String(255))
+    address: Mapped[str] = mapped_column(String(255))
+    phone: Mapped[int] = mapped_column(Integer())
+    email: Mapped[str] = mapped_column(String(255))
+
+    products: Mapped[list[Product]] = relationship(secondary=product_order_table)
+    payment: Mapped["Payment"] = relationship(back_populates="order")
+
+
+class Payment(Base):
+    __tablename__ = "payment"
+
+    id: Mapped[UUID] = mapped_column(Uuid(), primary_key=True)
+    amount: Mapped[int] = mapped_column(Integer())
+    status: Mapped[PaymentStatus] = mapped_column(Enum(PaymentStatus))
+
+    order_id: Mapped[int] = mapped_column(ForeignKey("order.id"))
+    order: Mapped["Order"] = relationship(back_populates="payment")
 
 
 admin_models: Iterable[type[ModelView]] = (
