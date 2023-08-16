@@ -1,10 +1,10 @@
 from enum import Enum
 from uuid import UUID
 
-import msgspec
+from pydantic import BaseModel
 
 
-class PaymentConfirmation(msgspec.Struct):
+class PaymentConfirmation(BaseModel):
     type: str
     confirmation_url: str
 
@@ -20,12 +20,12 @@ class AmountCurrency(Enum):
     rub = "RUB"
 
 
-class PaymentAmount(msgspec.Struct):
+class PaymentAmount(BaseModel):
     value: str
     currency: AmountCurrency
 
 
-class Payment(msgspec.Struct):
+class Payment(BaseModel):
     id: UUID
     status: PaymentStatus
     amount: PaymentAmount

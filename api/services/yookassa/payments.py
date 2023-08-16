@@ -1,6 +1,5 @@
 from uuid import UUID
 
-import msgspec
 import ujson
 
 from api.services.yookassa import make_get_request, make_post_request
@@ -22,10 +21,9 @@ async def create_api_payment(value: int, return_url: str, description: str) -> P
             }
         ),
     )
-    payment = msgspec.json.decode(payment_response, type=Payment)
-    return payment
+    return Payment(**ujson.loads(payment_response))
 
 
 async def get_payment(id: UUID) -> Payment:
     payment_response = await make_get_request(f"payments/{str(id)}")
-    return msgspec.json.decode(payment_response, type=Payment)
+    return Payment(**ujson.loads(payment_response))
