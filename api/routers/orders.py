@@ -1,3 +1,4 @@
+import pydantic
 from fastapi import APIRouter
 
 from api.env import BASE_UI_URL
@@ -8,11 +9,17 @@ from api.services.yookassa.payments import create_api_payment
 router = APIRouter(tags=["orders"])
 
 
+class OrderModel(pydantic.BaseModel):
+    full_name: str
+    address: str
+    phone: int
+    email: str
+    amount: int
+
+
 @router.post("/order")
-async def new_order(
-    full_name: str, address: str, phone: int, email: str, product_ids: str, amount: int
-):
-    order_id = await create_order(full_name, address, phone, email)
-    api_payment = await create_api_payment(amount, BASE_UI_URL, description="Покупка")
+async def new_order(order: OrderModel):
+    order_id = await create_order(order.full_name, order.address, order.phone, order.email)
+    api_payment = await create_api_payment(order.amount, BASE_UI_URL, description="Покупка")
     await create_payment(api_payment, order_id)
-    return api_payment
+    return api_payment.confirmation.confirmation_url

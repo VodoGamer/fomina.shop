@@ -6,7 +6,7 @@ import CartProduct from "../components/CartProduct";
 import { Product } from "../types/product";
 
 
-async function getProducts(productIds: string[]): Promise<Product[]> {
+export async function getProducts(productIds: string[]): Promise<Product[]> {
 	const returnList: Product[] = [];
 	for (const productId of productIds) {
 		returnList.push((await axios.get(`${import.meta.env.VITE_BASE_API_URL}/product/${productId}/`)).data);
@@ -14,7 +14,7 @@ async function getProducts(productIds: string[]): Promise<Product[]> {
 	return returnList;
 }
 
-function calculateOverallSum(products: Product[]): number {
+export function calculateOverallSum(products: Product[]): number {
 	let sum: number = 0;
 	for (const product of products) { sum += product.price; }
 	return sum;
@@ -40,7 +40,7 @@ const Cart: Component = () => {
 						<div class="cart-information">
 							<h3 class="cart-information__text">Предметов в корзине: {productIds?.length}</h3>
 							<h3 class="cart-information__text">Итого к оплате: <Show when={overallSum}>{overallSum()}</Show>₽</h3>
-							<a class="order-button" href="/">
+							<a class="order-button" href="/purchase">
 								<h4 class="order-button__text">Перейти к оформлению</h4>
 							</a>
 						</div>

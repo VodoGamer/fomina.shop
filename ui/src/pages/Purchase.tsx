@@ -1,32 +1,41 @@
-import { Component } from "solid-js"
+import { Component, Match, Show, Switch, createResource, createSignal } from "solid-js"
+
 import Header from "../components/Header"
+import PurchaseForm from "../components/PurchaseForm";
+import { calculateOverallSum, getProducts } from "./Cart";
 
 const Purchase: Component = () => {
+	const [orderUrl, setOrderUrl] = createSignal<undefined | string>();
+
+	const productIds = localStorage.getItem("cartProducts")?.split(",");
+	if (productIds == undefined) {
+		return (<>
+			<Header />
+			<h1 class="purchase-header">У вас нет товаров в корзине</h1>
+		</>)
+	}
+	const [cartProducts] = createResource(productIds, getProducts);
+	const [cartSum] = createResource(cartProducts, calculateOverallSum);
+
 	return (
 		<>
 			<Header />
-			<h1 class="purchase-header">Оформление заказа</h1>
-			<form class="purchase" action="/" method="post">
-				<p class="purchase__field">
-					<label class="purchase__label" for="name">Имя, фамилия</label>
-					<input class="purchase__input" type="text" name="name" id="name" required />
-				</p>
-				<p class="purchase__field">
-					<label class="purchase__label" for="address">Полный адрес</label>
-					<input class="purchase__input" type="text" name="address" id="address" required />
-				</p>
-				<p class="purchase__field">
-					<label class="purchase__label" for="telephone-number">Номер телефона</label>
-					<input class="purchase__input" type="tel" name="telephone-number" id="telephone-number" required maxlength="20" />
-				</p>
-				<p class="purchase__field">
-					<label class="purchase__label" for="email">Электронная почта</label>
-					<input class="purchase__input" type="text" name="email" id="email" required />
-				</p>
-				<button class="order-button" type="submit"><p class="order-button__text">Перейти к оплате</p></button>
-			</form>
+			<h1 class="purchase-header">
+				Оформление заказа
+				<Show when={cartSum()}>
+					{` на ${String(cartSum())}₽`}
+				</Show>
+			</h1>
+			<Switch>
+				<Match when={!orderUrl()}>
+					<PurchaseForm setOrder={setOrderUrl} cartSum={cartSum()} />
+				</Match>
+				<Match when={orderUrl()}>
+					<h2><a href={orderUrl()}>Заказ создан, осталось только оплатить</a></h2>
+				</Match>
+			</Switch>
 		</>
-	)
-}
+	);
+};
 
-export default Purchase
+export default Purchase;
