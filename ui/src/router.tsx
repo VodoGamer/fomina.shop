@@ -6,6 +6,7 @@ import Index from './pages/Index';
 import Category from './pages/Category';
 import Product from './pages/Product';
 import Cart from './pages/Cart';
+import Purchase from './pages/Purchase';
 
 const root = document.getElementById('app');
 
@@ -17,6 +18,7 @@ render(
 				<Route path="/category/:slug" component={Category} />
 				<Route path="/product/:productId/" component={Product} />
 				<Route path="/cart/" component={Cart} />
+				<Route path="/purchase/" component={Purchase} />
 			</Routes>
 		</Router>
 	),
