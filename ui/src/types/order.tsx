@@ -13,5 +13,5 @@ export type Order = {
 	status: string,
 	amount: OrderAmount,
 	description: string,
-	confirmation: OrderConfirmation,
+	confirmation: OrderConfirmation | null,
 }

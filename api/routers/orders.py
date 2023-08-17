@@ -4,8 +4,7 @@ from fastapi import APIRouter
 from api.env import BASE_UI_URL
 from api.services.db.orders import add_products_to_order, create_order
 from api.services.db.payments import create_payment
-from api.services.yookassa.payments import Payment as ApiPayment
-from api.services.yookassa.payments import create_api_payment
+from api.services.yookassa.payments import ApiPayment, create_api_payment
 
 router = APIRouter(tags=["orders"])
 

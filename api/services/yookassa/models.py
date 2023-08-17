@@ -21,13 +21,13 @@ class AmountCurrency(Enum):
 
 
 class PaymentAmount(BaseModel):
-    value: str
+    value: int
     currency: AmountCurrency
 
 
-class Payment(BaseModel):
+class ApiPayment(BaseModel):
     id: UUID
     status: PaymentStatus
     amount: PaymentAmount
     description: str
-    confirmation: PaymentConfirmation
+    confirmation: PaymentConfirmation | None = None
