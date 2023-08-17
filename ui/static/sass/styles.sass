@@ -146,6 +146,8 @@ $margin-step: 8px
 	display: grid
 	margin-top: $margin-step * 3
 	grid-template-columns: 570px 1fr 50%
+	@media screen and ( max-width: 1150px )
+		grid-template-columns: 1fr
 
 .cart-products
 	display: grid
@@ -182,6 +184,8 @@ $margin-step: 8px
 
 .cart-information
 	grid-column: 3
+	@media screen and ( max-width: 1150px )
+		grid-column: 1
 
 .cart-information__text
 	font-size: 32px
