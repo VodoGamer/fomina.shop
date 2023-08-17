@@ -5,17 +5,18 @@ function getValueForId(id: string) {
 	return (document.getElementById(id) as HTMLInputElement).value;
 }
 
-async function createOrder(cartSum: number) {
+async function createOrder(cartSum: number, productIds: string[] | undefined) {
 	return (await axios.post(`${import.meta.env.VITE_BASE_API_URL}/order`, {
 		full_name: getValueForId("name"),
 		address: getValueForId("address"),
 		phone: getValueForId("telephone-number"),
 		email: getValueForId("email"),
 		amount: cartSum,
+		product_ids: productIds,
 	})).data;
 }
 
-export default function PurchaseForm(props: { setOrder: Setter<undefined | string>, cartSum: number }) {
+export default function PurchaseForm(props: { setOrder: Setter<undefined | string>, cartSum: number, productIds: string[] | undefined }) {
 	return (
 		<div class="purchase">
 			<p class="purchase__field">
@@ -34,7 +35,7 @@ export default function PurchaseForm(props: { setOrder: Setter<undefined | strin
 				<label class="purchase__label" for="email">Электронная почта</label>
 				<input class="purchase__input" type="email" name="email" id="email" required />
 			</p>
-			<button class="order-button" type="submit" onClick={async () => { props.setOrder(await createOrder(props.cartSum)); }}>
+			<button class="order-button" type="submit" onClick={async () => { props.setOrder(await createOrder(props.cartSum, props.productIds)); }}>
 				<p class="order-button__text">Перейти к оплате</p>
 			</button>
 		</div>
