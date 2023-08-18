@@ -339,6 +339,17 @@ urllib3 = ">=1.25.4,<1.27"
 crt = ["awscrt (==0.16.26)"]
 
 [[package]]
+name = "certifi"
+version = "2022.12.7"
+description = "Python package for providing Mozilla's CA Bundle."
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "certifi-2022.12.7-py3-none-any.whl", hash = "sha256:4ad3232f5e926d6718ec31cfc1fcadfde020920e278684144551c91769c7bc18"},
+    {file = "certifi-2022.12.7.tar.gz", hash = "sha256:35824b4c3a97115964b408844d64aa14db1cc518f6562e8d7261699d1350a9e3"},
+]
+
+[[package]]
 name = "cfgv"
 version = "3.4.0"
 description = "Validate configuration and produce human readable error messages."
@@ -434,6 +445,20 @@ files = [
 ]
 
 [[package]]
+name = "choicelib"
+version = "0.1.5"
+description = "Choice a best similar-interface library from given list"
+optional = false
+python-versions = ">=3.7,<4.0"
+files = [
+    {file = "choicelib-0.1.5-py3-none-any.whl", hash = "sha256:6170daad66ef9ef7f72c75fbb527e8980720c63b84f8b7b379380095e6bec8ca"},
+    {file = "choicelib-0.1.5.tar.gz", hash = "sha256:450035a260e5621af793ea858be1f7b04e38bb50c7c40f9ef480da3c571314c7"},
+]
+
+[package.dependencies]
+typing-extensions = ">=4.0.1,<5.0.0"
+
+[[package]]
 name = "click"
 version = "8.1.6"
 description = "Composable command line interface toolkit"
@@ -468,6 +493,19 @@ files = [
     {file = "distlib-0.3.7-py2.py3-none-any.whl", hash = "sha256:2e24928bc811348f0feb63014e97aaae3037f2cf48712d51ae61df7fd6075057"},
     {file = "distlib-0.3.7.tar.gz", hash = "sha256:9dafe54b34a028eafd95039d5e5d4851a13734540f1331060d31c9916e7147a8"},
 ]
+
+[[package]]
+name = "envparse"
+version = "0.2.0"
+description = "Simple environment variable parsing"
+optional = false
+python-versions = "*"
+files = [
+    {file = "envparse-0.2.0.tar.gz", hash = "sha256:4f3b9a27bb55d27f124eb4adf006fec05e4588891c9a054a183a112645056eb7"},
+]
+
+[package.extras]
+testing = ["pytest"]
 
 [[package]]
 name = "exceptiongroup"
@@ -828,6 +866,44 @@ files = [
     {file = "MarkupSafe-2.1.3-cp39-cp39-win32.whl", hash = "sha256:fec21693218efe39aa7f8599346e90c705afa52c5b31ae019b2e57e8f6542bb2"},
     {file = "MarkupSafe-2.1.3-cp39-cp39-win_amd64.whl", hash = "sha256:3fd4abcb888d15a94f32b75d8fd18ee162ca0c064f35b11134be77050296d6ba"},
     {file = "MarkupSafe-2.1.3.tar.gz", hash = "sha256:af598ed32d6ae86f1b747b82783958b1a4ab8f617b06fe68795c7f026abbdcad"},
+]
+
+[[package]]
+name = "msgspec"
+version = "0.9.1"
+description = "A fast and friendly JSON/MessagePack library, with optional schema validation"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "msgspec-0.9.1-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:22f9d68607a9c1d4c9770046f7c22f97c45c57e5a6fcc8d97715af94071f384c"},
+    {file = "msgspec-0.9.1-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:f4ad9182ae2597fe5507d7ac666cdf568fa2bb9774e03d03ffafed5f58503292"},
+    {file = "msgspec-0.9.1-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:a1cc6d427a74ffd396d9f2a1a6a5a091337b77d0757a11157408e395cc7c5246"},
+    {file = "msgspec-0.9.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:3885b569eb78c7cee3c2ab6c312a477fdd2fdc1e395d7fecfa5db5c17d689df1"},
+    {file = "msgspec-0.9.1-cp310-cp310-musllinux_1_1_aarch64.whl", hash = "sha256:b1d1fe0ca534cf60dc7b98d268588527c12ffd63d8c55c8bddaf35c43830590a"},
+    {file = "msgspec-0.9.1-cp310-cp310-musllinux_1_1_x86_64.whl", hash = "sha256:172e14a783d3c0580c88e6a4506b64a1ea397d8c614e1a169ef0461083ea97ed"},
+    {file = "msgspec-0.9.1-cp310-cp310-win_amd64.whl", hash = "sha256:851dc6d686f7c876fe895c4921aa9887aa1f303a593f16c4816811f9f99d56e2"},
+    {file = "msgspec-0.9.1-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:d550937a65a455de5b1fcb6e9eb60cee349cf421f31234195b51ca286e607a0d"},
+    {file = "msgspec-0.9.1-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:9516612c285535effdca6d9b74c2f23f1947711b86e93e4a6f99d307474de580"},
+    {file = "msgspec-0.9.1-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:b249dc07bd934339420fa422f674e2ea10794e21a8ce5b6c8bd5d8fa19481342"},
+    {file = "msgspec-0.9.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:fb2d0b74b08115c7c4b06b5e373560970afcea06b810f47306e247a529d5ac25"},
+    {file = "msgspec-0.9.1-cp311-cp311-musllinux_1_1_aarch64.whl", hash = "sha256:c737920ee52e3662321ccbcc00419e411608f5feb29a1007904b7885b26ab9a4"},
+    {file = "msgspec-0.9.1-cp311-cp311-musllinux_1_1_x86_64.whl", hash = "sha256:10c7d70564d35304f7f423ec6a894e5a029f90c9691b19ed18a3e10f0bf40fbc"},
+    {file = "msgspec-0.9.1-cp311-cp311-win_amd64.whl", hash = "sha256:0799a8b63be00c58c55325e9974effac3e76dff416d8f7e7b867db09ed2c978b"},
+    {file = "msgspec-0.9.1-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:84b344ada028426bfcca9015aa9379f742435cd1633316fbaf0edde7199fdb8c"},
+    {file = "msgspec-0.9.1-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:c867df64eb80b723c8b9ee7bd5fc21664d31eeb64002af4747f46a64a71e5913"},
+    {file = "msgspec-0.9.1-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:90026c2fa34ddaa79d56dcde0d45ca0d22327730e2b130145096fe9c8f9e5a06"},
+    {file = "msgspec-0.9.1-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:d2da67a1f4c7528054f1697b551289f9bd400704a78a1c4d53f4996dfdf79e7f"},
+    {file = "msgspec-0.9.1-cp38-cp38-musllinux_1_1_aarch64.whl", hash = "sha256:6e652314394f027e34d0fd33aebefc3361ca2a49dfd3651d259703ef4965e1a0"},
+    {file = "msgspec-0.9.1-cp38-cp38-musllinux_1_1_x86_64.whl", hash = "sha256:a115c09c10df17516198896877f3044a7fd773f825a4d9a07d2579a861f00356"},
+    {file = "msgspec-0.9.1-cp38-cp38-win_amd64.whl", hash = "sha256:c841a0b534898880e3e8c3b167670b962f35451693194d5414234904d5479816"},
+    {file = "msgspec-0.9.1-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:5fa772cf19b5f878554555b17c1e45830f6b0b0d838582d72953d2f24beb4d49"},
+    {file = "msgspec-0.9.1-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:b7326e071720284ac5e0017697bf01d8f5e14309fbeef34def378207c53bcdc2"},
+    {file = "msgspec-0.9.1-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:393f4eba17457882aa646b5c97a8ff6a7f9c85a77175edd4f927c4efd9663933"},
+    {file = "msgspec-0.9.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:5884f17d7cc8500616f0f0919b872b95fbefb90188ac3bc1b752f2d9dad20b05"},
+    {file = "msgspec-0.9.1-cp39-cp39-musllinux_1_1_aarch64.whl", hash = "sha256:7972addcdd184c0560cc729182771d78e6f2bb7abc85368f632c6b69f90d5b6d"},
+    {file = "msgspec-0.9.1-cp39-cp39-musllinux_1_1_x86_64.whl", hash = "sha256:472d9931d09c92afa89b3637d6ca82f7fd513b428da1939a1ce3b51ad64b3f6d"},
+    {file = "msgspec-0.9.1-cp39-cp39-win_amd64.whl", hash = "sha256:deb1a5eb18f7d457b4d4ee8086dc89030ed511c7269e0cbb6550b5e80f3453d2"},
+    {file = "msgspec-0.9.1.tar.gz", hash = "sha256:a792b0ca37b467be942675d3865847370f56022a83a42e4464e3505d276ab1cd"},
 ]
 
 [[package]]
@@ -1304,6 +1380,27 @@ files = [
 ]
 
 [[package]]
+name = "requests"
+version = "2.31.0"
+description = "Python HTTP for Humans."
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "requests-2.31.0-py3-none-any.whl", hash = "sha256:58cd2187c01e70e6e26505bca751777aa9f2ee0b7f4300988b709f44e013003f"},
+    {file = "requests-2.31.0.tar.gz", hash = "sha256:942c5a758f98d790eaed1a29cb6eefc7ffb0d1cf7af05c3d2791656dbd6ad1e1"},
+]
+
+[package.dependencies]
+certifi = ">=2017.4.17"
+charset-normalizer = ">=2,<4"
+idna = ">=2.5,<4"
+urllib3 = ">=1.21.1,<3"
+
+[package.extras]
+socks = ["PySocks (>=1.5.6,!=1.5.7)"]
+use-chardet-on-py3 = ["chardet (>=3.0.2,<6)"]
+
+[[package]]
 name = "ruff"
 version = "0.0.278"
 description = "An extremely fast Python linter, written in Rust."
@@ -1498,6 +1595,27 @@ anyio = ">=3.4.0,<5"
 full = ["httpx (>=0.22.0)", "itsdangerous", "jinja2", "python-multipart", "pyyaml"]
 
 [[package]]
+name = "telegrinder"
+version = "0.1.dev20"
+description = "async telegram bot building"
+optional = false
+python-versions = ">=3.8,<4.0"
+files = [
+    {file = "telegrinder-0.1.dev20-py3-none-any.whl", hash = "sha256:143d9e10ee65de87c7468961361975496834256a8008cfcc783ef90290282133"},
+    {file = "telegrinder-0.1.dev20.tar.gz", hash = "sha256:3851d11054a93f62105acbfb27e7c54bd87a267d389f11966e4bfb5a9bd15221"},
+]
+
+[package.dependencies]
+aiohttp = ">=3.8.1,<4.0.0"
+certifi = ">=2022.6.15,<2023.0.0"
+choicelib = ">=0.1.5,<0.2.0"
+envparse = ">=0.2.0,<0.3.0"
+msgspec = ">=0.9.0,<0.10.0"
+PyYAML = ">=6.0,<7.0"
+requests = ">=2.28.1,<3.0.0"
+vbml = ">=1.1.post1,<2.0"
+
+[[package]]
 name = "tomli"
 version = "2.0.1"
 description = "A lil' TOML parser"
@@ -1623,6 +1741,20 @@ typing-extensions = {version = ">=4.0", markers = "python_version < \"3.11\""}
 
 [package.extras]
 standard = ["colorama (>=0.4)", "httptools (>=0.5.0)", "python-dotenv (>=0.13)", "pyyaml (>=5.1)", "uvloop (>=0.14.0,!=0.15.0,!=0.15.1)", "watchfiles (>=0.13)", "websockets (>=10.4)"]
+
+[[package]]
+name = "vbml"
+version = "1.1.post1"
+description = "Way to check, match & resist. Sofisticated object oriented regex-based text parser"
+optional = false
+python-versions = ">=3.7,<4.0"
+files = [
+    {file = "vbml-1.1.post1-py3-none-any.whl", hash = "sha256:e3037c3f67b79128c48a100326fde833345e7d1e0d466566d37c2c98d08a587d"},
+    {file = "vbml-1.1.post1.tar.gz", hash = "sha256:59e852b35b2c4d3f8e7d927ab2e0a9dde753f3427ab9a61aca7ed2f4d3986f3c"},
+]
+
+[package.dependencies]
+typing_extensions = "*"
 
 [[package]]
 name = "virtualenv"
@@ -1751,4 +1883,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "a377697b34c8be3cff8d909beb249c3b7cf093969f3b86a199c1bf79bdf532ce"
+content-hash = "ae98cf03a5d020fbcb233bb005bf59c460d0db0ef6fdb5a9d911156b990d9b68"

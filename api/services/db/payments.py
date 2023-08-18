@@ -1,10 +1,10 @@
 from uuid import UUID
 
-from sqlalchemy import delete, select
+from sqlalchemy import delete, select, update
 
 from api.client import db
 from api.services.db.models import Order, Payment
-from api.services.yookassa.models import ApiPayment
+from api.services.yookassa.models import ApiPayment, PaymentStatus
 
 
 async def create_payment(api_payment: ApiPayment, order_id: int):
@@ -29,4 +29,12 @@ async def delete_payment_and_order(payment_id: UUID, order_id):
     async with db() as session:
         await session.execute(delete(Payment).where(Payment.id == payment_id))
         await session.execute(delete(Order).where(Order.id == order_id))
+        await session.commit()
+
+
+async def update_payment_status(payment_id: UUID, new_status: PaymentStatus):
+    async with db() as session:
+        await session.execute(
+            update(Payment).where(Payment.id == payment_id).values(status=new_status)
+        )
         await session.commit()
