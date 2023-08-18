@@ -12,7 +12,7 @@ export default function CartProduct(props: { product: Product }) {
 		if (currentCart == undefined) { return; }
 		if (currentCart?.length > 1) {
 			const index = currentCart?.indexOf(String(productId));
-			currentCart?.splice(index);
+			currentCart?.splice(index, 1);
 			localStorage.setItem("cartProducts", String(currentCart));
 		} else {
 			localStorage.removeItem("cartProducts");
