@@ -5,6 +5,7 @@ from uuid import UUID
 from fastapi_storages.integrations.sqlalchemy import FileType
 from sqladmin import ModelView
 from sqlalchemy import (
+    BigInteger,
     Boolean,
     Column,
     DateTime,
@@ -117,7 +118,7 @@ class Order(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     full_name: Mapped[str] = mapped_column(String(255))
     address: Mapped[str] = mapped_column(String(255))
-    phone: Mapped[int] = mapped_column(Integer())
+    phone: Mapped[int] = mapped_column(BigInteger())
     email: Mapped[str] = mapped_column(String(255))
 
     products: Mapped[list[Product]] = relationship(secondary=product_order_table)
