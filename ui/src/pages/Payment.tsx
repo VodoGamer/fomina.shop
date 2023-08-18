@@ -53,4 +53,3 @@ const Payment: Component = () => {
 
 
 export default Payment;
-

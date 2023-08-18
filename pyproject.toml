@@ -26,8 +26,8 @@ telegrinder = "^0.1.dev20"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.7.0"
-ruff = "^0.0.278"
-pyright = "^1.1.317"
+ruff = "^0.0.285"
+pyright = "^1.1.323"
 pre-commit = "^3.3.3"
 
 [tool.black]
