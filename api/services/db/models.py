@@ -106,8 +106,8 @@ class ProductVariationAdmin(ModelView, model=ProductVariation):
 product_order_table = Table(
     "product_order",
     Base.metadata,
-    Column("order_id", ForeignKey("order.id")),
-    Column("product_id", ForeignKey("product.id")),
+    Column("order_id", ForeignKey("order.id", ondelete="cascade")),
+    Column("product_id", ForeignKey("product.id", ondelete="cascade")),
 )
 
 

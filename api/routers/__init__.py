@@ -2,7 +2,7 @@ from typing import Iterable
 
 from fastapi.routing import APIRouter
 
-from api.routers import categories, images, orders, payments, products, variations
+from api.routers import categories, images, orders, payments, payments_daemon, products, variations
 
 routers: Iterable[APIRouter] = (
     categories.router,
@@ -11,4 +11,5 @@ routers: Iterable[APIRouter] = (
     variations.router,
     orders.router,
     payments.router,
+    payments_daemon.router,
 )
