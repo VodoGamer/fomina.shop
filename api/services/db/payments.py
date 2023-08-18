@@ -38,3 +38,9 @@ async def update_payment_status(payment_id: UUID, new_status: PaymentStatus):
             update(Payment).where(Payment.id == payment_id).values(status=new_status)
         )
         await session.commit()
+
+
+async def get_payment_by_order_id(order_id: int):
+    async with db() as session:
+        result = await session.execute(select(Payment).where(Payment.order_id == order_id))
+    return result.scalars().one()

@@ -16,7 +16,7 @@ async function getPayment(paymentId: string): Promise<Order> {
 	return (
 		await axios.get(`${import.meta.env.VITE_BASE_API_URL}/payment`, {
 			"params":
-				{ "payment_id": paymentId }
+				{ "order_id": paymentId }
 		})
 	).data;
 }

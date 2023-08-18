@@ -1,5 +1,7 @@
+from sqlalchemy import select
+
 from api.client import db
-from api.services.db.models import Order, product_order_table
+from api.services.db.models import Order, Payment, product_order_table
 
 
 async def create_order(full_name: str, address: str, phone: int, email: str):

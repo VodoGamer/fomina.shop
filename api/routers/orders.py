@@ -22,6 +22,8 @@ class OrderModel(pydantic.BaseModel):
 async def new_order(order: OrderModel) -> ApiPayment:
     order_id = await create_order(order.full_name, order.address, order.phone, order.email)
     await add_products_to_order(order_id, order.product_ids)
-    api_payment = await create_api_payment(order.amount, BASE_UI_URL, description="Покупка")
+    api_payment = await create_api_payment(
+        order.amount, f"{BASE_UI_URL}/payment/{order_id}", description="Покупка"
+    )
     await create_payment(api_payment, order_id)
     return api_payment
