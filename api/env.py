@@ -20,7 +20,7 @@ YOOKASSA_SECRET_KEY = os.getenv("YOOKASSA_SECRET_KEY", "very_secret")
 BASE_UI_URL = os.getenv("BASE_UI_URL", "http://ui:4173")
 
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "123456:token")
-TELEGRAM_NOTIFICATION_USER_IDS = map(
+TELEGRAM_NOTIFICATION_SELLER_IDS = map(
     int, os.getenv("TELEGRAM_NOTIFICATION_USER_IDS", "1, 2").split(",")
 )
 

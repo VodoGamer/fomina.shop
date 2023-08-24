@@ -1,8 +1,8 @@
+from aiogram import Bot
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from sqladmin import Admin
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
-from telegrinder import API, Token
 
 from api.admin import authentication_backend
 from api.env import ASYNC_DB_URI, TELEGRAM_BOT_TOKEN
@@ -15,7 +15,7 @@ engine = create_async_engine(ASYNC_DB_URI)
 db = async_sessionmaker(engine)
 admin = Admin(app, engine, authentication_backend=authentication_backend)
 
-telegram_api = API(Token(TELEGRAM_BOT_TOKEN))
+telegram_api = Bot(TELEGRAM_BOT_TOKEN)
 
 app.add_middleware(
     CORSMiddleware,

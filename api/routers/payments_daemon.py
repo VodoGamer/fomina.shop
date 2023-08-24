@@ -7,7 +7,7 @@ from api.services.db.payments import (
     get_all_payments,
     update_payment_status,
 )
-from api.services.telegram.notifications import send_notification_to_users
+from api.services.telegram.notifications import send_notification_to_sellers
 from api.services.yookassa.models import PaymentStatus
 from api.services.yookassa.payments import get_payment_by_id
 
@@ -25,7 +25,7 @@ async def payments_status_daemon():
                 api_payment.status == PaymentStatus.succeeded
                 and db_payment.status != PaymentStatus.succeeded
             ):
-                await send_notification_to_users(
+                await send_notification_to_sellers(
                     f"Пришёл новый заказ №{db_payment.id} на {api_payment.amount.value}₽"
                 )
             await update_payment_status(db_payment.id, api_payment.status)
