@@ -24,16 +24,18 @@ const Product: Component = () => {
 	return (
 		<>
 			<Header />
-			<Show when={product()}>
-				<div class="product">
-					<ProductImages productId={product().id} class="product__image" limit={1} />
-					<div class="product__details">
-						<h1 class="product__title">{product().title}</h1>
-						{displayDescription(product().description)}
-						<p class="product__price">{product().price}₽</p>
-						<AddCartButton productId={product().id} />
+			<Show fallback={<h1>Произошла ошибка при получении информации о товаре :(</h1>} when={!product.error}>
+				<Show fallback={<h1>Получаем информацию о товаре...</h1>} when={product()}>
+					<div class="product">
+						<ProductImages productId={product().id} class="product__image" limit={1} />
+						<div class="product__details">
+							<h1 class="product__title">{product().title}</h1>
+							{displayDescription(product().description)}
+							<p class="product__price">{product().price}₽</p>
+							<AddCartButton productId={product().id} />
+						</div>
 					</div>
-				</div>
+				</Show>
 			</Show>
 		</>
 	)
