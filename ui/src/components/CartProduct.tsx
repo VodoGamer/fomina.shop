@@ -1,40 +1,37 @@
 import ProductImages from "./ProductImages";
 import { Product } from "../types/product";
 import cross from "../../static/icons/cross.svg";
-import { Show, createSignal } from "solid-js";
+import { Setter, Accessor } from "solid-js";
 
-export default function CartProduct(props: { product: Product }) {
-	const [product, setProduct] = createSignal<Product | null>(props.product);
-
+export default function CartProduct(props: {
+	productIds: Accessor<string[]>;
+	setProductIds: Setter<string[]>;
+	product: Product;
+}) {
 	function deleteProductFromCart(productId: number) {
-		setProduct(null);
-		let currentCart = localStorage.getItem("cartProducts")?.split(",");
-		if (currentCart == undefined) {
+		const index = props.productIds().indexOf(String(productId));
+		if (props.productIds().length == 1) {
+			localStorage.removeItem("cartProducts");
+			location.reload(); // refactor: veryyy bad code 💩
 			return;
 		}
-		if (currentCart?.length > 1) {
-			const index = currentCart?.indexOf(String(productId));
-			currentCart?.splice(index, 1);
-			localStorage.setItem("cartProducts", String(currentCart));
-		} else {
-			localStorage.removeItem("cartProducts");
-		}
+		const newProducts = props.productIds().splice(index - 1, 1);
+		localStorage.setItem("cartProducts", String(newProducts));
+		props.setProductIds(newProducts);
 	}
 
 	return (
-		<Show when={product()}>
-			<div class="cart-product">
-				<button class="cart-product__cross" onClick={() => deleteProductFromCart(product().id)}>
-					<img src={cross} alt="" width="100%" />
-				</button>
-				<ProductImages productId={product()?.id} class="cart-product__image" limit={1} />
-				<div class="cart-product__texts">
-					<a class="cart-product__title" href={`/product/${product()?.id}`}>
-						{product()?.title}
-					</a>
-					<p class="cart-product__price">{product()?.price}₽</p>
-				</div>
+		<div class="cart-product">
+			<button class="cart-product__cross" onClick={() => deleteProductFromCart(props.product.id)}>
+				<img src={cross} alt="" width="100%" />
+			</button>
+			<ProductImages productId={props.product.id} class="cart-product__image" limit={1} />
+			<div class="cart-product__texts">
+				<a class="cart-product__title" href={`/product/${props.product.id}`}>
+					{props.product.title}
+				</a>
+				<p class="cart-product__price">{props.product.price}₽</p>
 			</div>
-		</Show>
+		</div>
 	);
 }
