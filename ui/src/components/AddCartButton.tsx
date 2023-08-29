@@ -3,7 +3,9 @@ import { Match, Switch, createSignal } from "solid-js";
 function isProductInCart(productId: number): boolean {
 	const currentCart = localStorage.getItem("cartProducts")?.split(",");
 	const productIndexInCart = currentCart?.indexOf(String(productId));
-	if (productIndexInCart == undefined || productIndexInCart == -1) { return false; }
+	if (productIndexInCart == undefined || productIndexInCart == -1) {
+		return false;
+	}
 	return true;
 }
 
@@ -18,15 +20,17 @@ export default function AddCartButton(props: { productId: number }) {
 			localStorage.setItem("cartProducts", String(currentCart));
 		} else {
 			return localStorage.setItem("cartProducts", String(newId));
-		};
-	};
+		}
+	}
 
 	return (
-		<Switch fallback={
-			<a class="order-button order-button_active" href="/cart">
-				<p class="order-button__text">Уже у вас в корзине!</p>
-			</a>
-		}>
+		<Switch
+			fallback={
+				<a class="order-button order-button_active" href="/cart">
+					<p class="order-button__text">Уже у вас в корзине!</p>
+				</a>
+			}
+		>
 			<Match when={!inCart()}>
 				<button class="order-button" onClick={() => addToCart(props.productId)}>
 					<p class="order-button__text">Добавить в корзину</p>

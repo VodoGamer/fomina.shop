@@ -9,10 +9,12 @@ const Header: Component = () => {
 		<>
 			<header class="header">
 				<BurgerMenu />
-				<a href="/" aria-label="Перейти на главную страницу"><img class="header__logo" width="284" src={logo} alt="" /></a>
+				<a href="/" aria-label="Перейти на главную страницу">
+					<img class="header__logo" width="284" src={logo} alt="" />
+				</a>
 			</header>
 		</>
-	)
-}
+	);
+};
 
-export default Header
+export default Header;

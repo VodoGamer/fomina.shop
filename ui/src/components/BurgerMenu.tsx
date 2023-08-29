@@ -7,7 +7,7 @@ import cross from "../../static/icons/menu-cross.svg";
 
 const BurgerMenu: Component = () => {
 	const [burgerState, setBurgerState] = createSignal<boolean>(false);
-	const toggle = () => setBurgerState(!burgerState())
+	const toggle = () => setBurgerState(!burgerState());
 
 	return (
 		<>
@@ -21,6 +21,6 @@ const BurgerMenu: Component = () => {
 			</Show>
 		</>
 	);
-}
+};
 
 export default BurgerMenu;

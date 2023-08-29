@@ -6,5 +6,5 @@ export default function PurchaseError(props: { errorText: string }) {
 			<img src={error} alt="" />
 			<p>{props.errorText}</p>
 		</div>
-	)
+	);
 }

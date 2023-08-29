@@ -9,14 +9,16 @@ export default function CartProduct(props: { product: Product }) {
 	function deleteProductFromCart(productId: number) {
 		setProduct(null);
 		let currentCart = localStorage.getItem("cartProducts")?.split(",");
-		if (currentCart == undefined) { return; }
+		if (currentCart == undefined) {
+			return;
+		}
 		if (currentCart?.length > 1) {
 			const index = currentCart?.indexOf(String(productId));
 			currentCart?.splice(index, 1);
 			localStorage.setItem("cartProducts", String(currentCart));
 		} else {
 			localStorage.removeItem("cartProducts");
-		};
+		}
 	}
 
 	return (
@@ -27,10 +29,12 @@ export default function CartProduct(props: { product: Product }) {
 				</button>
 				<ProductImages productId={product()?.id} class="cart-product__image" limit={1} />
 				<div class="cart-product__texts">
-					<a class="cart-product__title" href={`/product/${product()?.id}`}>{product()?.title}</a>
+					<a class="cart-product__title" href={`/product/${product()?.id}`}>
+						{product()?.title}
+					</a>
 					<p class="cart-product__price">{product()?.price}₽</p>
 				</div>
 			</div>
 		</Show>
-	)
+	);
 }

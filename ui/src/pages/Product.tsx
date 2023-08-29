@@ -6,16 +6,15 @@ import Header from "../components/Header";
 import ProductImages from "../components/ProductImages";
 import AddCartButton from "../components/AddCartButton";
 
-type Params = { productId: string }
+type Params = { productId: string };
 
 const getProduct = async (productId: number) =>
 	(await axios.get(`${import.meta.env.VITE_BASE_API_URL}/product/${productId}/`)).data;
 
 const displayDescription = (rawText: string) => {
-	const paragraphs = rawText.split('\n');
+	const paragraphs = rawText.split("\n");
 	return paragraphs.map((paragraph) => <p class="product__description">{paragraph}</p>);
-}
-
+};
 
 const Product: Component = () => {
 	const params = useParams<Params>();
@@ -24,7 +23,10 @@ const Product: Component = () => {
 	return (
 		<>
 			<Header />
-			<Show fallback={<h1>Произошла ошибка при получении информации о товаре :(</h1>} when={!product.error}>
+			<Show
+				fallback={<h1>Произошла ошибка при получении информации о товаре :(</h1>}
+				when={!product.error}
+			>
 				<Show fallback={<h1>Получаем информацию о товаре...</h1>} when={product()}>
 					<div class="product">
 						<ProductImages productId={product().id} class="product__image" limit={1} />
@@ -38,7 +40,7 @@ const Product: Component = () => {
 				</Show>
 			</Show>
 		</>
-	)
+	);
 };
 
 export default Product;

@@ -1,5 +1,5 @@
 export type Image = {
-	id: number,
-	path: string,
-	description: string | undefined
-}
+	id: number;
+	path: string;
+	description: string | undefined;
+};

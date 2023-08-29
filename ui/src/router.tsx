@@ -1,15 +1,15 @@
 /* @refresh reload */
-import { render } from 'solid-js/web';
+import { render } from "solid-js/web";
 import { Router, Route, Routes } from "@solidjs/router";
 
-import Index from './pages/Index';
-import Category from './pages/Category';
-import Product from './pages/Product';
-import Cart from './pages/Cart';
-import Purchase from './pages/Purchase';
-import Payment from './pages/Payment';
+import Index from "./pages/Index";
+import Category from "./pages/Category";
+import Product from "./pages/Product";
+import Cart from "./pages/Cart";
+import Purchase from "./pages/Purchase";
+import Payment from "./pages/Payment";
 
-const root = document.getElementById('app');
+const root = document.getElementById("app");
 
 render(
 	() => (
@@ -24,5 +24,5 @@ render(
 			</Routes>
 		</Router>
 	),
-	root!
+	root!,
 );
