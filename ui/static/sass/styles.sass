@@ -229,9 +229,17 @@ $margin-step: 8px
 	display: grid
 
 .purchase__label
-	display: block
+	display: flex
+	column-gap: $margin-step
 	font-size: 18px
 	font-weight: 400
+
+.purchase__error
+	display: flex
+	column-gap: $margin-step
+
+.purchase__label:has(.purchase__error) + .purchase__input
+	border: 1px solid red
 
 .purchase__input
 	margin-top: $margin-step

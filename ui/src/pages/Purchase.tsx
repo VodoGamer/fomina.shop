@@ -29,7 +29,7 @@ const Purchase: Component = () => {
 			</h1>
 			<Switch>
 				<Match when={!orderUrl()}>
-					<PurchaseForm setOrder={setOrderUrl} cartSum={cartSum()} productIds={productIds} />
+					<PurchaseForm setOrderUrl={setOrderUrl} cartSum={cartSum()} productIds={productIds} />
 				</Match>
 				<Match when={orderUrl()}>
 					<h2><a href={orderUrl()?.confirmation.confirmation_url}>Заказ создан, осталось только оплатить</a></h2>

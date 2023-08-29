@@ -1,22 +1,39 @@
+import { For, Setter, Show, createSignal } from "solid-js";
+import { Issues, safeParse } from "valibot";
+import { PurchaseData, PurchaseSchema } from "../schemas/purchaseSchema";
 import axios from "axios";
-import { Setter } from "solid-js";
+
+import PurchaseError from "./PurchaseError";
+
 
 function getValueForId(id: string) {
 	return (document.getElementById(id) as HTMLInputElement).value;
 }
 
-async function createOrder(cartSum: number, productIds: string[] | undefined) {
-	return (await axios.post(`${import.meta.env.VITE_BASE_API_URL}/order`, {
-		full_name: getValueForId("name"),
+function parseForm() {
+	const purchase = safeParse(PurchaseSchema, {
+		name: getValueForId("name"),
 		address: getValueForId("address"),
-		phone: getValueForId("telephone-number"),
+		phoneNumber: getValueForId("telephone-number"),
 		email: getValueForId("email"),
+	});
+	return purchase;
+};
+
+async function createOrder(purchase: PurchaseData, cartSum: number, productIds: string[] | undefined) {
+	return (await axios.post(`${import.meta.env.VITE_BASE_API_URL}/order`, {
+		full_name: purchase.name,
+		address: purchase.address,
+		phone: purchase.phoneNumber,
+		email: purchase.email,
 		amount: cartSum,
 		product_ids: productIds,
 	})).data;
 }
 
-export default function PurchaseForm(props: { setOrder: Setter<undefined | string>, cartSum: number, productIds: string[] | undefined }) {
+export default function PurchaseForm(props: { setOrderUrl: Setter<undefined | string>, cartSum: number, productIds: string[] | undefined }) {
+	const [issues, setIssues] = createSignal<Issues | undefined>();
+
 	return (
 		<div class="purchase">
 			<p class="purchase__field">
@@ -35,9 +52,22 @@ export default function PurchaseForm(props: { setOrder: Setter<undefined | strin
 				<label class="purchase__label" for="email">Электронная почта</label>
 				<input class="purchase__input" type="email" name="email" id="email" required />
 			</p>
-			<button class="order-button" type="submit" onClick={async () => { props.setOrder(await createOrder(props.cartSum, props.productIds)); }}>
+			<button class="order-button" type="submit" onClick={async () => {
+				const purchase = parseForm();
+				if (!purchase.success) {
+					setIssues(purchase.issues);
+					console.log(issues());
+				} else {
+					setIssues();
+					const response = await createOrder(purchase.output, props.cartSum, props.productIds);
+					props.setOrderUrl(response);
+				};
+			}}>
 				<p class="order-button__text">Перейти к оплате</p>
 			</button>
+			<For each={issues()}>{(issue) =>
+				<PurchaseError errorText={issue.message} />
+			}</For>
 		</div>
 	);
 };
