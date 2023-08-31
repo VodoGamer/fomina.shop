@@ -83,7 +83,6 @@ export default function PurchaseForm(props: {
 					const purchase = parseForm();
 					if (!purchase.success) {
 						setIssues(purchase.issues);
-						console.log(issues());
 					} else {
 						setIssues();
 						const response = await createOrder(purchase.output, props.cartSum, props.productIds);

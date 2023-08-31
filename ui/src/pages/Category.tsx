@@ -3,7 +3,7 @@ import { createResource, type Component, Show } from "solid-js";
 import axios from "axios";
 
 import Header from "../components/Header";
-import Products from "../components/ProductsList";
+import ArticlesList from "../components/ArticlesList";
 
 const getCategory = async (categorySlug: string) =>
 	(await axios.get(`${import.meta.env.VITE_BASE_API_URL}/category/${categorySlug}`)).data;
@@ -29,7 +29,7 @@ const Category: Component = () => {
 						</div>
 					</Show>
 				</Show>
-				<Products categorySlug={params.slug} />
+				<ArticlesList categorySlug={params.slug} />
 			</main>
 		</>
 	);

@@ -7,7 +7,6 @@ import CartProduct from "../components/CartProduct";
 import { Product } from "../types/product";
 
 export async function getProducts(productIds: string[]): Promise<Product[]> {
-	console.log(123);
 	return (
 		await axios.get(`${import.meta.env.VITE_BASE_API_URL}/products`, {
 			params: { product_ids: productIds },
