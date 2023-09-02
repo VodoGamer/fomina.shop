@@ -41,9 +41,13 @@ class Category(Base):
         back_populates="category", cascade="all, delete-orphan"
     )
 
+    def __str__(self) -> str:
+        return f"{self.id}. {self.title}"
+
 
 class CategoryAdmin(ModelView, model=Category):
     column_list = [Category.id, Category.title]
+    name_plural = "Categories"
 
 
 class Product(Base):
@@ -64,6 +68,9 @@ class Product(Base):
     )
     category: Mapped["Category"] = relationship(back_populates="products")
 
+    def __str__(self) -> str:
+        return f"{self.id}. {self.title}"
+
 
 class ProductAdmin(ModelView, model=Product):
     column_list = [Product.id, Product.title]
@@ -79,6 +86,9 @@ class Image(Base):
 
     product: Mapped["Product"] = relationship(back_populates="images")
 
+    def __str__(self) -> str:
+        return f"{self.id}. {self.path} | {self.description or ''}"
+
 
 class ImageAdmin(ModelView, model=Image):
     column_list = [Image.id]
@@ -93,11 +103,14 @@ class ProductVariation(Base):
     __tablename__ = "product_variation"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    type: Mapped[str] = mapped_column(Enum(VariationType))
+    type: Mapped[VariationType] = mapped_column(Enum(VariationType))
     value: Mapped[str] = mapped_column(String(50))
     product_id: Mapped[int] = mapped_column(ForeignKey("product.id"))
 
     product: Mapped["Product"] = relationship(back_populates="variations")
+
+    def __str__(self) -> str:
+        return f"{self.id}. {self.type.value} {self.value}"
 
 
 class ProductVariationAdmin(ModelView, model=ProductVariation):
@@ -124,6 +137,16 @@ class Order(Base):
     products: Mapped[list[Product]] = relationship(secondary=product_order_table)
     payment: Mapped["Payment"] = relationship(back_populates="order")
 
+    def __str__(self) -> str:
+        return str(self.id)
+
+
+class OrderAdmin(ModelView, model=Order):
+    column_list = [Order.id, Order.full_name]
+    can_create = False
+    can_edit = False
+    can_delete = False
+
 
 class Payment(Base):
     __tablename__ = "payment"
@@ -135,10 +158,22 @@ class Payment(Base):
     order_id: Mapped[int] = mapped_column(ForeignKey("order.id"))
     order: Mapped["Order"] = relationship(back_populates="payment")
 
+    def __str__(self) -> str:
+        return f"{self.id}. {self.status.value}"
+
+
+class PaymentAdmin(ModelView, model=Payment):
+    column_list = [Payment.id, Payment.status]
+    can_create = False
+    can_edit = False
+    can_delete = False
+
 
 admin_models: Iterable[type[ModelView]] = (
     CategoryAdmin,
     ProductAdmin,
     ImageAdmin,
     ProductVariationAdmin,
+    OrderAdmin,
+    PaymentAdmin,
 )
