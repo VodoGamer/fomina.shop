@@ -2,7 +2,7 @@ import { type Component, createResource, Show, For, createSignal, createEffect }
 import axios from "axios";
 import qs from "qs";
 
-import Header from "../components/Header";
+import Header from "../components/Header/Header";
 import CartProduct from "../components/CartProduct";
 import { Product } from "../types/product";
 

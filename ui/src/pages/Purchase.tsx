@@ -1,6 +1,6 @@
 import { Component, Match, Show, Switch, createResource, createSignal } from "solid-js";
 
-import Header from "../components/Header";
+import Header from "../components/Header/Header";
 import PurchaseForm from "../components/PurchaseForm";
 import { calculateOverallSum, getProducts } from "./Cart";
 import { Order } from "../types/order";

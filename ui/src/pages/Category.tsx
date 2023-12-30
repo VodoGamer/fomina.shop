@@ -2,7 +2,7 @@ import { useParams } from "@solidjs/router";
 import { createResource, type Component, Show } from "solid-js";
 import axios from "axios";
 
-import Header from "../components/Header";
+import Header from "../components/Header/Header";
 import ArticlesList from "../components/ArticlesList";
 
 const getCategory = async (categorySlug: string) =>

@@ -2,7 +2,7 @@ import { useParams } from "@solidjs/router";
 import axios from "axios";
 import { Component, Show, createResource } from "solid-js";
 
-import Header from "../components/Header";
+import Header from "../components/Header/Header";
 import ProductImages from "../components/ProductImages";
 import AddCartButton from "../components/AddCartButton";
 
