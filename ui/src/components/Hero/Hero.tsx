@@ -1,19 +1,18 @@
-import { type Component } from "solid-js";
-
-import hero_image from "./hero-image.webp";
 import styles from "./hero.module.sass";
 
-const Hero: Component = () => {
+export default function Hero(props: {
+	header: string;
+	background_image_url: string;
+	subheader?: string;
+}) {
 	return (
 		<>
-			<div class={styles.hero} style={`background-image: url(${hero_image});`}>
+			<div class={styles.hero} style={`background-image: url(${props.background_image_url});`}>
 				<div>
-					<h1 class={styles.header}>Fomina style</h1>
-					<span class={styles.subheader}>let it be...</span>
+					<h1 class={styles.header}>{props.header}</h1>
+					<span class={styles.subheader}>{props.subheader}</span>
 				</div>
 			</div>
 		</>
 	);
-};
-
-export default Hero;
+}

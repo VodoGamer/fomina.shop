@@ -4,13 +4,14 @@ import Header from "../../components/Header/Header";
 import Hero from "../../components/Hero/Hero";
 
 import styles from "./index.module.sass";
+import hero_image from "./index-image.webp";
 
 const Index: Component = () => {
 	return (
 		<>
 			<Header />
 			<main class={styles.main}>
-				<Hero />
+				<Hero header="Fomina Style" background_image_url={hero_image} subheader="let it be..." />
 			</main>
 		</>
 	);
