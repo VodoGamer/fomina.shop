@@ -3,7 +3,7 @@ import { createResource, type Component, Show } from "solid-js";
 import axios from "axios";
 
 import Header from "../../components/Header/Header";
-import ArticlesList from "../../components/ArticlesList";
+import ArticlesList from "../../components/Articles/ArticlesList";
 import Hero from "../../components/Hero/Hero";
 
 import styles from "./index.module.sass";
