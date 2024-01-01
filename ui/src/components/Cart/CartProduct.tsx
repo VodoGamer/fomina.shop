@@ -1,7 +1,10 @@
-import ProductImages from "./ProductImages";
-import { Product } from "../types/product";
-import cross from "../../static/icons/cross.svg";
 import { Setter, Accessor } from "solid-js";
+
+import ProductImages from "../ProductImages";
+import { Product } from "../../types/product";
+import cross from "../../../static/icons/cross.svg";
+
+import styles from "./cartProduct.module.sass";
 
 export default function CartProduct(props: {
 	productIds: Accessor<string[]>;
@@ -21,16 +24,16 @@ export default function CartProduct(props: {
 	}
 
 	return (
-		<div class="cart-product">
-			<button class="cart-product__cross" onClick={() => deleteProductFromCart(props.product.id)}>
+		<div class={styles.product}>
+			<button class={styles.cross} onClick={() => deleteProductFromCart(props.product.id)}>
 				<img src={cross} alt="" width="100%" />
 			</button>
-			<ProductImages productId={props.product.id} class="cart-product__image" limit={1} />
-			<div class="cart-product__texts">
-				<a class="cart-product__title" href={`/product/${props.product.id}`}>
+			<ProductImages productId={props.product.id} class={styles.image} limit={1} />
+			<div>
+				<a class={styles.title} href={`/product/${props.product.id}`}>
 					{props.product.title}
 				</a>
-				<p class="cart-product__price">{props.product.price}₽</p>
+				<p class={styles.price}>{props.product.price}₽</p>
 			</div>
 		</div>
 	);

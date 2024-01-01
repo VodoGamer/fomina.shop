@@ -3,12 +3,12 @@ import axios from "axios";
 
 import { type Category } from "../../types/category";
 
-import styles from "./categories.module.sass";
+import styles from "./burgermenu.module.sass";
 
-const getCategories = async (): Promise<[Category]> =>
-	(await axios.get(`${import.meta.env.VITE_BASE_API_URL}/categories/`)).data;
+const getCategories = async () =>
+	(await axios.get<Category[]>(`${import.meta.env.VITE_BASE_API_URL}/categories/`)).data;
 
-const Categories: Component = () => {
+const BurgerCategories: Component = () => {
 	const [categories] = createResource(getCategories);
 
 	return (
@@ -27,4 +27,4 @@ const Categories: Component = () => {
 	);
 };
 
-export default Categories;
+export default BurgerCategories;

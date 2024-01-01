@@ -1,0 +1,32 @@
+.product
+	display: grid
+	grid-template-columns: 25px 1fr 1fr
+	column-gap: var(--margin-step-2)
+	height: 300px
+
+.cross
+	background-color: transparent
+	border: 0
+	height: min-content
+	cursor: pointer
+
+.image
+	width: 100%
+	height: inherit
+	object-fit: cover
+
+.title
+	font-weight: 400
+	font-size: 36px
+	text-decoration: underline
+	color: red
+	:after
+		color: inherit
+
+.variation
+	font-weight: 300
+	font-size: 24px
+
+.price
+	font-size: 24px
+	font-weight: 400

@@ -7,7 +7,8 @@ import Article from "../Article/Article";
 import styles from "./articles.module.sass";
 
 const getProducts = async (categorySlug: string) =>
-	(await axios.get(`${import.meta.env.VITE_BASE_API_URL}/products/${categorySlug}/`)).data;
+	(await axios.get<[Product]>(`${import.meta.env.VITE_BASE_API_URL}/products/${categorySlug}/`))
+		.data;
 
 export default function ArticlesList(props: { categorySlug: string }) {
 	const [products] = createResource(props.categorySlug, getProducts);

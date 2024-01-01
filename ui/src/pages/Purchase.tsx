@@ -2,7 +2,7 @@ import { Component, Match, Show, Switch, createResource, createSignal } from "so
 
 import Header from "../components/Header/Header";
 import PurchaseForm from "../components/PurchaseForm";
-import { calculateOverallSum, getProducts } from "./Cart";
+import { calculateOverallSum, getProducts } from "./cart/Cart";
 import { Order } from "../types/order";
 
 const Purchase: Component = () => {

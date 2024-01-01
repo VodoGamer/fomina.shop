@@ -1,7 +1,6 @@
 import { type Component, createSignal, Show } from "solid-js";
 
-import Categories from "../Categories/Categories";
-
+import BurgerCategories from "./BurgerCategories";
 import menu from "./menu.svg";
 import cross from "./menu-cross.svg";
 import styles from "./burgermenu.module.sass";
@@ -16,7 +15,7 @@ const BurgerMenu: Component = () => {
 			<Show when={burgerState()}>
 				<div class={styles.menu}>
 					<img class={styles.toggler} onClick={toggle} src={cross} alt="" />
-					<Categories />
+					<BurgerCategories />
 				</div>
 				<div class={styles.content} onClick={toggle}></div>
 			</Show>

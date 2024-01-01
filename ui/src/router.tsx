@@ -5,7 +5,7 @@ import { Router, Route, Routes } from "@solidjs/router";
 import Index from "./pages/index/Index";
 import Category from "./pages/category/Category";
 import ProductPage from "./pages/Product";
-import Cart from "./pages/Cart";
+import Cart from "./pages/cart/Cart";
 import Purchase from "./pages/Purchase";
 import Payment from "./pages/Payment";
 

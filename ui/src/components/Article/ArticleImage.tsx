@@ -5,12 +5,15 @@ import { Image } from "../../types/image";
 
 import styles from "./article.module.sass";
 
-async function getImages(productId: Number): Promise<Image[]> {
-	const request = await axios.get(`${import.meta.env.VITE_BASE_API_URL}/images/${productId}`, {
-		params: {
-			limit: 1,
+async function getImages(productId: Number) {
+	const request = await axios.get<[Image]>(
+		`${import.meta.env.VITE_BASE_API_URL}/images/${productId}`,
+		{
+			params: {
+				limit: 1,
+			},
 		},
-	});
+	);
 	return request.data;
 }
 
