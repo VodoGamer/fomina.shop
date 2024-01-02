@@ -1,0 +1,30 @@
+.header
+	margin-top: var(--margin-step-3)
+	font-size: 32px
+	font-weight: 700
+
+.purchase
+	margin-top: var(--margin-step-3)
+
+.field
+	margin-top: var(--margin-step-2)
+	display: grid
+
+.label
+	display: flex
+	column-gap: var(--margin-step)
+	font-size: 18px
+	font-weight: 400
+
+.error
+	display: flex
+	column-gap: var(--margin-step)
+
+.label:has(.error) + .input
+	border: 1px solid red
+
+.input
+	margin-top: var(--margin-step)
+	border: 1px solid #ccc
+	height: 32px
+	width: 320px
