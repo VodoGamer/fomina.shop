@@ -1,6 +1,12 @@
 .buttons
-	display: flex
-	column-gap: var(--margin-step-2)
+	display: grid
+	gap: var(--margin-step-2)
+	grid-template-columns: repeat(3, 1fr)
+	width: min-content
+	@media screen and (max-width: 860px)
+		grid-template-columns: repeat(2, 1fr)
+	@media screen and (max-width: 680px)
+		grid-template-columns: 1fr
 
 .instagram, .wildberries, .ozon
 	background: #4F4F4F
