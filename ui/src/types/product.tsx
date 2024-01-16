@@ -5,4 +5,5 @@ export type Product = {
 	price: number;
 	pub_date: Date;
 	category_id: number;
+	article?: string;
 };

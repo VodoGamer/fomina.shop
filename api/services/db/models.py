@@ -57,6 +57,7 @@ class Product(Base):
     title: Mapped[str] = mapped_column(String(30))
     description: Mapped[str] = mapped_column(Text())
     price: Mapped[int]
+    article: Mapped[str | None] = mapped_column(String(50), nullable=True)
     pub_date: Mapped[str] = mapped_column(DateTime(), server_default=func.now())
     category_id: Mapped[int] = mapped_column(ForeignKey("category.id"))
 
