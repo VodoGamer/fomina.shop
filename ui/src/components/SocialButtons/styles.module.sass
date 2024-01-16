@@ -1,0 +1,24 @@
+.buttons
+    display: grid
+    gap: var(--margin-step-2)
+    grid-template-columns: repeat(3, 1fr)
+    width: min-content
+    @media screen and (max-width: 860px)
+        grid-template-columns: repeat(2, 1fr)
+    @media screen and (max-width: 680px)
+        grid-template-columns: 1fr
+
+.instagram, .wildberries, .ozon
+    background: #4F4F4F
+    border-radius: 20px
+    transition-duration: .4s
+    transition-property: background, background-color, linear-gradient
+
+.instagram:hover
+    background-color: #D3D3D3
+
+.wildberries:hover
+    background: linear-gradient(90deg, rgba(194,41,210,1) 0%, rgba(207,47,205,1) 100%)
+
+.ozon:hover
+    background-color: #005BFF

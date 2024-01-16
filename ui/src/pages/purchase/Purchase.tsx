@@ -1,9 +1,11 @@
 import { Component, Match, Show, Switch, createResource, createSignal } from "solid-js";
 
-import Header from "../components/Header";
-import PurchaseForm from "../components/PurchaseForm";
-import { calculateOverallSum, getProducts } from "./Cart";
-import { Order } from "../types/order";
+import Header from "../../components/Header/Header";
+import PurchaseForm from "../../components/PurchaseForm";
+import { calculateOverallSum, getProducts } from "../cart/Cart";
+import { Order } from "../../types/order";
+
+import styles from "./purchase.module.sass";
 
 const Purchase: Component = () => {
 	const [orderUrl, setOrderUrl] = createSignal<undefined | Order>();
@@ -13,7 +15,7 @@ const Purchase: Component = () => {
 		return (
 			<>
 				<Header />
-				<h1 class="purchase-header">У вас нет товаров в корзине</h1>
+				<h1 class={styles.header}>У вас нет товаров в корзине</h1>
 			</>
 		);
 	}
@@ -23,7 +25,7 @@ const Purchase: Component = () => {
 	return (
 		<>
 			<Header />
-			<h1 class="purchase-header">
+			<h1 class={styles.header}>
 				Оформление заказа
 				<Show when={cartSum()}>{` на ${String(cartSum())}₽`}</Show>
 			</h1>

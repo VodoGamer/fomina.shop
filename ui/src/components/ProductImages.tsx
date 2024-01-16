@@ -6,7 +6,7 @@ import { Image } from "../types/image";
 type Props = {
 	productId: number;
 	class: string;
-	limit?: number | undefined;
+	limit?: number;
 };
 
 const getImages = async (props: Props): Promise<[Image]> => {

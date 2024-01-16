@@ -1,4 +1,5 @@
 from sqlalchemy import select
+from sqlalchemy.orm import joinedload
 
 from api.client import db
 from api.services.db.models import Category, Product
@@ -14,7 +15,9 @@ async def get_products_for_category(category_slug: str):
 
 async def get_product(product_id: int):
     async with db() as session:
-        result = await session.execute(select(Product).where(Product.id == product_id))
+        result = await session.execute(
+            select(Product).where(Product.id == product_id).options(joinedload(Product.images))
+        )
     return result.scalar()
 
 

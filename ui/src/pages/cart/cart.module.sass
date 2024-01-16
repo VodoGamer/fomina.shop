@@ -1,0 +1,24 @@
+.header
+	font-size: 48px
+	font-weight: 600
+	margin-top: var(--margin-step-3)
+
+.cart
+	display: grid
+	margin-top: var(--margin-step-3)
+	grid-template-columns: 570px 1fr 50%
+	@media screen and ( max-width: 1150px )
+		grid-template-columns: 1fr
+
+.products
+	display: grid
+	row-gap: var(--margin-step-2)
+
+.information
+	grid-column: 3
+	@media screen and ( max-width: 1150px )
+		grid-column: 1
+
+.information__text
+	font-size: 32px
+	font-weight: 400

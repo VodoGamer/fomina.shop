@@ -1,7 +1,7 @@
 import { Component, Match, Switch, createResource } from "solid-js";
 import { useParams } from "@solidjs/router";
 
-import Header from "../components/Header";
+import Header from "../components/Header/Header";
 
 import success from "../../static/icons/success.svg";
 import processing from "../../static/icons/processing.svg";

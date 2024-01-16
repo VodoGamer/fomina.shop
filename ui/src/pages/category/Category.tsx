@@ -2,8 +2,11 @@ import { useParams } from "@solidjs/router";
 import { createResource, type Component, Show } from "solid-js";
 import axios from "axios";
 
-import Header from "../components/Header";
-import ArticlesList from "../components/ArticlesList";
+import Header from "../../components/Header/Header";
+import ArticlesList from "../../components/Articles/ArticlesList";
+import Hero from "../../components/Hero/Hero";
+
+import styles from "./index.module.sass";
 
 const getCategory = async (categorySlug: string) =>
 	(await axios.get(`${import.meta.env.VITE_BASE_API_URL}/category/${categorySlug}`)).data;
@@ -15,18 +18,13 @@ const Category: Component = () => {
 	return (
 		<>
 			<Header />
-			<main class="main">
+			<main class={styles.main}>
 				<Show
 					fallback={<h1>Произошла ошибка при получении информации о категории :(</h1>}
 					when={!category.error}
 				>
 					<Show fallback={<h1>Получаем информацию о категории...</h1>} when={category()}>
-						<div
-							class="first-look"
-							style={`background-image: url('/${category().image_path}'); height: 60vh;`}
-						>
-							<h1 class="first-look__header">{category().title}</h1>
-						</div>
+						<Hero header={category().title} background_image_url={category().image_path} />
 					</Show>
 				</Show>
 				<ArticlesList categorySlug={params.slug} />

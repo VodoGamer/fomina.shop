@@ -1,3 +1,7 @@
+:root
+	--margin-step: 8px
+	--margin-step-2: 16px
+	--margin-step-3: 24px
 $margin-step: 8px
 
 *, *::before, *::after
@@ -12,209 +16,24 @@ $margin-step: 8px
 	@media screen and ( max-width: 500px )
 		margin: $margin-step * 5 $margin-step * 3
 
+// social
+.social_instagram
+	:hover
+		background-color: #D3D3D3
+		color: #000000
+
 // header
-.header
-	display: grid
-	grid-template-columns: min-content 1fr min-content
-	justify-items: center
-	align-items: center
-
-.header__logo
-	width: 8em
-	@media screen and ( max-width: 500px )
-		width: 4em
-
-// burger-menu
-.menu, .menu-cross
-	cursor: pointer
-	width: 2em
-
-.burger-menu
-	position: absolute
-	top: 0
-	left: 0
-	background-color: white
-	padding: $margin-step * 3
-	z-index: 2
-
-.burger-menu__link
-	display: block
-	text-decoration: none
-	color: black
-	font-size: 40px
-	font-weight: 400
-	margin-top: $margin-step
-	transition-duration: .2s
-	&:hover
-		color: blue
-	@media screen and (max-width: 500px)
-		font-size: 1.5em
-
-.burger-menu__outside
-	position: absolute
-	top: 0
-	left: 0
-	height: 100%
-	width: 100%
-	z-index: 1
-	background-color: rgba(0, 0, 0, 0.2)
 
 // main
-.main
-	margin-top: $margin-step
 
 // First look
-.first-look
-	background-color: grey
-	background-blend-mode: multiply
-	background-size: cover
-	background-repeat: no-repeat
-	height: 80vh
-	display: grid
-	justify-items: center
-	align-items: center
-
-.first-look__header
-	font-size: 64px
-	font-weight: 600
-	color: white
-	@media screen and (max-width: 500px)
-		font-size: 2.3em
-
-.first-look__subheader
-	text-align: center
-	color: white
-	font-size: 1.5em
-	font-weight: 400
 
 // articles
-.articles
-	margin-top: $margin-step * 3
-	display: grid
-	grid-template-columns: repeat(auto-fit, minmax(300px, 471px))
-	gap: $margin-step * 1
-
-.article
-	min-width: 300px
-
-.article__link
-	color: black
-	text-decoration: none
-
-.article__image
-	img
-		aspect-ratio: 1
-		width: 100%
-		object-fit: cover
-
-.article__image
-	aspect-ratio: 1
-	width: 100%
-
-.loading-animation
-	animation-duration: 3s
-	animation-fill-mode: forwards
-	animation-iteration-count: infinite
-	animation-name: placeHolderShimmer
-	animation-timing-function: ease-in-out
-	background: #f6f7f8
-	background: linear-gradient(to right, #fafafa 8%, #f4f4f4 38%, #fafafa 54%)
-
-@keyframes placeHolderShimmer
-	0%
-		background-position: -468px 0
-
-	100%
-		background-position: 468px 0
-
-.article__title
-	font-size: 30px
-
-.article__price
-	font-size: 16px
-
-.article__title, .article__price
-	font-weight: 400
 
 // Product
-.product
-	display: grid
-	grid-template-columns: 500px 1fr
-	gap: $margin-step * 2
-	@media screen and ( max-width: 768px )
-		grid-template-columns: 1fr
+// // Cart
 
-.product__image
-	width: 100%
-
-.product__title
-	font-size: 48px
-	font-weight: 600
-
-.product__description
-	font-size: 24px
-	font-weight: 300
-
-.product__price
-	font-size: 24px
-	font-weight: 400
-
-// Cart
-.cart-header
-	font-size: 48px
-	font-weight: 600
-	margin-top: $margin-step * 3
-
-.cart
-	display: grid
-	margin-top: $margin-step * 3
-	grid-template-columns: 570px 1fr 50%
-	@media screen and ( max-width: 1150px )
-		grid-template-columns: 1fr
-
-.cart-products
-	display: grid
-	row-gap: $margin-step * 2
-
-.cart-product
-	display: grid
-	grid-template-columns: 25px 1fr 1fr
-	column-gap: $margin-step * 2
-	height: 300px
-
-.cart-product__cross
-	background-color: transparent
-	border: 0
-	height: min-content
-	cursor: pointer
-
-.cart-product__image
-	width: 100%
-	height: inherit
-	object-fit: cover
-
-.cart-product__title
-	font-weight: 400
-	font-size: 36px
-
-.cart-product__variation
-	font-weight: 300
-	font-size: 24px
-
-.cart-product__price
-	font-size: 24px
-	font-weight: 400
-
-.cart-information
-	grid-column: 3
-	@media screen and ( max-width: 1150px )
-		grid-column: 1
-
-.cart-information__text
-	font-size: 32px
-	font-weight: 400
-
-// Order
+// // Order
 .order-button
 	margin-top: $margin-step * 2
 	border: 3px solid black
@@ -239,36 +58,6 @@ $margin-step: 8px
 	font-size: 24px
 
 // Purchase
-.purchase-header
-	margin-top: $margin-step * 3
-	font-size: 32px
-	font-weight: 700
-
-.purchase
-	margin-top: $margin-step * 3
-
-.purchase__field
-	margin-top: $margin-step * 2
-	display: grid
-
-.purchase__label
-	display: flex
-	column-gap: $margin-step
-	font-size: 18px
-	font-weight: 400
-
-.purchase__error
-	display: flex
-	column-gap: $margin-step
-
-.purchase__label:has(.purchase__error) + .purchase__input
-	border: 1px solid red
-
-.purchase__input
-	margin-top: $margin-step
-	border: 1px solid #ccc
-	height: 32px
-	width: 320px
 
 // Payment
 .payment-description

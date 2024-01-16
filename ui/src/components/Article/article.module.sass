@@ -1,0 +1,40 @@
+.article
+	min-width: 300px
+
+.link
+	color: black
+	text-decoration: none
+
+.image img
+	aspect-ratio: 1
+	width: 100%
+	object-fit: cover
+
+.image
+	aspect-ratio: 1
+	width: 100%
+
+.loading_animation
+	animation-duration: 3s
+	animation-fill-mode: forwards
+	animation-iteration-count: infinite
+	animation-name: placeHolderShimmer
+	animation-timing-function: ease-in-out
+	background: #f6f7f8
+	background: linear-gradient(to right, #fafafa 8%, #f4f4f4 38%, #fafafa 54%)
+
+@keyframes placeHolderShimmer
+	0%
+		background-position: -468px 0
+
+	100%
+		background-position: 468px 0
+
+.title
+	font-size: 30px
+
+.price
+	font-size: 16px
+
+.title, .price
+	font-weight: 400
