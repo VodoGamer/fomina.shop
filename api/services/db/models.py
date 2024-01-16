@@ -61,7 +61,7 @@ class Product(Base):
     category_id: Mapped[int] = mapped_column(ForeignKey("category.id"))
 
     images: Mapped[list["Image"]] = relationship(
-        back_populates="product", cascade="all, delete-orphan"
+        back_populates="product", cascade="all, delete-orphan", lazy="select"
     )
     variations: Mapped[list["ProductVariation"]] = relationship(
         back_populates="product", cascade="all, delete-orphan"
