@@ -2,9 +2,9 @@ import { Show } from "solid-js";
 import { Product as ProductModel } from "../../types/product";
 
 import AddToCartButton from "../Cart/AddToCartButton";
-import ProductImages from "../ProductImages";
 
 import styles from "./product.module.sass";
+import ImagesSlider from "../Slider";
 
 const displayDescription = (rawText: string) => {
 	const paragraphs = rawText.split("\n");
@@ -15,7 +15,7 @@ export default function Product(props: { product: ProductModel }) {
 	return (
 		<>
 			<div class={styles.product}>
-				<ProductImages productId={props.product.id} class={styles.image} limit={1} />
+				<ImagesSlider productId={props.product.id} />
 				<div>
 					<h1 class={styles.title}>{props.product.title}</h1>
 					<Show when={props.product.article}>
