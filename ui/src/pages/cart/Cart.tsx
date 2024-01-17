@@ -9,6 +9,8 @@ import { Product } from "../../types/product";
 import styles from "./cart.module.sass";
 import buttonStyles from "../../components/Cart/cart.module.sass";
 
+const DELIVER_AMOUNT = 300;
+
 export async function getProducts(productIds: string[]): Promise<Product[]> {
 	return (
 		await axios.get(`${import.meta.env.VITE_BASE_API_URL}/products`, {
@@ -28,7 +30,7 @@ export function calculateOverallSum(products: Product[] | undefined): number {
 	for (const product of products) {
 		sum += product.price;
 	}
-	return sum;
+	return sum + DELIVER_AMOUNT;
 }
 
 const Cart: Component = () => {
@@ -71,6 +73,7 @@ const Cart: Component = () => {
 							</div>
 							<div class={styles.information}>
 								<h3 class={styles.information__text}>Предметов в корзине: {products()?.length}</h3>
+								<h3 class={styles.information__text}>Стоимость доставки: 300₽</h3>
 								<h3 class={styles.information__text}>
 									Итого к оплате: {calculateOverallSum(products())}₽
 								</h3>
