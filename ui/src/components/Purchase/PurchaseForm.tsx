@@ -1,9 +1,10 @@
-import { For, Setter, Show, createSignal } from "solid-js";
+import { For, Setter, createSignal } from "solid-js";
 import { Issues, safeParse } from "valibot";
-import { PurchaseData, PurchaseSchema } from "../schemas/purchaseSchema";
+import { PurchaseData, PurchaseSchema } from "../../schemas/purchaseSchema";
 import axios from "axios";
 
 import PurchaseError from "./PurchaseError";
+import styles from "./styles.module.sass";
 
 function getValueForId(id: string) {
 	return (document.getElementById(id) as HTMLInputElement).value;
@@ -44,25 +45,25 @@ export default function PurchaseForm(props: {
 	const [issues, setIssues] = createSignal<Issues | undefined>();
 
 	return (
-		<div class="purchase">
-			<p class="purchase__field">
-				<label class="purchase__label" for="name">
+		<div class={styles.purchase}>
+			<p class={styles.purchase__field}>
+				<label class={styles.purchase__label} for="name">
 					Имя, фамилия
 				</label>
-				<input class="purchase__input" type="text" name="name" id="name" required />
+				<input class={styles.purchase__input} type="text" name="name" id="name" required />
 			</p>
-			<p class="purchase__field">
-				<label class="purchase__label" for="address">
+			<p class={styles.purchase__field}>
+				<label class={styles.purchase__label} for="address">
 					Полный адрес
 				</label>
-				<input class="purchase__input" type="text" name="address" id="address" required />
+				<input class={styles.purchase__input} type="text" name="address" id="address" required />
 			</p>
-			<p class="purchase__field">
-				<label class="purchase__label" for="telephone-number">
+			<p class={styles.purchase__field}>
+				<label class={styles.purchase__label} for="telephone-number">
 					Номер телефона
 				</label>
 				<input
-					class="purchase__input"
+					class={styles.purchase__input}
 					type="tel"
 					name="telephone-number"
 					id="telephone-number"
@@ -70,11 +71,11 @@ export default function PurchaseForm(props: {
 					maxlength="20"
 				/>
 			</p>
-			<p class="purchase__field">
-				<label class="purchase__label" for="email">
+			<p class={styles.purchase__field}>
+				<label class={styles.purchase__label} for="email">
 					Электронная почта
 				</label>
-				<input class="purchase__input" type="email" name="email" id="email" required />
+				<input class={styles.purchase__input} type="email" name="email" id="email" required />
 			</p>
 			<button
 				class="order-button"
