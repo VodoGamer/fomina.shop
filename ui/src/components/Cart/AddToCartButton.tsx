@@ -23,6 +23,7 @@ export default function AddToCartButton(props: { productId: number }) {
 		} else {
 			return localStorage.setItem("cartProducts", String(newId));
 		}
+		location.reload(); // refactor
 	}
 
 	return (
