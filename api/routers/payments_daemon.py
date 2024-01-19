@@ -28,5 +28,5 @@ async def payments_status_daemon():
                 await send_notification_to_sellers(
                     f"Пришёл новый заказ №{db_payment.id} на {api_payment.amount.value}₽"
                 )
-            await update_payment_status(db_payment.id, api_payment.status)
+                await update_payment_status(db_payment.id, api_payment.status)
         await asyncio.sleep(5)

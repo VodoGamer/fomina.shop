@@ -24,7 +24,7 @@ function parseForm() {
 async function createOrder(
 	purchase: PurchaseData,
 	cartSum: number,
-	productIds: string[] | undefined,
+	productIds: number[] | undefined,
 ) {
 	return (
 		await axios.post(`${import.meta.env.VITE_BASE_API_URL}/order`, {
@@ -41,7 +41,7 @@ async function createOrder(
 export default function PurchaseForm(props: {
 	setOrderUrl: Setter<Order | undefined>;
 	cartSum: number | undefined;
-	productIds: string[] | undefined;
+	productIds: number[] | undefined;
 }) {
 	const [issues, setIssues] = createSignal<Issues | undefined>();
 

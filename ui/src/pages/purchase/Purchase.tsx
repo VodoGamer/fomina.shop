@@ -25,7 +25,7 @@ async function getProducts(productIds: number[]): Promise<Product[]> {
 const Purchase: Component = () => {
 	const [orderUrl, setOrderUrl] = createSignal<undefined | Order>();
 
-	const productIds = localStorage.getItem("cartProducts")?.split(",");
+	const productIds = cart();
 	if (productIds == undefined) {
 		return (
 			<>

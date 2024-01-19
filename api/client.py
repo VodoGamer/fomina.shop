@@ -1,3 +1,6 @@
+import logging
+import sys
+
 from aiogram import Bot
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -7,6 +10,10 @@ from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 from api.admin import authentication_backend
 from api.env import ASYNC_DB_URI, TELEGRAM_BOT_TOKEN
 from api.storage import CustomSystemStorage
+
+logger: logging.Logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+logger.addHandler(logging.StreamHandler(sys.stdout))
 
 app = FastAPI()
 storage = CustomSystemStorage(path="public/")

@@ -20,9 +20,9 @@ YOOKASSA_SECRET_KEY = os.getenv("YOOKASSA_SECRET_KEY", "very_secret")
 BASE_UI_URL = os.getenv("BASE_UI_URL", "http://ui:4173")
 
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "123456:token")
-TELEGRAM_NOTIFICATION_SELLER_IDS = map(
-    int, os.getenv("TELEGRAM_NOTIFICATION_USER_IDS", "1, 2").split(",")
-)
+TELEGRAM_NOTIFICATION_SELLER_IDS: list[str] = os.getenv(
+    "TELEGRAM_NOTIFICATION_USER_IDS", "1, 2"
+).split(",")
 
 BASE_DB_URI = f"{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_TABLE}"
 PSYCOPG_DB_URI = f"postgresql://{BASE_DB_URI}"
