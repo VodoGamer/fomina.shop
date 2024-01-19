@@ -5,6 +5,7 @@ import AddToCartButton from "../Cart/AddToCartButton";
 
 import styles from "./product.module.sass";
 import ImagesSlider from "../Slider";
+import Variations from "../Variations";
 
 const displayDescription = (rawText: string) => {
 	const paragraphs = rawText.split("\n");
@@ -21,6 +22,7 @@ export default function Product(props: { product: ProductModel }) {
 					<Show when={props.product.article}>
 						<h2 class={styles.article}>Артикул: {props.product.article}</h2>
 					</Show>
+					<Variations productId={props.product.id} />
 					<div class={styles.description_box}>{displayDescription(props.product.description)}</div>
 					<p class={styles.price}>{props.product.price}₽</p>
 					<AddToCartButton productId={props.product.id} />

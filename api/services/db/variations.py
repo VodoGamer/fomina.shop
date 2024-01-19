@@ -9,4 +9,4 @@ async def get_variation_for_product(product_id: int):
         result = await session.execute(
             select(ProductVariation).join(Product).where(Product.id == product_id)
         )
-    return result.scalar()
+    return result.scalars().all()

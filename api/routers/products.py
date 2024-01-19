@@ -2,7 +2,12 @@ from typing import Annotated
 
 from fastapi import APIRouter, Query
 
-from api.services.db.products import get_product, get_products, get_products_for_category
+from api.services.db.products import (
+    count_products_price,
+    get_product,
+    get_products,
+    get_products_for_category,
+)
 
 router = APIRouter(tags=["products"])
 
@@ -20,3 +25,8 @@ async def get_product_by_id(product_id: int):
 @router.get("/products")
 async def get_products_by_ids(product_ids: Annotated[list[int], Query()]):
     return await get_products(product_ids)
+
+
+@router.get("/products_sum")
+async def get_product_prices_by_ids(product_ids: Annotated[list[int], Query()]):
+    return await count_products_price(product_ids)

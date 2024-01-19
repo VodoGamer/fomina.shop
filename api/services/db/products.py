@@ -1,5 +1,6 @@
 from sqlalchemy import select
 from sqlalchemy.orm import joinedload
+from sqlalchemy.sql import func
 
 from api.client import db
 from api.services.db.models import Category, Product
@@ -25,3 +26,11 @@ async def get_products(product_ids: list[int]):
     async with db() as session:
         result = await session.execute(select(Product).filter(Product.id.in_(product_ids)))
     return result.scalars().all()
+
+
+async def count_products_price(product_ids: list[int]):
+    async with db() as session:
+        result = await session.execute(
+            select(func.sum(Product.price)).filter(Product.id.in_(product_ids))
+        )
+    return result.scalar()

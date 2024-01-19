@@ -1,6 +1,7 @@
 import { Component } from "solid-js";
 
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
+import cart from "../Cart/CartLogic";
 
 import logo from "./fomina-logo.svg";
 import cart_icon from "./shopping_cart.svg";
@@ -16,9 +17,7 @@ const Header: Component = () => {
 				</a>
 				<a class={styles.cart} href="/cart" aria-label="Перейти на страницу корзины">
 					<img src={cart_icon} alt="" />
-					<p class={styles.cart_products_count}>
-						{localStorage.getItem("cartProducts")?.split(",").length}
-					</p>
+					<p class={styles.cart_products_count}>{cart()?.length}</p>
 				</a>
 			</header>
 		</>

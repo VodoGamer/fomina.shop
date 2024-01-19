@@ -96,8 +96,8 @@ class ImageAdmin(ModelView, model=Image):
 
 
 class VariationType(enum.Enum):
-    size = "Возраст, рост: "
-    color = "Цвет: "
+    size = "Возраст, рост"
+    color = "Цвет"
 
 
 class ProductVariation(Base):

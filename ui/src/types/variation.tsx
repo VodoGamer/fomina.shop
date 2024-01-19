@@ -1,4 +1,4 @@
-export type variation = {
+export type Variation = {
 	id: number;
 	type: string;
 	value: string;

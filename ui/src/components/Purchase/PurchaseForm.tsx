@@ -5,6 +5,7 @@ import axios from "axios";
 
 import PurchaseError from "./PurchaseError";
 import styles from "./styles.module.sass";
+import { Order } from "../../types/order";
 
 function getValueForId(id: string) {
 	return (document.getElementById(id) as HTMLInputElement).value;
@@ -38,8 +39,8 @@ async function createOrder(
 }
 
 export default function PurchaseForm(props: {
-	setOrderUrl: Setter<undefined | string>;
-	cartSum: number;
+	setOrderUrl: Setter<Order | undefined>;
+	cartSum: number | undefined;
 	productIds: string[] | undefined;
 }) {
 	const [issues, setIssues] = createSignal<Issues | undefined>();
