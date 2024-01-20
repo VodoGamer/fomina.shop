@@ -3,7 +3,9 @@ import sys
 
 from aiogram import Bot
 from fastapi import FastAPI
+from fastapi.exceptions import RequestValidationError, ResponseValidationError
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import PlainTextResponse
 from sqladmin import Admin
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 
@@ -31,3 +33,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.exception_handler(RequestValidationError)
+@app.exception_handler(ResponseValidationError)
+async def validation_exception_handler(request, exc):
+    return PlainTextResponse(str(exc), status_code=400)

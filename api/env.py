@@ -17,6 +17,10 @@ ADMIN_TOKEN = os.getenv("ADMIN_TOKEN", "...")
 YOOKASSA_SHOPID = os.getenv("YOOKASSA_SHOPID", "123456")
 YOOKASSA_SECRET_KEY = os.getenv("YOOKASSA_SECRET_KEY", "very_secret")
 
+SDEK_CLIENT_ID = os.getenv("SDEK_CLIENT_ID", "EMscd6r9JnFiQ3bLoyjJY6eM78JrJceI")
+SDEK_CLIENT_SECRET = os.getenv("SDEK_CLIENT_SECRET", "PjLZkKBHEiLK3YsjtNrt3TGNG0ahs3kG")
+SDEK_BASE_API_URL = os.getenv("SDEK_BASE_API_URL", "https://api.edu.cdek.ru/v2")
+
 BASE_UI_URL = os.getenv("BASE_UI_URL", "http://ui:4173")
 
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "123456:token")
