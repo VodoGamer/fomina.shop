@@ -1,7 +1,5 @@
-import { type Component, Show, For } from "solid-js";
+import { type Component, Show, For, createResource } from "solid-js";
 import { Store, createStore } from "solid-js/store";
-import axios from "axios";
-import qs from "qs";
 
 import Header from "../../components/Header/Header";
 import CartProduct from "../../components/Cart/CartProduct";
@@ -10,15 +8,17 @@ import cart from "../../components/Cart/CartLogic";
 
 import styles from "./cart.module.sass";
 import buttonStyles from "../../components/Cart/cart.module.sass";
+import Delivery, { getDeliveryPrice, officeCode } from "../../components/Delivery/Delivery";
 
-const DELIVER_AMOUNT = 300;
-
-export function calculateOverallSum(products: Product[]): number {
+export function calculateOverallSum(
+	products: Product[],
+	delivery_price: number | undefined = 0,
+): number {
 	let sum: number = 0;
 	for (const product of products) {
 		sum += product.price;
 	}
-	return sum + DELIVER_AMOUNT;
+	return sum + delivery_price;
 }
 
 export interface ProductIndex extends Product {
@@ -35,6 +35,8 @@ export function removeFromStore(index: number): void {
 }
 
 const Cart: Component = () => {
+	const [deliveryPrice] = createResource(officeCode, getDeliveryPrice);
+
 	return (
 		<>
 			<Header />
@@ -49,13 +51,20 @@ const Cart: Component = () => {
 						</div>
 						<div class={styles.information}>
 							<h3 class={styles.information__text}>Предметов в корзине: {cart().length}</h3>
-							<h3 class={styles.information__text}>Стоимость доставки: {DELIVER_AMOUNT}₽</h3>
-							<h3 class={styles.information__text}>
-								Итого к оплате: {calculateOverallSum(store.products)}₽
-							</h3>
-							<a class={buttonStyles.button} href="/purchase">
-								<h4 class={buttonStyles.text}>Перейти к оформлению</h4>
-							</a>
+							<Delivery />
+							<Show when={officeCode()}>
+								<Show when={!deliveryPrice.error}>
+									<Show when={deliveryPrice()} fallback={<h1>Загружаем...</h1>}>
+										<p class={styles.information__text}>Цена доставки: {deliveryPrice()}₽</p>
+										<h3 class={styles.information__text}>
+											Итого к оплате: {calculateOverallSum(store.products, deliveryPrice())}₽
+										</h3>
+										<a class={buttonStyles.button} href="/purchase">
+											<h4 class={buttonStyles.text}>Перейти к оформлению</h4>
+										</a>
+									</Show>
+								</Show>
+							</Show>
 						</div>
 					</div>
 				</Show>

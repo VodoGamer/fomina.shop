@@ -1,15 +1,8 @@
-from dataclasses import dataclass
 from typing import Any
 
 from pydantic import BaseModel
 
 from . import ResponseError, make_post_request
-
-
-@dataclass(frozen=True, slots=True)
-class DeliveryPostalCodes:
-    from_location: int
-    to_location: int
 
 
 class DeliveryTariff(BaseModel):
@@ -29,12 +22,12 @@ class DeliveryResponse(BaseModel):
     errors: list[ResponseError] | None = None
 
 
-async def calculate_delivery_count(postal_codes: DeliveryPostalCodes, weight: int) -> Any:
+async def calculate_delivery_count(from_location: str, to_location: str, weight: int) -> Any:
     return await make_post_request(
         "calculator/tarifflist",
         {
-            "from_location": {"postal_code": postal_codes.from_location},
-            "to_location": {"postal_code": postal_codes.to_location},
+            "from_location": {"address": from_location},
+            "to_location": {"address": to_location},
             "packages": {"weight": weight},
         },
     )

@@ -33,8 +33,8 @@ async def get_token() -> AuthResponse:
             return AuthResponse(**ujson.loads(await resp.read()))
 
 
-async def make_get_request(method: str, data: Any | None = None) -> Any:
-    return await _get_request_session("get", method, data)
+async def make_get_request(method: str, params: Any | None = None) -> Any:
+    return await _get_request_session("get", method, params)
 
 
 async def make_post_request(method: str, data: Any | None = None) -> Any:

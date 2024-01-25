@@ -2,10 +2,11 @@ import logging
 import sys
 
 from aiogram import Bot
-from fastapi import FastAPI
-from fastapi.exceptions import RequestValidationError, ResponseValidationError
+from fastapi import FastAPI, Request
+from fastapi.encoders import jsonable_encoder
+from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import PlainTextResponse
+from fastapi.responses import JSONResponse
 from sqladmin import Admin
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 
@@ -36,6 +37,10 @@ app.add_middleware(
 
 
 @app.exception_handler(RequestValidationError)
-@app.exception_handler(ResponseValidationError)
-async def validation_exception_handler(request, exc):
-    return PlainTextResponse(str(exc), status_code=400)
+async def validation_exception_handler(
+    request: Request, exc: RequestValidationError
+) -> JSONResponse:
+    return JSONResponse(
+        status_code=422,
+        content=jsonable_encoder({"detail": exc.errors(), "body": exc.body}),
+    )

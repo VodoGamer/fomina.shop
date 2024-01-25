@@ -12,6 +12,7 @@ class CityFoundResponse(BaseModel):
     country_code: str
     country: str
     region: str
+    region_code: int
 
 
 async def find_city(
@@ -23,5 +24,6 @@ async def find_city(
             "country_codes": country_codes or "",
             "postal_code": postal_code or "",
             "city": name or "",
+            "limit": -1,
         },
     )
