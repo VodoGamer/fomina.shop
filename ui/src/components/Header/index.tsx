@@ -1,8 +1,8 @@
 import { Component } from "solid-js";
 
-import styles from "../assets/styles/header.module.sass";
-import logo from "../assets/icons/logo.svg";
-import menu from "../assets/icons/menu.svg";
+import styles from "../../assets/styles/header.module.sass";
+import logo from "../../assets/icons/logo.svg";
+import Menu from "./Menu";
 
 const Header: Component = () => {
 	return (
@@ -13,9 +13,7 @@ const Header: Component = () => {
 				</a>
 			</div>
 			<div class={styles.header__block}>
-				<button class={styles.menu_button}>
-					<img class={styles.header__image} src={menu} alt="" />
-				</button>
+				<Menu />
 			</div>
 		</div>
 	);
