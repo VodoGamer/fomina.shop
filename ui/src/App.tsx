@@ -8,9 +8,11 @@ function App() {
 	return (
 		<MetaProvider>
 			<Header />
-			<Router>
-				<Route path="/" component={Home} />
-			</Router>
+			<main>
+				<Router>
+					<Route path="/" component={Home} />
+				</Router>
+			</main>
 			<Footer />
 		</MetaProvider>
 	);

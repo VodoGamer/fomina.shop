@@ -1,6 +1,6 @@
 import { Component } from "solid-js";
 
-import styles from "../../assets/styles/header.module.sass";
+import styles from "./header.module.sass";
 import logo from "../../assets/icons/logo.svg";
 import Menu from "./Menu";
 
