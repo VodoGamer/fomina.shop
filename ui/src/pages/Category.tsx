@@ -5,7 +5,7 @@ import Hero from "../components/Hero";
 import Products from "../components/Products";
 import hero_image from "../assets/hero.png";
 
-const Home: Component = () => {
+const Category: Component = () => {
 	return (
 		<>
 			<MetaProvider>
@@ -17,4 +17,4 @@ const Home: Component = () => {
 	);
 };
 
-export default Home;
+export default Category;

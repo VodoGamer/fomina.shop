@@ -8,9 +8,9 @@ import image from "./assets/image.png";
 const Products: Component = () => {
 	return (
 		<div class={styles.products}>
-			<Product title="Product 1" image={image} />
-			<Product title="Product 2" image={image} />
-			<Product title="Product 3" image={image} />
+			<Product id={1} title="Product 1" image={image} />
+			<Product id={2} title="Product 2" image={image} />
+			<Product id={3} title="Product 3" image={image} />
 		</div>
 	);
 };
