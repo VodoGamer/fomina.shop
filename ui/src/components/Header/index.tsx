@@ -6,7 +6,7 @@ import Menu from "./Menu";
 
 const Header: Component = () => {
 	return (
-		<div class={styles.header}>
+		<header class={styles.header}>
 			<div class={styles.header__block}>
 				<a href="/">
 					<img class={styles.header__image} src={logo} alt="" />
@@ -15,7 +15,7 @@ const Header: Component = () => {
 			<div class={styles.header__block}>
 				<Menu />
 			</div>
-		</div>
+		</header>
 	);
 };
 

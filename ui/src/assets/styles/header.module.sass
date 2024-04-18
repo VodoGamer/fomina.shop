@@ -4,6 +4,7 @@
 	grid-template-columns: 1fr 40px
 	justify-content: center
 	align-items: center
+	height: 48px
 
 .header__block
 	display: grid
@@ -27,15 +28,23 @@
 .menu_button
 	display: grid
 	align-items: center
+	justify-content: right
 	border: 0
 	cursor: pointer
 	background: transparent
+	height: 48px
 
-.menu_cross
-	position: absolute
-	right: 7.5%
-	top: 30px
-	border: 0
-	background: transparent
-	img
-		filter: invert(1)
+// nav
+.nav__list
+	list-style-type: none
+
+.nav__item
+	margin-bottom: 16px
+
+.nav__link
+	text-decoration: none
+	color: #000
+	font-size: 32px
+	&:hover
+		text-decoration: underline
+		text-decoration-thickness: 2px
