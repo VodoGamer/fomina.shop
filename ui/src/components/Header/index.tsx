@@ -1,8 +1,9 @@
 import { Component } from "solid-js";
 
-import styles from "./header.module.sass";
-import logo from "../../assets/icons/logo.svg";
 import Menu from "./Menu";
+
+import styles from "./assets/header.module.sass";
+import logo from "./assets/logo.svg";
 
 const Header: Component = () => {
 	return (

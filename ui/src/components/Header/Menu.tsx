@@ -1,9 +1,9 @@
 import { Component, Show, createSignal } from "solid-js";
 import { Portal } from "solid-js/web";
 
-import styles from "./header.module.sass";
-import menu_icon from "../../assets/icons/menu.svg";
-import menu_cross from "../../assets/icons/menu_cross.svg";
+import styles from "./assets/header.module.sass";
+import menu_icon from "./assets/menu.svg";
+import menu_cross from "./assets/menu_cross.svg";
 
 const Menu: Component = () => {
 	const [showMenu, setShowMenu] = createSignal(false);
