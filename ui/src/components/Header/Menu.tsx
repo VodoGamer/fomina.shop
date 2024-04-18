@@ -21,13 +21,12 @@ const Menu: Component = () => {
 							<nav>
 								<ul class={styles.nav__list}>
 									<li class={styles.nav__item}>
-										<a class={styles.nav__link} href="/">
-											Home
-										</a>
-									</li>
-									<li class={styles.nav__item}>
-										<a class={styles.nav__link} href="/">
-											Home
+										<a
+											class={styles.nav__link}
+											href="/category/"
+											onClick={toggleMenu}
+										>
+											Category
 										</a>
 									</li>
 								</ul>
