@@ -1,0 +1,25 @@
+[project]
+name = "fomina-shop-api"
+version = "0.1.0"
+description = "API for fomina-shop"
+authors = [{ name = "VodoGamer", email = "vodogamer@yandex.ru" }]
+dependencies = ["fastapi>=0.110.2", "pydantic>=2.7.0", "uvicorn>=0.29.0"]
+readme = "README.md"
+requires-python = ">= 3.12"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = ["pyright>=1.1.359"]
+
+[tool.ruff]
+line-length = 99
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/api"]
