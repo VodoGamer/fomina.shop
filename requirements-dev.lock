@@ -8,18 +8,28 @@
 #   with-sources: false
 
 -e file:.
+alembic==1.13.1
+    # via fomina-shop-api
 annotated-types==0.6.0
     # via pydantic
 anyio==4.3.0
     # via starlette
+asyncpg==0.29.0
+    # via fomina-shop-api
 click==8.1.7
     # via uvicorn
 fastapi==0.110.2
     # via fomina-shop-api
+greenlet==3.0.3
+    # via sqlalchemy
 h11==0.14.0
     # via uvicorn
 idna==3.7
     # via anyio
+mako==1.3.3
+    # via alembic
+markupsafe==2.1.5
+    # via mako
 nodeenv==1.8.0
     # via pyright
 pydantic==2.7.0
@@ -28,15 +38,22 @@ pydantic==2.7.0
 pydantic-core==2.18.1
     # via pydantic
 pyright==1.1.359
+python-dotenv==1.0.1
+    # via fomina-shop-api
 setuptools==69.5.1
     # via nodeenv
 sniffio==1.3.1
     # via anyio
+sqlalchemy==2.0.29
+    # via alembic
+    # via fomina-shop-api
 starlette==0.37.2
     # via fastapi
 typing-extensions==4.11.0
+    # via alembic
     # via fastapi
     # via pydantic
     # via pydantic-core
+    # via sqlalchemy
 uvicorn==0.29.0
     # via fomina-shop-api
