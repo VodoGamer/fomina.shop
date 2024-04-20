@@ -1,3 +1,5 @@
 from api.client import app
+from api.handlers import routers
 
-__all__ = ["app"]
+for router in routers:
+    app.include_router(router)
