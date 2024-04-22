@@ -1,0 +1,34 @@
+name: Lint and check types
+
+on: [push, pull_request]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rye
+        id: setup-rye
+        uses: eifinger/setup-rye@v2
+        with:
+          enable-cache: true
+
+      - uses: actions/setup-python@v4
+        id: python-setup
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        if: steps.setup-rye.outputs.cache-hit != 'true'
+        run: rye config --set-bool behaivor.use-uv=true && rye sync --no-lock
+
+      - name: Check code formatting
+        run: rye fmt
+
+      - name: Check code lint
+        run: rye lint
+
+      - name: Check types by pyright
+        run: rye run pyright api
