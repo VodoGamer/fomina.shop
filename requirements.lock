@@ -16,9 +16,16 @@ anyio==4.3.0
     # via starlette
 asyncpg==0.29.0
     # via fomina-shop-api
+boto3==1.34.88
+    # via fastapi-storages
+botocore==1.34.88
+    # via boto3
+    # via s3transfer
 click==8.1.7
     # via uvicorn
 fastapi==0.110.2
+    # via fomina-shop-api
+fastapi-storages==0.3.0
     # via fomina-shop-api
 greenlet==3.0.3
     # via sqlalchemy
@@ -26,29 +33,56 @@ h11==0.14.0
     # via uvicorn
 idna==3.7
     # via anyio
+itsdangerous==2.2.0
+    # via fomina-shop-api
+jinja2==3.1.3
+    # via sqladmin
+jmespath==1.0.1
+    # via boto3
+    # via botocore
 mako==1.3.3
     # via alembic
 markupsafe==2.1.5
+    # via jinja2
     # via mako
+    # via wtforms
+pillow==10.3.0
+    # via fomina-shop-api
 pydantic==2.7.0
     # via fastapi
     # via fomina-shop-api
 pydantic-core==2.18.1
     # via pydantic
+python-dateutil==2.9.0.post0
+    # via botocore
 python-dotenv==1.0.1
     # via fomina-shop-api
+python-multipart==0.0.9
+    # via sqladmin
+s3transfer==0.10.1
+    # via boto3
+six==1.16.0
+    # via python-dateutil
 sniffio==1.3.1
     # via anyio
+sqladmin==0.16.1
+    # via fomina-shop-api
 sqlalchemy==2.0.29
     # via alembic
     # via fomina-shop-api
+    # via sqladmin
 starlette==0.37.2
     # via fastapi
+    # via sqladmin
 typing-extensions==4.11.0
     # via alembic
     # via fastapi
     # via pydantic
     # via pydantic-core
     # via sqlalchemy
+urllib3==2.2.1
+    # via botocore
 uvicorn==0.29.0
     # via fomina-shop-api
+wtforms==3.1.2
+    # via sqladmin

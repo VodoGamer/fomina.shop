@@ -16,6 +16,11 @@ anyio==4.3.0
     # via starlette
 asyncpg==0.29.0
     # via fomina-shop-api
+boto3==1.34.88
+    # via fastapi-storages
+botocore==1.34.88
+    # via boto3
+    # via s3transfer
 cfgv==3.4.0
     # via pre-commit
 click==8.1.7
@@ -23,6 +28,8 @@ click==8.1.7
 distlib==0.3.8
     # via virtualenv
 fastapi==0.110.2
+    # via fomina-shop-api
+fastapi-storages==0.3.0
     # via fomina-shop-api
 filelock==3.13.4
     # via virtualenv
@@ -34,13 +41,24 @@ identify==2.5.36
     # via pre-commit
 idna==3.7
     # via anyio
+itsdangerous==2.2.0
+    # via fomina-shop-api
+jinja2==3.1.3
+    # via sqladmin
+jmespath==1.0.1
+    # via boto3
+    # via botocore
 mako==1.3.3
     # via alembic
 markupsafe==2.1.5
+    # via jinja2
     # via mako
+    # via wtforms
 nodeenv==1.8.0
     # via pre-commit
     # via pyright
+pillow==10.3.0
+    # via fomina-shop-api
 platformdirs==4.2.0
     # via virtualenv
 pre-commit==3.7.0
@@ -50,26 +68,42 @@ pydantic==2.7.0
 pydantic-core==2.18.1
     # via pydantic
 pyright==1.1.359
+python-dateutil==2.9.0.post0
+    # via botocore
 python-dotenv==1.0.1
     # via fomina-shop-api
+python-multipart==0.0.9
+    # via sqladmin
 pyyaml==6.0.1
     # via pre-commit
+s3transfer==0.10.1
+    # via boto3
 setuptools==69.5.1
     # via nodeenv
+six==1.16.0
+    # via python-dateutil
 sniffio==1.3.1
     # via anyio
+sqladmin==0.16.1
+    # via fomina-shop-api
 sqlalchemy==2.0.29
     # via alembic
     # via fomina-shop-api
+    # via sqladmin
 starlette==0.37.2
     # via fastapi
+    # via sqladmin
 typing-extensions==4.11.0
     # via alembic
     # via fastapi
     # via pydantic
     # via pydantic-core
     # via sqlalchemy
+urllib3==2.2.1
+    # via botocore
 uvicorn==0.29.0
     # via fomina-shop-api
 virtualenv==20.25.3
     # via pre-commit
+wtforms==3.1.2
+    # via sqladmin
