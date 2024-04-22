@@ -17,18 +17,18 @@ import "./index.css";
 const root = document.getElementById("app");
 
 render(
-	() => (
-		<MetaProvider>
-			<Header />
-			<main>
-				<Router>
-					<Route path="/" component={Home} />
-					<Route path="/category" component={Category} />
-					<Route path="/product/:id" component={Product} />
-				</Router>
-			</main>
-			<Footer />
-		</MetaProvider>
-	),
-	root!
+  () => (
+    <MetaProvider>
+      <Header />
+      <main>
+        <Router>
+          <Route path="/" component={Home} />
+          <Route path="/category/:slug" component={Category} />
+          <Route path="/product/:id" component={Product} />
+        </Router>
+      </main>
+      <Footer />
+    </MetaProvider>
+  ),
+  root!
 );
