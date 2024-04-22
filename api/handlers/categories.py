@@ -10,6 +10,8 @@ async def get_categories():
     return await DatabaseRepository().category.get_all()
 
 
-@router.get("/category/{id}")
-async def get_category(id: int):
-    return await DatabaseRepository().category.get_by_id(id)
+@router.get("/category/")
+async def get_category(id_or_slug: str):
+    if id_or_slug.isdigit():
+        return await DatabaseRepository().category.get_by_id(int(id_or_slug))
+    return await DatabaseRepository().category.get_by_slug(id_or_slug)

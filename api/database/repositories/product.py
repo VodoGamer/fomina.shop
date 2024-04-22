@@ -15,3 +15,10 @@ class ProductRepository(ABCRepository):
         async with self.session() as session:
             result = await session.execute(select(Product).where(Product.id == id))
             return result.scalars().first()
+
+    async def get_by_category(self, category_id: int) -> list[Product]:
+        async with self.session() as session:
+            result = await session.execute(
+                select(Product).where(Product.categories.any(id=category_id))
+            )
+            return list(result.scalars().all())

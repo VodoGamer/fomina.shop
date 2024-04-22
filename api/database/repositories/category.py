@@ -15,3 +15,8 @@ class CategoryRepository(ABCRepository):
         async with self.session() as session:
             result = await session.execute(select(Category).where(Category.id == id))
             return result.scalars().first()
+
+    async def get_by_slug(self, slug: str) -> Category | None:
+        async with self.session() as session:
+            result = await session.execute(select(Category).where(Category.slug == slug))
+            return result.scalars().first()
