@@ -21,11 +21,15 @@ build-backend = "hatchling.build"
 
 [tool.rye]
 managed = true
-dev-dependencies = ["pyright>=1.1.359"]
+dev-dependencies = ["pyright>=1.1.359", "pre-commit>=3.7.0"]
 
 [tool.ruff]
 lint.select = ["I", "E", "F", "B", "Q"]
 line-length = 99
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
 
 [tool.hatch.metadata]
 allow-direct-references = true
