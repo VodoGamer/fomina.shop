@@ -18,3 +18,8 @@ class ABCRepository(Generic[T], ABC):
     async def get_all(self) -> list[T]:
         """Get all entities from the database."""
         ...
+
+    @abstractmethod
+    async def get_by_id(self, id: int) -> T | None:
+        """Get an entity from the database by its id."""
+        ...
