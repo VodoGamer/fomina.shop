@@ -1,6 +1,6 @@
 from sqlalchemy import select
 
-from api.models import Product
+from api.database.models import Product
 
 from .abc import ABCRepository
 

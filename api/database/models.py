@@ -21,6 +21,7 @@ class Product(Base):
     description: Mapped[str]
     price: Mapped[int] = mapped_column(Integer())
 
+    images: Mapped[list["ProductImage"]] = relationship(back_populates="product", lazy="selectin")
     categories: Mapped[list["Category"]] = relationship(secondary=products_categories)
 
     def __repr__(self) -> str:
@@ -35,3 +36,12 @@ class Category(Base):
 
     def __repr__(self) -> str:
         return f"Category(id={self.id!r}, title={self.title!r})"
+
+
+class ProductImage(Base):
+    __tablename__ = "product_image"
+    id = mapped_column(Integer, primary_key=True)
+    url = mapped_column(String(255))
+    product_id = mapped_column(Integer, ForeignKey("product.id"))
+
+    product = relationship("Product", back_populates="images")
