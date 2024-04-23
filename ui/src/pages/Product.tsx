@@ -1,4 +1,4 @@
-import { Component, Show, createResource } from "solid-js";
+import { Component, Show, createResource, createSignal } from "solid-js";
 import { useParams } from "@solidjs/router";
 import { MetaProvider, Title } from "@solidjs/meta";
 
@@ -8,6 +8,8 @@ import SliderHero from "../components/Hero/Slider";
 import ProductInterface from "../interfaces/product";
 import { getFromApi } from "../utils/api";
 import { Loader } from "../components/Loader";
+import Button from "../components/Button";
+import { addToCart } from "../utils/cart";
 
 async function getProduct(id: number): Promise<ProductInterface> {
   return (await getFromApi(`product/${id}`)).data;
@@ -16,6 +18,12 @@ async function getProduct(id: number): Promise<ProductInterface> {
 const Product: Component = () => {
   const params: { id: string } = useParams();
   const [product] = createResource(Number(params.id), getProduct);
+  const [productInCart, setProductInCart] = createSignal(false);
+
+  function processAddToCart() {
+    addToCart(Number(params.id));
+    setProductInCart(true);
+  }
 
   return (
     <>
@@ -33,6 +41,18 @@ const Product: Component = () => {
           <div class={styles.product}>
             <p class={styles.product__description}>{product()?.description}</p>
             <span class={styles.product__price}>{product()?.price}₽</span>
+            <Show
+              when={!productInCart()}
+              fallback={
+                <Button
+                  text="Перейти в корзину"
+                  link="/cart"
+                  style={{ "background-color": "#DDFFC2" }}
+                />
+              }
+            >
+              <Button text="Добавить в корзину" onClick={processAddToCart} />
+            </Show>
           </div>
         </Show>
       </Show>
