@@ -22,12 +22,7 @@ const Menu: Component = () => {
             <div class={styles.header} style={{ "align-items": "start" }}>
               <MenuNav toggleMenu={toggleMenu} />
               <button class={styles.menu_button} onClick={toggleMenu}>
-                <img
-                  style={{ filter: "invert(1)" }}
-                  class={styles.header__image}
-                  src={menu_cross}
-                  alt=""
-                />
+                <img class={styles.header__image} src={menu_cross} alt="" />
               </button>
             </div>
           </div>

@@ -4,8 +4,7 @@ import { MetaProvider, Title } from "@solidjs/meta";
 
 import styles from "../assets/styles/product.module.sass";
 
-import Hero from "../components/Hero";
-import image from "../components/Products/assets/image.png";
+import SliderHero from "../components/Hero/Slider";
 import ProductInterface from "../interfaces/product";
 import { getFromApi } from "../utils/api";
 import { Loader } from "../components/Loader";
@@ -25,8 +24,10 @@ const Product: Component = () => {
       </MetaProvider>
       <Show when={!product.loading} fallback={<Loader />}>
         <Show when={product} fallback={<p>Error... {product.error}</p>}>
-          <Hero
-            image={`/${product()?.images?.[0]?.url ?? image}`}
+          <SliderHero
+            images={product()?.images?.map((image) => {
+              return `/${image.url}`;
+            })}
             title={product()?.title}
           />
           <div class={styles.product}>

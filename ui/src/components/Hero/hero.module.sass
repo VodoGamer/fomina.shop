@@ -1,20 +1,18 @@
 .hero__image
-	height: 100vh
+	height: 100%
 	width: 100vw
 	object-fit: cover
 	display: block
-	position: absolute
-	top: 0
-	left: 0
+	position: relative
 	z-index: -1
 
 .hero
-	display: grid
-	align-items: center
-	justify-content: center
-	height: calc(100vh - 80px)
+	height: 80vh
+	&:has(.hero__image:not([src]))
+		background-color: #888
 
 .hero__title
 	color: white
 	position: relative
-	top: -64px
+	top: calc(-40vh - 24px)
+	text-align: center
