@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Query
 
 from api.database import DatabaseRepository
 
@@ -6,8 +6,10 @@ router = APIRouter(tags=["products"])
 
 
 @router.get("/products")
-async def get_products():
-    return await DatabaseRepository().product.get_all()
+async def get_products(ids: list[int] = Query(alias="ids[]", default=[])):
+    if ids == []:
+        return await DatabaseRepository().product.get_all()
+    return [await DatabaseRepository().product.get_by_id(id) for id in ids]
 
 
 @router.get("/product/{id}")
