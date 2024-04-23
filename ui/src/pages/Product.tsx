@@ -1,4 +1,4 @@
-import { Component } from "solid-js";
+import { Component, Show, createResource } from "solid-js";
 import { useParams } from "@solidjs/router";
 import { MetaProvider, Title } from "@solidjs/meta";
 
@@ -6,32 +6,37 @@ import styles from "../assets/styles/product.module.sass";
 
 import Hero from "../components/Hero";
 import image from "../components/Products/assets/image.png";
+import ProductInterface from "../interfaces/product";
+import { getFromApi } from "../utils/api";
+import { Loader } from "../components/Loader";
+
+async function getProduct(id: number): Promise<ProductInterface> {
+  return (await getFromApi(`product/${id}`)).data;
+}
 
 const Product: Component = () => {
-	const params: { id: string } = useParams();
+  const params: { id: string } = useParams();
+  const [product] = createResource(Number(params.id), getProduct);
 
-	return (
-		<>
-			<MetaProvider>
-				<Title>Product page - Fomina</Title>
-			</MetaProvider>
-			<Hero image={image} title={`Product ${params.id}`} />
-			<div class={styles.product}>
-				<p class={styles.product__description}>
-					Описание товара на большое количество символов.... Lorem ipsum dolor
-					sit amet, consectetur adipiscing elit. Nulla viverra velit in viverra
-					lobortis. Duis vitae arcu fermentum, porttitor sem quis, ornare nibh.
-					Morbi imperdiet fermentum sem quis tristique. Mauris ac turpis eget
-					nulla rhoncus aliquet. Quisque cursus bibendum justo, gravida varius
-					ligula posuere a. Morbi sodales nunc a tellus mollis, a rhoncus arcu
-					malesuada. Class aptent taciti sociosqu ad litora torquent per conubia
-					nostra, per inceptos himenaeos. Nulla molestie at lorem blandit
-					lobortis. Praesent facilisis at neque sed varius.
-				</p>
-				<span class={styles.product__price}>1200₽</span>
-			</div>
-		</>
-	);
+  return (
+    <>
+      <MetaProvider>
+        <Title>Product page - Fomina</Title>
+      </MetaProvider>
+      <Show when={!product.loading} fallback={<Loader />}>
+        <Show when={product} fallback={<p>Error... {product.error}</p>}>
+          <Hero
+            image={`/${product()?.images?.[0]?.url ?? image}`}
+            title={product()?.title}
+          />
+          <div class={styles.product}>
+            <p class={styles.product__description}>{product()?.description}</p>
+            <span class={styles.product__price}>{product()?.price}₽</span>
+          </div>
+        </Show>
+      </Show>
+    </>
+  );
 };
 
 export default Product;

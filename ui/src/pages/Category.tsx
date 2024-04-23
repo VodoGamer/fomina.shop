@@ -24,7 +24,7 @@ const Category: Component = () => {
       </MetaProvider>
       <Show when={!category.loading} fallback={<Loader />}>
         <Show when={category} fallback={<p>Error... {category.error}</p>}>
-          <Hero image={hero_image} title={category().title} />
+          <Hero image={hero_image} title={category()?.title} />
         </Show>
       </Show>
       <Products />
