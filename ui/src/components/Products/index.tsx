@@ -3,8 +3,7 @@ import { Component, For, Show, createResource } from "solid-js";
 import ProductInterface from "../../interfaces/product";
 import Product from "./Product";
 
-import styles from "./assets/products.module.sass";
-import image from "./assets/image.png";
+import styles from "./products.module.sass";
 import { getFromApi } from "../../utils/api";
 import { Loader } from "../Loader";
 

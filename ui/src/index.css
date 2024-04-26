@@ -3,7 +3,19 @@
 	padding: 0;
 	box-sizing: border-box;
 
-	font-family: "Playfair Display", serif;
-	font-optical-sizing: auto;
+	font-family: "Source Serif 4", serif;
+	font-variation-settings: "opsz" 20;
 	font-style: normal;
+}
+
+h1, h2, h3 {
+	font-weight: 600;
+}
+
+h1 {
+	font-size: 36px;
+}
+
+#app {
+	margin: 24px 5%;
 }

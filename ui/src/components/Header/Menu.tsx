@@ -19,8 +19,8 @@ const Menu: Component = () => {
     <>
       <Show when={showMenu()}>
         <Portal>
-          <div class={styles.menu}>
-            <div class={styles.header} style={{ "align-items": "start" }}>
+          <div class={styles.menu__block}>
+            <div class={styles.menu} style={{ "align-items": "start" }}>
               <MenuNav toggleMenu={toggleMenu} />
               <button class={styles.menu_button} onClick={toggleMenu}>
                 <img class={styles.header__image} src={menu_cross} alt="" />

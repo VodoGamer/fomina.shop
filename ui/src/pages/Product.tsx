@@ -1,10 +1,9 @@
-import { Component, Show, createResource, createSignal } from "solid-js";
+import { Component, For, Show, createResource, createSignal } from "solid-js";
 import { useParams } from "@solidjs/router";
 import { MetaProvider, Title } from "@solidjs/meta";
 
 import styles from "../assets/styles/product.module.sass";
 
-import SliderHero from "../components/Hero/Slider";
 import ProductInterface from "../interfaces/product";
 import { getFromApi } from "../utils/api";
 import { Loader } from "../components/Loader";
@@ -32,27 +31,31 @@ const Product: Component = () => {
       </MetaProvider>
       <Show when={!product.loading} fallback={<Loader />}>
         <Show when={product} fallback={<p>Error... {product.error}</p>}>
-          <SliderHero
-            images={product()?.images?.map((image) => {
-              return `/${image.url}`;
-            })}
-            title={product()?.title}
-          />
           <div class={styles.product}>
-            <p class={styles.product__description}>{product()?.description}</p>
-            <span class={styles.product__price}>{product()?.price}₽</span>
-            <Show
-              when={!productInCart()}
-              fallback={
-                <Button
-                  text="Перейти в корзину"
-                  link="/cart"
-                  style={{ "background-color": "#DDFFC2" }}
-                />
-              }
-            >
-              <Button text="Добавить в корзину" onClick={processAddToCart} />
-            </Show>
+            <div class={styles.images}>
+              <For each={product()?.images}>
+                {(image) => (
+                  <img class={styles.image} src={`/${image.url}`} alt="" />
+                )}
+              </For>
+            </div>
+            <div class={styles.info}>
+              <h1>{product()?.title}</h1>
+              <p class={styles.description}>{product()?.description}</p>
+              <span class={styles.price}>{product()?.price}₽</span>
+              <Show
+                when={!productInCart()}
+                fallback={
+                  <Button
+                    text="Перейти в корзину"
+                    link="/cart"
+                    style={{ "background-color": "#DDFFC2" }}
+                  />
+                }
+              >
+                <Button text="Добавить в корзину" onClick={processAddToCart} />
+              </Show>
+            </div>
           </div>
         </Show>
       </Show>

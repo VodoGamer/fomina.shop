@@ -1,19 +1,24 @@
 import { Component } from "solid-js";
 
-import styles from "./assets/footer.module.sass";
-import instagram_logo from "./assets/instagram.svg";
+import styles from "./footer.module.sass";
 
 const Footer: Component = () => {
-	return (
-		<footer class={styles.footer}>
-			<p class={styles.footer__text}>Социальные сети</p>
-			<div class={styles.social}>
-				<a href="https://instagram.com/fomina_style">
-					<img class={styles.social__image} src={instagram_logo} alt="" />
-				</a>
-			</div>
-		</footer>
-	);
+  return (
+    <footer class={styles.footer}>
+      <a class={styles.link} href="https://instagram.com">
+        instagram
+      </a>
+      <a class={styles.link} href="https://telegram.com">
+        telegram
+      </a>
+      <a class={styles.link} href="#">
+        политика конфиденциальности
+      </a>
+      <a class={styles.link} href="#">
+        условия использования
+      </a>
+    </footer>
+  );
 };
 
 export default Footer;

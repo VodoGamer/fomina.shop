@@ -1,13 +1,25 @@
 .product
-	margin: 16px 7.5%
-	margin-bottom: 50vh
+	display: grid
+	grid-template-columns: 50% 50%
+	gap: 24px
 
-.product__description
-	margin-top: 24px
+.info
+	display: flex
+	flex-flow: column
+	gap: 8px
+
+.description, .price
 	font-size: 24px
+	font-weight: 400
 	display: block
 
-.product__price
-	margin-top: 16px
-	font-size: 40px
+// image
+.images
+	display: grid
+	grid-template-columns: 1fr 1fr
+	gap: 24px
+
+.image
 	display: block
+	width: 100%
+	object-fit: cover
