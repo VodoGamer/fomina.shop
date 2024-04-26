@@ -11,6 +11,11 @@ export default defineConfig({
     // devtools(),
     solidPlugin(),
   ],
+  css: {
+    modules: {
+      generateScopedName: '[name]__[local]',
+    }
+  },
   server: {
     port: 3000,
   },

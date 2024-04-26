@@ -6,6 +6,7 @@ import MenuNav from "./MenuNav";
 import styles from "./assets/header.module.sass";
 import menu_icon from "./assets/menu.svg";
 import menu_cross from "./assets/menu_cross.svg";
+import cart_icon from "./assets/cart.svg";
 
 const Menu: Component = () => {
   const [showMenu, setShowMenu] = createSignal(false);
@@ -28,6 +29,9 @@ const Menu: Component = () => {
           </div>
         </Portal>
       </Show>
+      <a class={styles.menu_button} href="/cart">
+        <img class={styles.header__image} src={cart_icon} alt="" />
+      </a>
       <button class={styles.menu_button} onClick={toggleMenu}>
         <img class={styles.header__image} src={menu_icon} alt="" />
       </button>

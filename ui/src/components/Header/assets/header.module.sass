@@ -1,15 +1,20 @@
 .header
-	margin: 16px 7.5%
+	margin: 16px 5%
 	display: grid
-	grid-template-columns: 1fr 40px
-	justify-content: center
+	grid-template-columns: max-content 1fr
 	align-items: center
+
+.header__buttons
+	justify-self: end
+	display: flex
+	gap: 24px
+
+.header__logo
+	display: grid
 	height: 48px
 
-.header__block
-	display: grid
+.header__buttons, .header__logo
 	align-items: center
-	height: 48px
 
 .header__image
 	max-width: 100%
@@ -34,8 +39,11 @@
 	height: 48px
 
 // nav
-.nav__list
+.nav__item
 	list-style-type: none
+	opacity: 1
+	transition: all .3s
+	transition-timing-function: ease-in
 
 .nav__item
 	margin-bottom: 16px
@@ -47,3 +55,10 @@
 	&:hover
 		text-decoration: underline
 		text-decoration-thickness: 2px
+
+.fade_in
+	opacity: 0
+	transition: opacity 0.5s ease-in-out
+
+.visible
+	opacity: 1
