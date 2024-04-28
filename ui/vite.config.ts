@@ -16,6 +16,7 @@ export default defineConfig({
       generateScopedName: '[name]__[local]',
     }
   },
+  envDir: '../',
   server: {
     port: 3000,
   },

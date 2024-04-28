@@ -7,7 +7,7 @@ from api.env import DB_CONNECT_URL
 from api.services.admin.auth import authentication_backend
 from api.storage import CustomSystemStorage
 
-storage = CustomSystemStorage("public/")
+storage = CustomSystemStorage("")
 
 app = FastAPI()
 app.add_middleware(

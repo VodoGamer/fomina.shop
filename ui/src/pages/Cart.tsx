@@ -4,6 +4,7 @@ import { getFromApi } from "../utils/api";
 import { getCart, removeFromCart } from "../utils/cart";
 import { Loader } from "../components/Loader";
 import ProductInterface from "../interfaces/product";
+import styles from "../assets/styles/cart.module.sass";
 
 async function getProducts(productIds: number[]): Promise<ProductInterface[]> {
   if (productIds.length == 0) {
@@ -33,24 +34,25 @@ export default function Cart() {
   }
 
   return (
-    <>
+    <div>
+      <h1>Корзина</h1>
       <Show when={!products.loading} fallback={<Loader />}>
         <Show when={products} fallback={<p>Корзина пуста</p>}>
-          <For each={products()}>
-            {(product) => (
-              <>
-                <button onClick={() => deleteFromCart(product.id)}>
-                  Remove
-                </button>
-                <div>
-                  {product.title} {product.price}
+          <div class={styles.products}>
+            <For each={products()}>
+              {(product) => (
+                <div class={styles.product}>
+                  <button onClick={() => deleteFromCart(product.id)}>x</button>
+                  <div>
+                    {product.title} {product.price}
+                  </div>
                 </div>
-              </>
-            )}
-          </For>
+              )}
+            </For>
+          </div>
         </Show>
         {sum()}
       </Show>
-    </>
+    </div>
   );
 }

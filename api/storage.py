@@ -8,7 +8,9 @@ from fastapi_storages.utils import secure_filename
 class CustomSystemStorage(FileSystemStorage):
     def __init__(self, path: str) -> None:
         self._path = Path(path)
-        Path("ui", self._path).mkdir(parents=True, exist_ok=True)
+        self._public_path = Path("ui", "public", self._path)
+
+        self._public_path.mkdir(parents=True, exist_ok=True)
 
     def write(self, file: BinaryIO, name: str) -> str:
         """
@@ -18,7 +20,7 @@ class CustomSystemStorage(FileSystemStorage):
         path = self._path / Path(filename)
 
         file.seek(0, 0)
-        with open(Path("ui", path), "wb") as output:
+        with open(Path(self._public_path, filename), "wb") as output:
             while True:
                 chunk = file.read(self.default_chunk_size)
                 if not chunk:
