@@ -1,4 +1,4 @@
-import { Component, Show, createResource } from "solid-js";
+import { Show, createResource } from "solid-js";
 import { useParams } from "@solidjs/router";
 import { MetaProvider, Title } from "@solidjs/meta";
 
@@ -13,9 +13,17 @@ async function getCategory(slug: string): Promise<CategoryInterface> {
   return (await getFromApi(`category/`, { params: { id_or_slug: slug } })).data;
 }
 
-const Category: Component = () => {
+const RouterCategory = () => {
   const params = useParams();
-  const [category] = createResource(params.slug, getCategory);
+  return (
+    <Show when={params.slug} keyed>
+      <Category slug={params.slug} />
+    </Show>
+  );
+};
+
+const Category = (props: { slug: string }) => {
+  const [category] = createResource(props.slug, getCategory);
 
   return (
     <>
@@ -26,11 +34,11 @@ const Category: Component = () => {
         <Show when={category} fallback={<p>Error... {category.error}</p>}>
           <Hero image={hero_image} />
           <h1 style={{ margin: "24px 0" }}>{category()?.title}</h1>
+          <Products categoryId={category()?.id} />
         </Show>
       </Show>
-      <Products />
     </>
   );
 };
 
-export default Category;
+export default RouterCategory;

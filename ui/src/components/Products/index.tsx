@@ -7,13 +7,13 @@ import styles from "./products.module.sass";
 import { getFromApi } from "../../utils/api";
 import { Loader } from "../Loader";
 
-async function getProducts(): Promise<ProductInterface[]> {
-  const response = await getFromApi("products");
+async function getProducts(categoryId: number): Promise<ProductInterface[]> {
+  const response = await getFromApi(`products/category/${categoryId}`);
   return response.data;
 }
 
-const Products: Component = () => {
-  const [products] = createResource(getProducts);
+const Products = (props: { categoryId?: number }) => {
+  const [products] = createResource(props.categoryId, getProducts);
 
   return (
     <Show when={!products.loading} fallback={<Loader />}>
