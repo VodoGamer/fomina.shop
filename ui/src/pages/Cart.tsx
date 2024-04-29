@@ -4,7 +4,9 @@ import { getFromApi } from "../utils/api";
 import { getCart, removeFromCart } from "../utils/cart";
 import { Loader } from "../components/Loader";
 import ProductInterface from "../interfaces/product";
+import menu_cross from "../components/Header/assets/menu_cross.svg";
 import styles from "../assets/styles/cart.module.sass";
+import Button from "../components/Button";
 
 async function getProducts(productIds: number[]): Promise<ProductInterface[]> {
   if (productIds.length == 0) {
@@ -34,25 +36,55 @@ export default function Cart() {
   }
 
   return (
-    <div>
-      <h1>Корзина</h1>
+    <>
+      <Show
+        when={products()?.length !== 0}
+        fallback={
+          <h1>
+            Корзина пуста
+            <Button text="Перейти к покупкам" link="/category/kids" />
+          </h1>
+        }
+      >
+        <h1>Корзина</h1>
+      </Show>
       <Show when={!products.loading} fallback={<Loader />}>
-        <Show when={products} fallback={<p>Корзина пуста</p>}>
+        <Show when={products()}>
           <div class={styles.products}>
             <For each={products()}>
               {(product) => (
-                <div class={styles.product}>
-                  <button onClick={() => deleteFromCart(product.id)}>x</button>
-                  <div>
-                    {product.title} {product.price}
+                <section class={styles.product}>
+                  <div
+                    class={styles.image}
+                    style={{
+                      "background-image": `url(${
+                        product.images?.length
+                          ? `/${product.images[0].url}`
+                          : ""
+                      })`,
+                    }}
+                  >
+                    <button
+                      class={styles.remove_button}
+                      onClick={() => deleteFromCart(product.id)}
+                    >
+                      <img class={styles.remove_icon} src={menu_cross} alt="" />
+                    </button>
                   </div>
-                </div>
+                  <div class={styles.info}>
+                    <h1>{product.title}</h1>
+                    <p>{product.price}₽</p>
+                    <Button
+                      text="Сведения о товаре"
+                      link={`/product/${product.id}`}
+                    />
+                  </div>
+                </section>
               )}
             </For>
           </div>
         </Show>
-        {sum()}
       </Show>
-    </div>
+    </>
   );
 }
