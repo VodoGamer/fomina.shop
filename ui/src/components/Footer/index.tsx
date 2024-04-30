@@ -11,7 +11,7 @@ const Footer: Component = () => {
       <a class={styles.link} href="https://t.me/fominakids">
         telegram
       </a>
-      // TODO: with yookassa payments
+      {/* TODO: with yookassa payments */}
       {/* <a class={styles.link} href="#">
         политика конфиденциальности
       </a>
