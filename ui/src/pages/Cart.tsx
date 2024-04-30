@@ -8,6 +8,7 @@ import menu_cross from "../components/Header/assets/menu_cross.svg";
 import styles from "../assets/styles/cart.module.sass";
 import Button from "../components/Button";
 import apiURL from "../utils/api";
+import { MetaProvider, Title } from "@solidjs/meta";
 
 async function getProducts(productIds: number[]): Promise<ProductInterface[]> {
   if (productIds.length == 0) {
@@ -38,6 +39,9 @@ export default function Cart() {
 
   return (
     <>
+      <MetaProvider>
+        <Title>Корзина - Fomina Style</Title>
+      </MetaProvider>
       <Show
         when={products()?.length !== 0}
         fallback={

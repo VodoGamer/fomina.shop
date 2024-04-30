@@ -28,7 +28,7 @@ const Category = (props: { slug: string }) => {
   return (
     <>
       <MetaProvider>
-        <Title>Category page - Fomina</Title>
+        <Title>Категория товаров - Fomina Style</Title>
       </MetaProvider>
       <Show when={!category.loading} fallback={<Loader />}>
         <Show when={category} fallback={<p>Error... {category.error}</p>}>

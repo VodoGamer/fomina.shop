@@ -28,7 +28,7 @@ const Product: Component = () => {
   return (
     <>
       <MetaProvider>
-        <Title>Product page - Fomina</Title>
+        <Title>Карточка товара - Fomina Style</Title>
       </MetaProvider>
       <Show when={!product.loading} fallback={<Loader />}>
         <Show when={product} fallback={<p>Error... {product.error}</p>}>
