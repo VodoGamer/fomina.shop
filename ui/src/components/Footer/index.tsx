@@ -5,18 +5,19 @@ import styles from "./footer.module.sass";
 const Footer: Component = () => {
   return (
     <footer class={styles.footer}>
-      <a class={styles.link} href="https://instagram.com">
+      <a class={styles.link} href="https://instagram.com/fomina_style">
         instagram
       </a>
-      <a class={styles.link} href="https://telegram.com">
+      <a class={styles.link} href="https://t.me/fominakids">
         telegram
       </a>
-      <a class={styles.link} href="#">
+      // TODO: with yookassa payments
+      {/* <a class={styles.link} href="#">
         политика конфиденциальности
       </a>
       <a class={styles.link} href="#">
         условия использования
-      </a>
+      </a> */}
     </footer>
   );
 };
