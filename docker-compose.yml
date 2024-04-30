@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:latest
+    container_name: ${PROJECT_NAME}-db
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_TABLE}
+    volumes:
+      - db:/var/lib/postgresql/data
+  api:
+    build:
+      context: ./api
+      dockerfile: ./Dockerfile
+    container_name: ${PROJECT_NAME}-api
+    env_file:
+      - .env
+    ports:
+      - "${API_PORT}:8000"
+    depends_on:
+      - db
+    volumes:
+      - uploads:/app/uploads:rw
+    restart: unless-stopped
+  ui:
+    build:
+      context: ./ui
+      dockerfile: ./Dockerfile
+    container_name: ${PROJECT_NAME}-ui
+    env_file:
+      - .env
+    ports:
+      - "${UI_PORT}:4173"
+    restart: unless-stopped
+
+volumes:
+  uploads:
+  db:

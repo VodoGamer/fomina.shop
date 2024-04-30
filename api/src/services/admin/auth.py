@@ -2,7 +2,7 @@ from sqladmin.authentication import AuthenticationBackend
 from starlette.requests import Request
 from starlette.responses import RedirectResponse
 
-from api.env import ADMIN_PASSWORD, ADMIN_TOKEN, ADMIN_USERNAME
+from src.env import ADMIN_PASSWORD, ADMIN_TOKEN, ADMIN_USERNAME
 
 
 class AdminAuth(AuthenticationBackend):

@@ -1,6 +1,6 @@
 {
   "name": "fomina-shop",
-  "version": "0.0.1dev",
+  "version": "1.0.0",
   "description": "",
   "scripts": {
     "start": "vite",

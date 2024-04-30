@@ -1,6 +1,6 @@
 from sqlalchemy import select
 
-from api.database.models import Category
+from src.database.models import Category
 
 from .abc import ABCRepository
 

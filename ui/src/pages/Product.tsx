@@ -9,6 +9,7 @@ import { getFromApi } from "../utils/api";
 import { Loader } from "../components/Loader";
 import Button from "../components/Button";
 import { addToCart } from "../utils/cart";
+import apiURL from "../utils/api";
 
 async function getProduct(id: number): Promise<ProductInterface> {
   return (await getFromApi(`product/${id}`)).data;
@@ -35,7 +36,11 @@ const Product: Component = () => {
             <div class={styles.images}>
               <For each={product()?.images}>
                 {(image) => (
-                  <img class={styles.image} src={`/${image.url}`} alt="" />
+                  <img
+                    class={styles.image}
+                    src={`${apiURL}/files/${image.url}`}
+                    alt=""
+                  />
                 )}
               </For>
             </div>

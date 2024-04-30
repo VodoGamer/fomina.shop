@@ -2,7 +2,7 @@ from typing import Iterable
 
 from sqladmin import ModelView
 
-from api.database.models import Category, Product, ProductImage
+from src.database.models import Category, Product, ProductImage
 
 
 class ProductAdmin(ModelView, model=Product):

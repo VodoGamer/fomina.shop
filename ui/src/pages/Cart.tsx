@@ -7,6 +7,7 @@ import ProductInterface from "../interfaces/product";
 import menu_cross from "../components/Header/assets/menu_cross.svg";
 import styles from "../assets/styles/cart.module.sass";
 import Button from "../components/Button";
+import apiURL from "../utils/api";
 
 async function getProducts(productIds: number[]): Promise<ProductInterface[]> {
   if (productIds.length == 0) {
@@ -59,7 +60,7 @@ export default function Cart() {
                     style={{
                       "background-image": `url(${
                         product.images?.length
-                          ? `/${product.images[0].url}`
+                          ? `${apiURL}/files/${product.images[0].url}`
                           : ""
                       })`,
                     }}

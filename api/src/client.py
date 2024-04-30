@@ -1,13 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi_storages import FileSystemStorage
 from sqladmin import Admin
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 
-from api.env import DB_CONNECT_URL
-from api.services.admin.auth import authentication_backend
-from api.storage import CustomSystemStorage
+from src.env import DB_CONNECT_URL
+from src.services.admin.auth import authentication_backend
 
-storage = CustomSystemStorage("")
+storage = FileSystemStorage("uploads/")
 
 app = FastAPI()
 app.add_middleware(

@@ -2,7 +2,7 @@ from fastapi_storages.integrations.sqlalchemy import FileType
 from sqlalchemy import Column, ForeignKey, Integer, String, Table
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
-from api.client import storage
+from src.client import storage
 
 
 class Base(DeclarativeBase):

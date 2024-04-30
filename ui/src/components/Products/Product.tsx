@@ -1,5 +1,5 @@
-import { Show } from "solid-js";
 import ProductInterface from "../../interfaces/product";
+import apiURL from "../../utils/api";
 import styles from "./products.module.sass";
 
 export default function Product(props: ProductInterface) {
@@ -10,7 +10,9 @@ export default function Product(props: ProductInterface) {
           <img
             class={styles.image}
             src={
-              props.images && props.images[0] ? `/${props.images[0].url}` : ""
+              props.images && props.images[0]
+                ? `${apiURL}/files/${props.images[0].url}`
+                : ""
             }
             alt=""
           />

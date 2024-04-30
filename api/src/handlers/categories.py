@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from api.database import DatabaseRepository
+from src.database import DatabaseRepository
 
 router = APIRouter(tags=["categories"])
 

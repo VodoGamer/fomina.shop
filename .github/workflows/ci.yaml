@@ -6,6 +6,10 @@ jobs:
   check:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: ./api
+
     steps:
       - uses: actions/checkout@v4
 
@@ -31,4 +35,4 @@ jobs:
         run: rye lint
 
       - name: Check types by pyright
-        run: rye run pyright api
+        run: rye run pyright src

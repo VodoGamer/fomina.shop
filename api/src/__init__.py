@@ -1,6 +1,6 @@
-from api.client import admin, app
-from api.handlers import routers
-from api.services.admin.views import admin_views
+from src.client import admin, app
+from src.handlers import routers
+from src.services.admin.views import admin_views
 
 for router in routers:
     app.include_router(router)

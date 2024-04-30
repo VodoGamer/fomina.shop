@@ -1,6 +1,6 @@
 from sqlalchemy import select
 
-from api.database.models import ProductImage
+from src.database.models import ProductImage
 
 from .abc import ABCRepository
 
