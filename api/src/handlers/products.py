@@ -19,4 +19,6 @@ async def get_product(id: int):
 
 @router.get("/products/category/{id}")
 async def get_products_by_category(id: int):
+    if id == -1:
+        return await DatabaseRepository().product.get_all()
     return await DatabaseRepository().product.get_by_category(id)
