@@ -1,14 +1,21 @@
-import { For, Show, createResource, createSignal } from "solid-js";
+import {
+  For,
+  Match,
+  Show,
+  Switch,
+  createResource,
+  createSignal,
+} from "solid-js";
 
 import { getCart, removeFromCart } from "../../utils/cart";
 import ProductInterface from "../../interfaces/product";
 import { getFromApi } from "../../utils/api";
 
 import Button from "../Button";
-import { Loader } from "../Loader";
 import CartProduct from "./CartProduct";
 
 import styles from "./assets/cartItems.module.sass";
+import PlaceCartProduct from "./PlaceCartProduct";
 
 async function getProducts(productIds: number[]): Promise<ProductInterface[]> {
   if (productIds.length == 0) {
@@ -50,9 +57,17 @@ export default function CartItems() {
       >
         <h1>Корзина</h1>
       </Show>
-      <Show when={!products.loading} fallback={<Loader />}>
-        <Show when={products()}>
-          <div class={styles.products}>
+      <div class={styles.products}>
+        <Show when={products.loading}>
+          <For each={getCart()}>
+            {(id) => <PlaceCartProduct productId={id} />}
+          </For>
+        </Show>
+        <Switch>
+          <Match when={products.error}>
+            <p>Error...</p>
+          </Match>
+          <Match when={products()}>
             <For each={products()}>
               {(product) => (
                 <CartProduct
@@ -61,9 +76,9 @@ export default function CartItems() {
                 />
               )}
             </For>
-          </div>
-        </Show>
-      </Show>
+          </Match>
+        </Switch>
+      </div>
     </>
   );
 }

@@ -1,4 +1,4 @@
-import { Show, createResource } from "solid-js";
+import { Match, Show, Switch, createResource } from "solid-js";
 import { useParams } from "@solidjs/router";
 import { MetaProvider, Title } from "@solidjs/meta";
 
@@ -30,13 +30,19 @@ const Category = (props: { slug: string }) => {
       <MetaProvider>
         <Title>Категория товаров - Fomina Style</Title>
       </MetaProvider>
-      <Show when={!category.loading} fallback={<Loader />}>
-        <Show when={category} fallback={<p>Error... {category.error}</p>}>
-          <Hero image={hero_image} />
+      <Hero image={hero_image} />
+      <Show when={category.loading}>
+        <Loader />
+      </Show>
+      <Switch>
+        <Match when={category.error}>
+          <p>Error... {category.error.message}</p>
+        </Match>
+        <Match when={category()}>
           <h1 style={{ margin: "24px 0" }}>{category()?.title}</h1>
           <Products categoryId={category()?.id} />
-        </Show>
-      </Show>
+        </Match>
+      </Switch>
     </>
   );
 };

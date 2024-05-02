@@ -20,6 +20,7 @@
     "@solidjs/meta": "^0.29.3",
     "@solidjs/router": "^0.13.2",
     "axios": "^1.6.8",
-    "solid-js": "^1.8.11"
+    "solid-js": "^1.8.11",
+    "solid-transition-group": "^0.2.3"
   }
 }
