@@ -33,7 +33,8 @@ lint.ignore = ["B008"]
 line-length = 99
 
 [tool.pyright]
-venvPath = "api/"
+venvPath = "."
+venv = ".venv"
 
 [tool.hatch.metadata]
 allow-direct-references = true

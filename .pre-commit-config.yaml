@@ -19,3 +19,5 @@ repos:
   rev: v1.1.359
   hooks:
     - id: pyright
+      args:
+        - "--project api"
