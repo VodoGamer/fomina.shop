@@ -2,8 +2,8 @@ import ProductInterface from "../../interfaces/product";
 import apiURL from "../../utils/api";
 import Button from "../Button";
 
-import styles from "./cartItems.module.sass";
-import menu_cross from "../Header/assets/menu_cross.svg";
+import styles from "./assets/cartItems.module.sass";
+import menu_cross from "./assets/menu_cross_white.svg";
 
 export default function CartProduct(props: {
   product: ProductInterface;

@@ -6,9 +6,9 @@ import { getFromApi } from "../../utils/api";
 
 import Button from "../Button";
 import { Loader } from "../Loader";
-
-import styles from "./cartItems.module.sass";
 import CartProduct from "./CartProduct";
+
+import styles from "./assets/cartItems.module.sass";
 
 async function getProducts(productIds: number[]): Promise<ProductInterface[]> {
   if (productIds.length == 0) {
