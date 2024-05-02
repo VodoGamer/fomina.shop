@@ -9,13 +9,6 @@
 	display: flex
 	gap: 24px
 
-@media(max-width: 480px)
-	.header
-		row-gap: 8px
-		grid-template-columns: 1fr
-	.header__buttons, .menu_button
-		justify-self: start
-
 .header__logo
 	display: grid
 	height: 48px
@@ -77,3 +70,14 @@
 
 .nav__link:hover::after
 	width: 100%
+
+@media(max-width: 480px)
+	.header
+		row-gap: 8px
+		grid-template-columns: 1fr
+	.header__buttons, .menu_button
+		justify-self: start
+	.menu
+		grid-template-columns: 1fr
+	.menu_button
+		order: -1

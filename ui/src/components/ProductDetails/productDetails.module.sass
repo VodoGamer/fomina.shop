@@ -1,6 +1,6 @@
-.product
+.product, .images
 	display: grid
-	grid-template-columns: 50% 50%
+	grid-template-columns: 1fr 1fr
 	gap: 24px
 
 .info
@@ -15,9 +15,8 @@
 
 // image
 .images
-	display: grid
-	grid-template-columns: 1fr 1fr
-	gap: 24px
+	@media screen and (max-width: 768px)
+		grid-template-columns: 1fr
 
 .image
 	display: block

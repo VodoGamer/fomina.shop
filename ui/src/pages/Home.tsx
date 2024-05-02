@@ -1,7 +1,7 @@
 import { Component } from "solid-js";
 import { MetaProvider, Title } from "@solidjs/meta";
 
-import hero_image from "../assets/hero.png";
+import hero_image from "../assets/hero.webp";
 import Hero from "../components/Hero";
 
 const Home: Component = () => {

@@ -4,6 +4,12 @@
 
 .products
 	gap: 16px
+	@media screen and (max-width: 768px)
+		grid-template-columns: 1fr
+
+@media screen and (max-width: 480px)
+	.product
+		grid-template-columns: 1fr
 
 .product
 	gap: 8px
@@ -26,6 +32,9 @@
 	height: 18px
 	display: block
 	filter: invert(1)
+	@media screen and (max-width: 768px)
+		width: 44px
+		height: 34px
 
 .product_price
 	font-size: 24px
