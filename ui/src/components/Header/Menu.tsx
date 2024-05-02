@@ -1,18 +1,24 @@
-import { Component, Show, createSignal } from "solid-js";
+import { Component, Show, createResource, createSignal } from "solid-js";
+import { Transition } from "solid-transition-group";
 import { Portal } from "solid-js/web";
 
 import MenuNav from "./MenuNav";
+import { getFromApi } from "../../utils/api";
 
-import styles from "./assets/header.module.sass";
 import menu_icon from "./assets/menu.svg";
 import menu_cross from "./assets/menu_cross.svg";
 import cart_icon from "./assets/cart.svg";
-import { Transition } from "solid-transition-group";
-
 import "../../assets/animations.sass";
+import styles from "./assets/header.module.sass";
+
+async function fetchCategories() {
+  const response = await getFromApi("categories/");
+  return response.data;
+}
 
 const Menu: Component = () => {
   const [showMenu, setShowMenu] = createSignal(false);
+  const [categories] = createResource(fetchCategories);
 
   function toggleMenu() {
     setShowMenu(!showMenu());
@@ -25,7 +31,7 @@ const Menu: Component = () => {
           <Show when={showMenu()}>
             <div class={styles.menu__block}>
               <div class={styles.menu} style={{ "align-items": "start" }}>
-                <MenuNav toggleMenu={toggleMenu} />
+                <MenuNav toggleMenu={toggleMenu} categories={categories} />
                 <button class={styles.menu_button} onClick={toggleMenu}>
                   <img class={styles.header__image} src={menu_cross} alt="" />
                 </button>

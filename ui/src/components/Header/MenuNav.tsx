@@ -1,18 +1,12 @@
-import { createResource, Show, For } from "solid-js";
+import { Show, For, Resource } from "solid-js";
 
 import { Loader } from "../Loader";
-import { getFromApi } from "../../utils/api";
 import CategoryInterface from "../../interfaces/category";
 
 import styles from "./assets/header.module.sass";
-import { Transition, TransitionGroup } from "solid-transition-group";
+import { TransitionGroup } from "solid-transition-group";
 
 import "../../assets/animations.sass";
-
-async function fetchCategories() {
-  const response = await getFromApi("categories/");
-  return response.data;
-}
 
 const AllProductsCategory: CategoryInterface = {
   id: -1,
@@ -20,23 +14,24 @@ const AllProductsCategory: CategoryInterface = {
   title: "Все товары",
 };
 
-export default function MenuNav(props: { toggleMenu: () => void }) {
-  const [categories] = createResource(fetchCategories);
-
+export default function MenuNav(props: {
+  toggleMenu: () => void;
+  categories: Resource<CategoryInterface[]>;
+}) {
   return (
     <>
       <nav>
         <ul class={styles.nav__list}>
-          <Show when={categories.loading}>
+          <Show when={props.categories.loading}>
             <Loader />
           </Show>
           <Show
-            when={!categories.error}
-            fallback={<p>Error... {categories.error.message}</p>}
+            when={!props.categories.error}
+            fallback={<p>Error... {props.categories.error.message}</p>}
           >
             <TransitionGroup name="list-item">
-              <For each={categories()}>
-                {(category, index) => (
+              <For each={props.categories()}>
+                {(category) => (
                   <CategoryLink
                     category={category}
                     toggleMenu={props.toggleMenu}
