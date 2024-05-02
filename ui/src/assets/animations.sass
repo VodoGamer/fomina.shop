@@ -1,3 +1,13 @@
+// fade
+.fade-enter-active,
+.fade-exit-active
+	transition: opacity 0.3s
+
+.fade-enter,
+.fade-exit-to
+	opacity: 0
+
+// slide-fade
 .slide-fade-enter-active,
 .slide-fade-exit-active
 	transition: opacity 0.3s, transform 0.3s
@@ -9,3 +19,14 @@
 
 .slide-fade-enter
 	transform: translateY(-10px)
+
+.list-item
+	transition: all 0.5s
+
+.list-item-enter,
+.list-item-exit-to
+	opacity: 0
+	transform: translateY(30px)
+
+.list-item-exit-active
+	position: absolute

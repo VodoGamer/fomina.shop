@@ -5,6 +5,9 @@ import { getFromApi } from "../../utils/api";
 import CategoryInterface from "../../interfaces/category";
 
 import styles from "./assets/header.module.sass";
+import { Transition, TransitionGroup } from "solid-transition-group";
+
+import "../../assets/animations.sass";
 
 async function fetchCategories() {
   const response = await getFromApi("categories/");
@@ -23,12 +26,15 @@ export default function MenuNav(props: { toggleMenu: () => void }) {
   return (
     <>
       <nav>
-        <Show when={!categories.loading} fallback={<Loader />}>
-          <ul class={styles.nav__list}>
-            <Show
-              when={!categories.error}
-              fallback={<p>Error... {categories.error.message}</p>}
-            >
+        <ul class={styles.nav__list}>
+          <Show when={categories.loading}>
+            <Loader />
+          </Show>
+          <Show
+            when={!categories.error}
+            fallback={<p>Error... {categories.error.message}</p>}
+          >
+            <TransitionGroup name="list-item">
               <For each={categories()}>
                 {(category, index) => (
                   <CategoryLink
@@ -37,13 +43,13 @@ export default function MenuNav(props: { toggleMenu: () => void }) {
                   />
                 )}
               </For>
-              <CategoryLink
-                category={AllProductsCategory}
-                toggleMenu={props.toggleMenu}
-              />
-            </Show>
-          </ul>
-        </Show>
+            </TransitionGroup>
+          </Show>
+          <CategoryLink
+            category={AllProductsCategory}
+            toggleMenu={props.toggleMenu}
+          />
+        </ul>
       </nav>
     </>
   );
