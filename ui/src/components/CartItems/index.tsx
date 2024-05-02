@@ -1,11 +1,4 @@
-import {
-  For,
-  Match,
-  Show,
-  Switch,
-  createResource,
-  createSignal,
-} from "solid-js";
+import { For, Match, Show, Switch, createResource } from "solid-js";
 
 import { getCart, removeFromCart } from "../../utils/cart";
 import ProductInterface from "../../interfaces/product";
@@ -15,7 +8,8 @@ import Button from "../Button";
 import CartProduct from "./CartProduct";
 
 import styles from "./assets/cartItems.module.sass";
-import PlaceCartProduct from "./PlaceCartProduct";
+import { Transition } from "solid-transition-group";
+import { Loader } from "../Loader";
 
 async function getProducts(productIds: number[]): Promise<ProductInterface[]> {
   if (productIds.length == 0) {
@@ -29,13 +23,13 @@ async function calculateSum(products: ProductInterface[]): Promise<number> {
 }
 
 export default function CartItems() {
-  const [productsIds, setProductIds] = createSignal(getCart());
-  const [products] = createResource(productsIds, getProducts);
+  const productIds = getCart();
+  const [products, { mutate }] = createResource(productIds, getProducts);
   const [sum] = createResource(products, calculateSum);
 
   function deleteFromCart(id: number) {
-    const index = productsIds().indexOf(id);
-    setProductIds((prevItems) => {
+    const index = productIds.indexOf(id);
+    mutate((prevItems) => {
       const newItems = [...prevItems];
       newItems.splice(index, 1);
       return newItems;
@@ -57,28 +51,28 @@ export default function CartItems() {
       >
         <h1>Корзина</h1>
       </Show>
-      <div class={styles.products}>
-        <Show when={products.loading}>
-          <For each={getCart()}>
-            {(id) => <PlaceCartProduct productId={id} />}
-          </For>
-        </Show>
+      <Show when={products.loading}>
+        <Loader />
+      </Show>
+      <Transition mode="outin" name="slide-fade">
         <Switch>
           <Match when={products.error}>
             <p>Error...</p>
           </Match>
           <Match when={products()}>
-            <For each={products()}>
-              {(product) => (
-                <CartProduct
-                  product={product}
-                  deleteFromCart={deleteFromCart}
-                />
-              )}
-            </For>
+            <div class={styles.products}>
+              <For each={products()}>
+                {(product) => (
+                  <CartProduct
+                    product={product}
+                    deleteFromCart={deleteFromCart}
+                  />
+                )}
+              </For>
+            </div>
           </Match>
         </Switch>
-      </div>
+      </Transition>
     </>
   );
 }
