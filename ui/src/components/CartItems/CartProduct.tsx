@@ -8,6 +8,7 @@ import menu_cross from "./assets/menu_cross_white.svg";
 export default function CartProduct(props: {
   product: ProductInterface;
   deleteFromCart: (id: number) => void;
+  index: number;
 }) {
   return (
     <section class={styles.product}>
@@ -23,7 +24,7 @@ export default function CartProduct(props: {
       >
         <button
           class={styles.remove_button}
-          onClick={() => props.deleteFromCart(props.product.id)}
+          onClick={() => props.deleteFromCart(props.index)}
         >
           <img class={styles.remove_icon} src={menu_cross} alt="" />
         </button>

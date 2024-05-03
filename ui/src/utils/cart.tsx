@@ -8,9 +8,8 @@ export function addToCart(product_id: number) {
   localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-export function removeFromCart(product_id: number) {
+export function removeFromCart(index: number) {
   const cart = getCart();
-  const index = cart.indexOf(product_id);
   if (index > -1) {
     cart.splice(index, 1);
   }

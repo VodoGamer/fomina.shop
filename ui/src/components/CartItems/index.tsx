@@ -27,15 +27,14 @@ export default function CartItems() {
   const [products, { mutate }] = createResource(productIds, getProducts);
   const [sum] = createResource(products, calculateSum);
 
-  function deleteFromCart(id: number) {
-    const index = productIds.indexOf(id);
+  function deleteFromCart(index: number) {
     mutate((prevItems) => {
       const newItems = [...prevItems];
       newItems.splice(index, 1);
       return newItems;
     });
 
-    removeFromCart(id);
+    removeFromCart(index);
   }
 
   return (
@@ -43,10 +42,10 @@ export default function CartItems() {
       <Show
         when={products()?.length !== 0}
         fallback={
-          <h1>
-            Корзина пуста
+          <>
+            <h1>Корзина пуста</h1>
             <Button text="Перейти к покупкам" link="/category/all-products" />
-          </h1>
+          </>
         }
       >
         <h1>Корзина</h1>
@@ -62,10 +61,11 @@ export default function CartItems() {
           <Match when={products()}>
             <div class={styles.products}>
               <For each={products()}>
-                {(product) => (
+                {(product, index) => (
                   <CartProduct
                     product={product}
                     deleteFromCart={deleteFromCart}
+                    index={index()}
                   />
                 )}
               </For>

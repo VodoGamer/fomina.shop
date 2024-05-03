@@ -3,7 +3,10 @@ import styles from "./button.module.sass";
 import { JSX, splitProps } from "solid-js";
 
 const Button = (
-  props: JSX.HTMLAttributes<HTMLAnchorElement> & { text: string; link?: string }
+  props: JSX.HTMLAttributes<HTMLAnchorElement> & {
+    text: string;
+    link?: string;
+  },
 ) => {
   const [local, others] = splitProps(props, ["text", "link"]);
   return (
