@@ -2,13 +2,21 @@ from io import BytesIO
 from typing import Any
 
 from fastapi.exceptions import ValidationException
-from fastapi_storages import StorageImage
+from fastapi_storages import StorageFile, StorageImage
 from fastapi_storages.integrations.sqlalchemy import ImageType
 from PIL import Image, UnidentifiedImageError
 from sqlalchemy import Dialect
 
 
 class CustomImageType(ImageType):
+    def process_result_value(self, value: Any, dialect: Dialect) -> StorageFile | None:  # pyright: ignore
+        if value is None:
+            return value
+
+        return StorageFile(name=value, storage=self.storage)
+
+
+class CompressedImageType(CustomImageType):
     def process_bind_param(self, value: Any, dialect: Dialect) -> str | None:
         if value is None:
             return value
@@ -36,12 +44,3 @@ class CustomImageType(ImageType):
         image_file.close()
         value.file.close()
         return image.name
-
-    def process_result_value(self, value: Any, dialect: Dialect) -> StorageImage | None:
-        if value is None:
-            return value
-
-        with Image.open(self.storage.get_path(value)) as image:
-            return StorageImage(
-                name=value, storage=self.storage, height=image.height, width=image.width
-            )
