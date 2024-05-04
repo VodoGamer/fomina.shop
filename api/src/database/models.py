@@ -1,8 +1,8 @@
-from fastapi_storages.integrations.sqlalchemy import FileType
 from sqlalchemy import Column, ForeignKey, Integer, String, Table
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 from src.client import storage
+from src.storage.images import CustomImageType
 
 
 class Base(DeclarativeBase):
@@ -44,7 +44,7 @@ class Category(Base):
 class ProductImage(Base):
     __tablename__ = "product_image"
     id = mapped_column(Integer, primary_key=True)
-    url = mapped_column(FileType(storage))
+    url = mapped_column(CustomImageType(storage))
     product_id = mapped_column(Integer, ForeignKey("product.id"))
 
     product = relationship("Product", back_populates="images")
