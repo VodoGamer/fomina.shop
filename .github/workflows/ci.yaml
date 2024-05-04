@@ -2,13 +2,13 @@ name: Lint and check types
 
 on: [push, pull_request]
 
-defaults:
-  run:
-    working-directory: api
-
 jobs:
   backend:
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: api
 
     steps:
       - uses: actions/checkout@v4
@@ -41,6 +41,10 @@ jobs:
   frontend:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: ui
+
     steps:
       - uses: actions/checkout@v4
 
@@ -59,10 +63,10 @@ jobs:
         run: bun install
 
       - name: Check code formatting
-        run: bun run format lint ./ui/src
+        run: bun run biome format src
 
       - name: Check code lint
-        run: bun run biome lint ./ui/src
+        run: bun run biome lint src
 
       - name: Check types by pyright
-        run: bun run biome check ./ui/src
+        run: bun run biome check src
