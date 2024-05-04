@@ -10,11 +10,13 @@ export default function ProductImages(props: { product?: ProductInterface }) {
 		<div class={styles.images}>
 			<For each={props.product?.images}>
 				{(image) => (
-					<img
-						class={styles.image}
-						src={`${apiURL}/files/${image.url}`}
-						alt=""
-					/>
+					<a href={`${apiURL}/files/${image.original_url}`}>
+						<img
+							class={styles.image}
+							src={`${apiURL}/files/${image.url}`}
+							alt={image.description}
+						/>
+					</a>
 				)}
 			</For>
 		</div>
