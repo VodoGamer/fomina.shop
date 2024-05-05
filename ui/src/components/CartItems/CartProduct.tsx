@@ -1,5 +1,5 @@
 import type ProductInterface from "../../interfaces/product";
-import apiURL from "../../utils/api";
+import { getCompressedImageUrl, getImageUrl } from "../../utils/images";
 import Button from "../Button";
 
 import styles from "./assets/cartItems.module.sass";
@@ -17,7 +17,7 @@ export default function CartProduct(props: {
 				style={{
 					"background-image": `url(${
 						props.product.images?.length
-							? `${apiURL}/files/${props.product.images[0].url}`
+							? getCompressedImageUrl(getImageUrl(props.product.images[0].url))
 							: ""
 					})`,
 				}}

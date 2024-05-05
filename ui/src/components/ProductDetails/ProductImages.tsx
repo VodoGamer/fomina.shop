@@ -1,7 +1,7 @@
 import { For } from "solid-js";
 
 import type ProductInterface from "../../interfaces/product";
-import apiURL from "../../utils/api";
+import { getCompressedImageUrl, getImageUrl } from "../../utils/images";
 
 import styles from "./productDetails.module.sass";
 
@@ -10,11 +10,13 @@ export default function ProductImages(props: { product?: ProductInterface }) {
 		<div class={styles.images}>
 			<For each={props.product?.images}>
 				{(image) => (
-					<img
-						class={styles.image}
-						src={`${apiURL}/files/${image.url}`}
-						alt=""
-					/>
+					<a href={getImageUrl(image.url)} target="_blank" rel="noreferrer">
+						<img
+							class={styles.image}
+							src={getCompressedImageUrl(getImageUrl(image.url))}
+							alt={image.description}
+						/>
+					</a>
 				)}
 			</For>
 		</div>
