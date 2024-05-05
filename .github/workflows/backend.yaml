@@ -1,4 +1,4 @@
-name: Lint and check types
+name: Backend CI
 
 on: [push, pull_request]
 
@@ -37,36 +37,3 @@ jobs:
 
       - name: Check types by pyright
         run: rye run pyright src
-
-  frontend:
-    runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: ui
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install Bun
-        id: setup-bun
-        uses: oven-sh/setup-bun@v1
-
-      - uses: actions/cache@v3
-        id: bun-cache
-        with:
-          key: bun-cache
-          path: ~/.bun/install/cache
-
-      - name: Install dependencies
-        if: steps.bun-cache.outputs.cache-hit != 'true'
-        run: bun install
-
-      - name: Check code formatting
-        run: bun run biome format src
-
-      - name: Check code lint
-        run: bun run biome lint src
-
-      - name: Check types by pyright
-        run: bun run biome check src
