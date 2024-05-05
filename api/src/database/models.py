@@ -2,7 +2,7 @@ from sqlalchemy import Column, ForeignKey, Integer, String, Table
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 from src.client import storage
-from src.storage.images import CompressedImageType, CustomImageType
+from src.storage.images import CompressedImageType
 
 
 class Base(DeclarativeBase):
@@ -45,7 +45,6 @@ class ProductImage(Base):
     __tablename__ = "product_image"
     id = mapped_column(Integer, primary_key=True)
     url = mapped_column(CompressedImageType(storage), nullable=False)
-    original_url = mapped_column(CustomImageType(storage), nullable=False)
     description = mapped_column(String(100), nullable=False)
     product_id = mapped_column(Integer, ForeignKey("product.id"))
 

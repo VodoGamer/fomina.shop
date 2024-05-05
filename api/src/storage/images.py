@@ -29,18 +29,28 @@ class CompressedImageType(CustomImageType):
         except UnidentifiedImageError:
             raise ValidationException("Invalid image file") from UnidentifiedImageError
 
-        image_file = Image.open(value.file)  # TODO: improve this
+        original_image_storage = self._save_image_to_storage(value.file, image_file, value)
+
+        image_file = Image.open(value.file)
+        image_file = image_file.resize(
+            (1200, 1200 * image_file.height // image_file.width), Image.Resampling.LANCZOS
+        )
         buffer = BytesIO()
         image_file.save(buffer, format="WebP", quality=85)
+        self._save_image_to_storage(buffer, image_file, value, "webp")
 
+        image_file.close()
+        value.file.close()
+        return original_image_storage.name
+
+    def _save_image_to_storage(
+        self, buffer: BytesIO, image_file: Image.Image, value: Any, extension: str | None = None
+    ) -> StorageImage:
         image = StorageImage(
-            name=value.filename.split(".")[0] + ".webp",
+            name=f"{value.filename.split(".")[0]}.{extension}" if extension else value.filename,
             storage=self.storage,
             height=image_file.height,
             width=image_file.width,
         )
         image.write(file=buffer)
-
-        image_file.close()
-        value.file.close()
-        return image.name
+        return image
