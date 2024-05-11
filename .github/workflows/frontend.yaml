@@ -21,4 +21,4 @@ jobs:
         run: bun install
 
       - name: Check code
-        run: bun run biome check src
+        run: bun run prettier --check src

@@ -10,7 +10,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@biomejs/biome": "^1.7.3",
+    "prettier": "^3.2.5",
     "sass": "^1.75.0",
     "solid-devtools": "^0.29.2",
     "typescript": "^5.3.3",

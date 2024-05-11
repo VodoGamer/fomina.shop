@@ -13,7 +13,11 @@ async function getProducts(productIds: number[]): Promise<ProductInterface[]> {
 	if (productIds.length === 0) {
 		return [];
 	}
-	return (await getFromApi("products", { params: { ids: productIds } })).data;
+	const response = await getFromApi("products", {
+		params: { ids: productIds },
+	});
+
+	return response.data;
 }
 
 async function calculateSum(products: ProductInterface[]): Promise<number> {
