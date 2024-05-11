@@ -12,10 +12,17 @@ export default function Carousel(props: {
 	setShowCarousel: Setter<boolean | number>;
 	images: Image[];
 }) {
+	function getImagesFromIndex() {
+		const index = props.showCarousel() as number;
+		const buffer = props.images;
+		const result: Image[] = props.images.slice(index);
+		return result.concat(buffer.slice(0, index));
+	}
+
 	return (
 		<Portal>
 			<div class={styles.container}>
-				<ImagesSlider images={props.images} />
+				<ImagesSlider images={getImagesFromIndex()} />
 				<button
 					type="button"
 					class={styles.button}
