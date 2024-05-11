@@ -21,7 +21,7 @@ export default function Carousel(props: {
 
 	return (
 		<Portal>
-			<div class={styles.container}>
+			<div class={styles.container} data-portal="true">
 				<ImagesSlider images={getImagesFromIndex()} />
 				<button
 					type="button"

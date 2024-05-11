@@ -23,3 +23,7 @@ h1 {
 #app {
 	margin: 24px 5%;
 }
+
+body:has(div[data-portal="true"]) #app {  /* TODO: it's very bad */
+	display: none;
+}
