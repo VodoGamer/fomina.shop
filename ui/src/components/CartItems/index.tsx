@@ -16,6 +16,12 @@ async function getProducts(productIds: number[]): Promise<ProductInterface[]> {
 	const response = await getFromApi("products", {
 		params: { ids: productIds },
 	});
+	for (const [key, product] of Object.entries(response.data)) {
+		if (product == null) {
+			removeFromCart(Number(key));
+			response.data.splice(Number(key), 1);
+		}
+	}
 
 	return response.data;
 }
