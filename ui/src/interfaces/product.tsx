@@ -1,4 +1,5 @@
 import type Image from "./image";
+import ProductVariation from "./productVariation";
 
 export default interface ProductInterface {
 	id: number;
@@ -6,4 +7,5 @@ export default interface ProductInterface {
 	description: string;
 	price: number;
 	images?: Image[];
+	variations?: ProductVariation[];
 }

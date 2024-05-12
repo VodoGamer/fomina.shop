@@ -6,6 +6,7 @@ import Button from "../Button";
 import styles from "./productDetails.module.sass";
 
 import "../../assets/animations.sass";
+import VariationsSelector from "../VariationsSelector";
 
 export default function ProductInfo(props: {
 	product?: ProductInterface;
@@ -21,6 +22,7 @@ export default function ProductInfo(props: {
 	return (
 		<div class={styles.info}>
 			<h1>{props.product?.title}</h1>
+			<VariationsSelector variations={props.product?.variations} />
 			<p class={styles.description}>{props.product?.description}</p>
 			<span class={styles.price}>{props.product?.price}₽</span>
 			<Transition mode="outin" name="slide-fade">
