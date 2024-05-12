@@ -2,7 +2,7 @@ from typing import Iterable
 
 from sqladmin import ModelView
 
-from src.database.models import Category, Product, ProductImage
+from src.database.models import Category, Product, ProductImage, ProductVariation
 
 
 class ProductAdmin(ModelView, model=Product):
@@ -18,4 +18,13 @@ class ImageAdmin(ModelView, model=ProductImage):
     column_list = [ProductImage.id, ProductImage.url]
 
 
-admin_views: Iterable[type[ModelView]] = (ProductAdmin, CategoryAdmin, ImageAdmin)
+class ProductVariationAdmin(ModelView, model=ProductVariation):
+    column_list = [ProductVariation.id, ProductVariation.key, ProductVariation.value]
+
+
+admin_views: Iterable[type[ModelView]] = (
+    ProductAdmin,
+    CategoryAdmin,
+    ImageAdmin,
+    ProductVariationAdmin,
+)
