@@ -27,7 +27,7 @@ def upgrade() -> None:
         "url",
         existing_type=sa.VARCHAR(length=255),
         nullable=False,
-        existing_server_default=sa.text("''::character varying"),
+        existing_server_default=sa.text("''::character varying"),  # type: ignore
     )
     # ### end Alembic commands ###
 
@@ -39,7 +39,7 @@ def downgrade() -> None:
         "url",
         existing_type=sa.VARCHAR(length=255),
         nullable=True,
-        existing_server_default=sa.text("''::character varying"),
+        existing_server_default=sa.text("''::character varying"),  # type: ignore
     )
     op.drop_column("product_image", "description")
     # ### end Alembic commands ###

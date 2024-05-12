@@ -12,7 +12,6 @@ async def get_file(filename: str, fm: Literal["webp"] = Query(None)):
     if fm == "webp":
         # remove original extension and replace it with .webp
         filename = f"{"".join(filename.split(".")[:-1])}.webp"
-    print(filename)
     file = "uploads" / Path(filename)
     if file.exists():
         return FileResponse(file)

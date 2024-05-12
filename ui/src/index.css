@@ -24,6 +24,7 @@ h1 {
 	margin: 24px 5%;
 }
 
-body:has(div[data-portal="true"]) #app {  /* TODO: it's very bad */
+body:has(div[data-portal="true"]) #app {
+	/* TODO: it's very bad */
 	display: none;
 }
