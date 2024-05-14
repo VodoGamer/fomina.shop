@@ -1,6 +1,6 @@
 import { For } from "solid-js";
 import type Image from "../../interfaces/image";
-import { getImageUrl } from "../../utils/images";
+import { getImageUrl, getCompressedImageUrl } from "../../utils/images";
 
 import { Slider, SliderProvider } from "solid-slider";
 import styles from "./carousel.module.sass";
@@ -14,7 +14,7 @@ export default function ImagesSlider(props: { images: Image[] }) {
 					{(image) => (
 						<img
 							class={styles.image}
-							src={getImageUrl(image.url)}
+							src={getCompressedImageUrl(getImageUrl(image.url))}
 							alt={image.description}
 						/>
 					)}
