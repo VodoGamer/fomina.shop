@@ -1,4 +1,6 @@
-from sqlalchemy import Column, ForeignKey, Integer, String, Table
+import datetime
+
+from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, Table, func
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 from src.client import storage
@@ -23,6 +25,11 @@ class Product(Base):
     title: Mapped[str] = mapped_column(String(50))
     description: Mapped[str]
     price: Mapped[int] = mapped_column(Integer())
+    updated_at: Mapped[datetime.datetime] = mapped_column(
+        DateTime(),
+        onupdate=datetime.datetime.now(),
+        server_default=func.now(),
+    )
 
     images: Mapped[list["ProductImage"]] = relationship(back_populates="product", lazy="selectin")
     categories: Mapped[list["Category"]] = relationship(secondary=products_categories)
@@ -39,6 +46,11 @@ class Category(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     title: Mapped[str] = mapped_column(String(50))
     slug: Mapped[str] = mapped_column(String(50))
+    updated_at: Mapped[datetime.datetime] = mapped_column(
+        DateTime(),
+        onupdate=datetime.datetime.now(),
+        server_default=func.now(),
+    )
 
     def __repr__(self) -> str:
         return f"Category(id={self.id!r}, title={self.title!r})"
@@ -50,6 +62,11 @@ class ProductImage(Base):
     url = mapped_column(CompressedImageType(storage), nullable=False)
     description = mapped_column(String(100), nullable=False)
     product_id = mapped_column(Integer, ForeignKey("product.id"))
+    updated_at: Mapped[datetime.datetime] = mapped_column(
+        DateTime(),
+        onupdate=datetime.datetime.now(),
+        server_default=func.now(),
+    )
 
     product = relationship("Product", back_populates="images")
 
