@@ -1,6 +1,6 @@
 import datetime
 
-from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, Table, func
+from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, Table, Text, func
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 from src.client import storage
@@ -23,7 +23,7 @@ class Product(Base):
     __tablename__ = "product"
     id: Mapped[int] = mapped_column(primary_key=True)
     title: Mapped[str] = mapped_column(String(50))
-    description: Mapped[str]
+    description: Mapped[str] = mapped_column(Text())
     price: Mapped[int] = mapped_column(Integer())
     updated_at: Mapped[datetime.datetime] = mapped_column(
         DateTime(),
