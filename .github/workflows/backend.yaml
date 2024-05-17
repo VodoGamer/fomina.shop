@@ -13,27 +13,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Rye
-        id: setup-rye
-        uses: eifinger/setup-rye@v2
-        with:
-          enable-cache: true
-          working-directory: api
-
       - uses: actions/setup-python@v4
         id: python-setup
         with:
-          python-version: "3.12.2"
+          python-version: "3.12"
+          cache: pip
 
       - name: Install dependencies
-        if: steps.setup-rye.outputs.cache-hit != 'true'
-        run: rye config --set-bool behaivor.use-uv=true && rye sync --no-lock
+        if: steps.python-setup.outputs.cache-hit != 'true'
+        run: pip install -r requirements-dev.lock
 
       - name: Check code formatting
-        run: rye fmt
+        run: ruff format .
 
       - name: Check code lint
-        run: rye lint
+        run: ruff check .
 
       - name: Check types by pyright
-        run: rye run pyright src
+        run: pyright src

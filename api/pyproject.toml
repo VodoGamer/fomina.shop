@@ -25,7 +25,11 @@ build-backend = "hatchling.build"
 
 [tool.rye]
 managed = true
-dev-dependencies = ["pyright>=1.1.359", "pre-commit>=3.7.0"]
+dev-dependencies = [
+    "pyright>=1.1.359",
+    "pre-commit>=3.7.0",
+    "ruff>=0.4.4",
+]
 
 [tool.ruff]
 lint.select = ["I", "E", "F", "B", "Q"]
