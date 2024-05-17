@@ -6,6 +6,7 @@ import Button from "../Button";
 import CartProduct from "./CartProduct";
 
 import { Transition } from "solid-transition-group";
+import CartOrder from "../CartOrder";
 import { Loader } from "../Loader";
 import styles from "./assets/cartItems.module.sass";
 
@@ -81,6 +82,9 @@ export default function CartItems() {
 					</Match>
 				</Switch>
 			</Transition>
+			<Show when={sum() !== 0}>
+				<CartOrder cartSum={sum} />
+			</Show>
 		</>
 	);
 }
