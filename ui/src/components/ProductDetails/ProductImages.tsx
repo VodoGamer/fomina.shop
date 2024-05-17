@@ -23,7 +23,7 @@ export default function ProductImages(props: { product?: ProductInterface }) {
 					<img
 						class={styles.image}
 						src={getCompressedImageUrl(getImageUrl(image.url))}
-						alt={image.description}
+						alt={image.description || props.product?.title}
 						onClick={() => setShowCarousel(index())}
 						onKeyPress={() => setShowCarousel(index())}
 					/>

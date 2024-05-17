@@ -14,7 +14,7 @@ export default function Product(props: ProductInterface) {
 								? getCompressedImageUrl(getImageUrl(props.images[0].url))
 								: ""
 						}
-						alt={(props.images?.length && props.images[0].description) || ""}
+						alt={props.images[0].description || props.title}
 					/>
 				</div>
 			</a>

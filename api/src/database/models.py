@@ -60,7 +60,7 @@ class ProductImage(Base):
     __tablename__ = "product_image"
     id = mapped_column(Integer, primary_key=True)
     url = mapped_column(CompressedImageType(storage), nullable=False)
-    description = mapped_column(String(100), nullable=False)
+    description = mapped_column(String(100), nullable=True)
     product_id = mapped_column(Integer, ForeignKey("product.id"))
     updated_at: Mapped[datetime.datetime] = mapped_column(
         DateTime(),
