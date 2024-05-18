@@ -17,11 +17,11 @@ jobs:
         id: python-setup
         with:
           python-version: "3.12"
-          cache: pip
+
+      - uses: yezz123/setup-uv@v4
 
       - name: Install dependencies
-        if: steps.python-setup.outputs.cache-hit != 'true'
-        run: pip install -r requirements-dev.lock
+        run: uv pip install -r requirements-dev.lock
 
       - name: Check code formatting
         run: ruff format .
