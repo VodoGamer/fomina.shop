@@ -19,8 +19,9 @@ jobs:
           python-version: "3.12"
 
       - uses: yezz123/setup-uv@v4
-        with:
-          uv-venv: "api/.venv"
+
+      - name: Select venv
+        run: uv venv
 
       - name: Install dependencies
         run: uv pip install -r requirements-dev.lock
