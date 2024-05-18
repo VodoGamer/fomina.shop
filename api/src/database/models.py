@@ -25,6 +25,9 @@ class Product(Base):
     title: Mapped[str] = mapped_column(String(50))
     description: Mapped[str] = mapped_column(Text())
     price: Mapped[int] = mapped_column(Integer())
+    position_order: Mapped[int] = mapped_column(
+        Integer(), default=0, server_default="0", nullable=False
+    )
     updated_at: Mapped[datetime.datetime] = mapped_column(
         DateTime(),
         onupdate=datetime.datetime.now(),
@@ -46,6 +49,9 @@ class Category(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     title: Mapped[str] = mapped_column(String(50))
     slug: Mapped[str] = mapped_column(String(50))
+    position_order: Mapped[int] = mapped_column(
+        Integer(), default=0, server_default="0", nullable=False
+    )
     updated_at: Mapped[datetime.datetime] = mapped_column(
         DateTime(),
         onupdate=datetime.datetime.now(),
@@ -62,6 +68,9 @@ class ProductImage(Base):
     url = mapped_column(CompressedImageType(storage), nullable=False)
     description = mapped_column(String(100), nullable=True)
     product_id = mapped_column(Integer, ForeignKey("product.id"))
+    position_order: Mapped[int] = mapped_column(
+        Integer(), default=0, server_default="0", nullable=False
+    )
     updated_at: Mapped[datetime.datetime] = mapped_column(
         DateTime(),
         onupdate=datetime.datetime.now(),

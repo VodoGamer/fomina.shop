@@ -8,7 +8,7 @@ from .abc import ABCRepository
 class ProductRepository(ABCRepository):
     async def get_all(self) -> list[Product]:
         async with self.session() as session:
-            result = await session.execute(select(Product).order_by(Product.updated_at.desc()))
+            result = await session.execute(select(Product).order_by(Product.position_order.desc()))
             return list(result.scalars().all())
 
     async def get_by_id(self, id: int) -> Product | None:
@@ -21,6 +21,6 @@ class ProductRepository(ABCRepository):
             result = await session.execute(
                 select(Product)
                 .where(Product.categories.any(id=category_id))
-                .order_by(Product.updated_at.desc())
+                .order_by(Product.position_order.desc())
             )
             return list(result.scalars().all())
