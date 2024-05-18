@@ -24,6 +24,7 @@ jobs:
         run: uv venv
 
       - name: Install dependencies
+        # I don't use cahce because uv is faster than github cache :D
         run: uv pip install -r requirements-dev.lock
 
       - name: Activate venv
