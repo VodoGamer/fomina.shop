@@ -1,0 +1,11 @@
+.trigger {
+	display: block;
+}
+
+.content {
+	border: 1px solid #e7e7e7;
+	border-radius: 0.25rem;
+	box-shadow: 0px 8px 16px rgba(0, 0, 0, .1),
+		0px 0px 1px inset #fffbed3c;
+	outline-color: transparent;
+}

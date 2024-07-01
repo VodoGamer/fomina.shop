@@ -1,0 +1,26 @@
+[data-scope="menu"][data-part="trigger"] {
+	background-color: transparent;
+	color: black;
+	border: none;
+	cursor: pointer;
+	outline: none;
+}
+
+[data-scope="menu"][data-part="content"][data-state="open"] {
+	background-color: white;
+	display: grid;
+	outline: black 1px solid;
+}
+
+[data-scope="menu"][data-part="item"] {
+	cursor: pointer;
+	padding: 8px 10px;
+	text-decoration: none;
+	color: black;
+
+	transition: .1s ease-out;
+}
+
+[data-scope="menu"][data-part="item"]:hover {
+	background-color: #F0F0F0;
+}

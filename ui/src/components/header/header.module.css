@@ -1,0 +1,19 @@
+.header {
+	display: grid;
+	grid-template-columns: 1fr min-content;
+	align-items: center;
+}
+
+.icons {
+	display: flex;
+	gap: 24px;
+}
+
+.logo__link {
+	text-decoration: none;
+	color: black;
+}
+
+.cart {
+	display: block;
+}
