@@ -1,10 +1,11 @@
 import { Title } from "@solidjs/meta";
+import Hero from "~/components/hero";
 
 export default function Home() {
 	return (
 		<main>
-			<Title>Hello World</Title>
-			<h1>Fomina Summer Style 2024</h1>
+			<Title>Fomina Shop - Брендовая детская одежда</Title>
+			<Hero />
 		</main>
 	);
 }

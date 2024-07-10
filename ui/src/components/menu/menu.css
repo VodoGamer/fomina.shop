@@ -3,7 +3,11 @@
 	color: black;
 	border: none;
 	cursor: pointer;
-	outline: none;
+}
+
+[data-scope="menu"][data-part="trigger"]:focus {
+	outline: black 0.2em solid;
+	border-radius: 0.1em;
 }
 
 [data-scope="menu"][data-part="content"][data-state="open"] {
