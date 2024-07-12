@@ -1,4 +1,3 @@
-import type { Setter } from "solid-js";
 import { Portal } from "solid-js/web";
 import type Image from "../../interfaces/image";
 
@@ -8,28 +7,27 @@ import "./slider.css";
 import ImagesSlider from "./slider";
 
 export default function Carousel(props: {
-	showCarousel: () => boolean | number;
-	setShowCarousel: Setter<boolean | number>;
+	index: number;
+	productId: number;
 	images: Image[];
 }) {
 	function getImagesFromIndex() {
-		const index = props.showCarousel() as number;
 		const buffer = props.images;
-		const result: Image[] = props.images.slice(index);
-		return result.concat(buffer.slice(0, index));
+		const result: Image[] = props.images.slice(props.index);
+		return result.concat(buffer.slice(0, props.index));
 	}
 
 	return (
 		<Portal>
 			<div class={styles.container} data-portal="true">
 				<ImagesSlider images={getImagesFromIndex()} />
-				<button
-					type="button"
-					class={styles.button}
-					onClick={() => props.setShowCarousel(false)}
-				>
-					<img src={cross} alt="Иконка закрытия карусели" />
-				</button>
+				<a class={styles.button} href={`/product/${props.productId}`}>
+					<img
+						class={styles.cross}
+						src={cross}
+						alt="Иконка закрытия карусели"
+					/>
+				</a>
 			</div>
 		</Portal>
 	);
