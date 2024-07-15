@@ -17,15 +17,18 @@ jobs:
         id: python-setup
         with:
           python-version: "3.12"
+      - uses: yezz123/setup-uv@v4
+        with:
+          uv-venv: "fomina_shop"
 
       - name: Install dependencies
-        run: pip install -r requirements-dev.lock
+        run: uv pip install -r requirements-dev.lock
 
       - name: Check code formatting
-        run: ruff format .
+        run: uv ruff format .
 
       - name: Check code lint
-        run: ruff check .
+        run: uv ruff check .
 
       - name: Check types by pyright
-        run: pyright src
+        run: uv pyright src
