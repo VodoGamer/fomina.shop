@@ -21,7 +21,11 @@ export default function Carousel(props: {
 		<Portal>
 			<div class={styles.container} data-portal="true">
 				<ImagesSlider images={getImagesFromIndex()} />
-				<a class={styles.button} href={`/product/${props.productId}`}>
+				<a
+					class={styles.button}
+					onClick={() => window.history.go(-1)}
+					href={`/product/${props.productId}`}
+				>
 					<img
 						class={styles.cross}
 						src={cross}

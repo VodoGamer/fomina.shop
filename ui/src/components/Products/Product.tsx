@@ -4,7 +4,7 @@ import styles from "./products.module.sass";
 
 export default function Product(props: ProductInterface) {
 	return (
-		<section>
+		<section class={styles.product}>
 			<a href={`/product/${props.id}`}>
 				<div class={styles.image__block}>
 					<img

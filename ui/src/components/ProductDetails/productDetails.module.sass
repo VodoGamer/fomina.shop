@@ -2,6 +2,8 @@
 	display: grid
 	grid-template-columns: 1fr 1fr
 	gap: 24px
+	@media screen and (max-width: 480px)
+		grid-template-columns: 1fr
 
 .info
 	display: flex
@@ -19,6 +21,8 @@
 .images
 	@media screen and (max-width: 768px)
 		grid-template-columns: 1fr
+	@media screen and (max-width: 480px)
+		grid-template-columns: 1fr 1fr
 
 .image
 	display: block
