@@ -1,7 +1,7 @@
 import { For, Match, Show, Switch, createResource } from "solid-js";
 import type ProductInterface from "../../interfaces/product";
 import { getFromApi } from "../../utils/api";
-import { getCart, removeFromCart } from "../../utils/cart";
+import { CartItem, getCart, removeFromCart } from "../../utils/cart";
 import Button from "../Button";
 import CartProduct from "./CartProduct";
 
@@ -9,6 +9,7 @@ import { Transition } from "solid-transition-group";
 import CartOrder from "../CartOrder";
 import { Loader } from "../Loader";
 import styles from "./assets/cartItems.module.sass";
+import { createStore } from "solid-js/store";
 
 async function getProducts(productIds: number[]): Promise<ProductInterface[]> {
 	if (productIds.length === 0) {
@@ -27,24 +28,29 @@ async function getProducts(productIds: number[]): Promise<ProductInterface[]> {
 	return response.data;
 }
 
-async function calculateSum(products: ProductInterface[]): Promise<number> {
-	return products.reduce((sum, product) => sum + product.price, 0);
-}
-
 export default function CartItems() {
-	const cart = getCart();
+	const cart: CartItem[] = getCart();
 	const productIds = cart.map((item) => item.product_id);
 	const [products, { mutate }] = createResource(productIds, getProducts);
-	const [sum] = createResource(products, calculateSum);
+	const [productsPrice, setProductsPrice] = createStore<number[]>([]);
 
 	function deleteFromCart(index: number) {
 		mutate((prevItems) => {
+			if (!prevItems) return;
 			const newItems = [...prevItems];
 			newItems.splice(index, 1);
+			setProductsPrice(productsPrice.filter((_, i) => i !== index));
 			return newItems;
 		});
-
 		removeFromCart(index);
+	}
+
+	function addToSum(price: number) {
+		setProductsPrice([...productsPrice, price]);
+	}
+
+	function sum() {
+		return productsPrice.reduce((a, b) => a + b, 0);
 	}
 
 	return (
@@ -76,6 +82,8 @@ export default function CartItems() {
 										product={product}
 										deleteFromCart={deleteFromCart}
 										index={index()}
+										cart={cart}
+										addToSum={addToSum}
 									/>
 								)}
 							</For>
@@ -83,8 +91,8 @@ export default function CartItems() {
 					</Match>
 				</Switch>
 			</Transition>
-			<Show when={sum() !== 0}>
-				<CartOrder cartSum={sum} />
+			<Show when={productsPrice.length}>
+				<CartOrder cartSum={sum()} />
 			</Show>
 		</>
 	);

@@ -1,10 +1,10 @@
-import { Resource, Show, createSignal } from "solid-js";
+import { Show, createSignal } from "solid-js";
 
 import Button from "../Button";
 import styles from "./assets/cartOrder.module.sass";
 import infoIcon from "./assets/info-circle.svg";
 
-export default function CartOrder(props: { cartSum: Resource<number> }) {
+export default function CartOrder(props: { cartSum: number }) {
 	const [isDialogOpen, setDialogOpen] = createSignal(false);
 
 	function togglePopup() {
@@ -15,7 +15,7 @@ export default function CartOrder(props: { cartSum: Resource<number> }) {
 		<div class={styles.order}>
 			<Show when={!isDialogOpen()}>
 				<div>
-					<h3>Общая сумма: {props.cartSum()}</h3>
+					<h3>Общая сумма: {props.cartSum}₽</h3>
 					<Button text="Оформить заказ" onClick={togglePopup} />
 				</div>
 			</Show>

@@ -1,4 +1,6 @@
+import { For } from "solid-js";
 import type ProductInterface from "../../interfaces/product";
+import { CartItem } from "../../utils/cart";
 import { getCompressedImageUrl, getImageUrl } from "../../utils/images";
 import Button from "../Button";
 
@@ -9,7 +11,12 @@ export default function CartProduct(props: {
 	product: ProductInterface;
 	deleteFromCart: (id: number) => void;
 	index: number;
+	cart: CartItem[];
+	addToSum: (price: number) => void;
 }) {
+	const cartInfo: CartItem = props.cart[props.index];
+	const price: number = props.product.price * (cartInfo.count || 1);
+	props.addToSum(price);
 	return (
 		<section class={styles.product}>
 			<div
@@ -32,7 +39,15 @@ export default function CartProduct(props: {
 			</div>
 			<div class={styles.info}>
 				<h1>{props.product.title}</h1>
-				<p>{props.product.price}₽</p>
+				<p>{price}₽</p>
+				<For each={cartInfo.variations || []}>
+					{(variation) => (
+						<p>
+							{variation.key} - {variation.value}
+						</p>
+					)}
+				</For>
+				<p>Количество - {cartInfo.count || 1}</p>
 				<Button
 					text="Сведения о товаре"
 					link={`/product/${props.product.id}`}

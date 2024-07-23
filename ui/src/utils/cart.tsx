@@ -1,6 +1,6 @@
 import { SelectedVariation } from "../interfaces/productVariation";
 
-interface CartItem {
+export interface CartItem {
 	product_id: number;
 	variations: SelectedVariation[];
 	count: number;
