@@ -1,10 +1,27 @@
-export function getCart(): number[] {
+import { SelectedVariation } from "../interfaces/productVariation";
+
+interface CartItem {
+	product_id: number;
+	variations: SelectedVariation[];
+	count: number;
+}
+
+export function getCart(): CartItem[] {
 	return JSON.parse(localStorage.getItem("cart") || "[]");
 }
 
-export function addToCart(product_id: number) {
+export function addToCart(
+	product_id: number,
+	variations: SelectedVariation[],
+	count: number | undefined = 1,
+) {
 	const cart = getCart();
-	cart.push(product_id);
+	const item: CartItem = {
+		product_id: product_id,
+		variations: variations,
+		count: count,
+	};
+	cart.push(item);
 	localStorage.setItem("cart", JSON.stringify(cart));
 }
 

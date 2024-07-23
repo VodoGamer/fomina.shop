@@ -32,7 +32,8 @@ async function calculateSum(products: ProductInterface[]): Promise<number> {
 }
 
 export default function CartItems() {
-	const productIds = getCart();
+	const cart = getCart();
+	const productIds = cart.map((item) => item.product_id);
 	const [products, { mutate }] = createResource(productIds, getProducts);
 	const [sum] = createResource(products, calculateSum);
 

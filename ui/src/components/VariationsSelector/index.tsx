@@ -4,8 +4,12 @@ import ProductVariation from "../../interfaces/productVariation";
 import styles from "./variationsSelector.module.sass";
 
 export default function VariationSelector(props: {
-	variations: ProductVariation[];
+	variations: ProductVariation[] | undefined;
 }) {
+	if (!props.variations) {
+		return null;
+	}
+
 	let variationsByKey: { [key: string]: ProductVariation[] } = {};
 	for (const variation of props.variations) {
 		if (!variationsByKey[variation.key]) {
@@ -15,14 +19,14 @@ export default function VariationSelector(props: {
 	}
 
 	return (
-		<form class={styles.form}>
+		<form name="variations" class={styles.form}>
 			<For each={Object.entries(variationsByKey)}>
 				{([key, variations]) => (
 					<p class={styles.field}>
 						<label class={styles.label} for={`${key}-select`}>
 							{key}
 						</label>
-						<select name="variation" id={`${key}-select`}>
+						<select name={key} id={`${key}-select`}>
 							<For each={variations}>
 								{(variation) => (
 									<option value={variation.value}>{variation.value}</option>
