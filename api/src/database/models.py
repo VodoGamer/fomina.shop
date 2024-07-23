@@ -91,3 +91,6 @@ class ProductVariation(Base):
     product_id = mapped_column(Integer, ForeignKey("product.id"))
 
     product = relationship("Product", back_populates="variations")
+
+    def __repr__(self) -> str:
+        return f"ProductVariation(id={self.id!r}, key={self.key!r}, value={self.value!r})"
