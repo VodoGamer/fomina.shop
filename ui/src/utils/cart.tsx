@@ -7,7 +7,7 @@ export interface CartItem {
 }
 
 export function getCart(): CartItem[] {
-	return JSON.parse(localStorage.getItem("cart") || "[]");
+	return JSON.parse(localStorage.getItem("newCart") || "[]");
 }
 
 export function addToCart(
@@ -22,7 +22,7 @@ export function addToCart(
 		count: count,
 	};
 	cart.push(item);
-	localStorage.setItem("cart", JSON.stringify(cart));
+	localStorage.setItem("newCart", JSON.stringify(cart));
 }
 
 export function removeFromCart(index: number) {
@@ -30,5 +30,5 @@ export function removeFromCart(index: number) {
 	if (index > -1) {
 		cart.splice(index, 1);
 	}
-	localStorage.setItem("cart", JSON.stringify(cart));
+	localStorage.setItem("newCart", JSON.stringify(cart));
 }
