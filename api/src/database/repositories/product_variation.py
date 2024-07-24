@@ -1,6 +1,6 @@
 from sqlalchemy import select
 
-from src.database.models import ProductVariation
+from src.database.models import Product, ProductVariation
 
 from .abc import ABCRepository
 
@@ -20,7 +20,5 @@ class ProductVariationRepository(ABCRepository):
 
     async def get_by_product_id(self, id: int) -> list[ProductVariation]:
         async with self.session() as session:
-            result = await session.execute(
-                select(ProductVariation).where(ProductVariation.product_id == id)
-            )
+            result = await session.execute(select(ProductVariation).where(Product.id == id))
             return list(result.scalars().all())

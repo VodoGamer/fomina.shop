@@ -18,6 +18,13 @@ products_categories = Table(
     Column("category", ForeignKey("category.id")),
 )
 
+products_variations = Table(
+    "products_variations",
+    Base.metadata,
+    Column("product_id", ForeignKey("product.id")),
+    Column("variation_id", ForeignKey("product_variation.id")),
+)
+
 
 class Product(Base):
     __tablename__ = "product"
@@ -37,7 +44,7 @@ class Product(Base):
     images: Mapped[list["ProductImage"]] = relationship(back_populates="product", lazy="selectin")
     categories: Mapped[list["Category"]] = relationship(secondary=products_categories)
     variations: Mapped[list["ProductVariation"]] = relationship(
-        back_populates="product", lazy="selectin"
+        secondary=products_variations, lazy="selectin"
     )
 
     def __repr__(self) -> str:
@@ -88,9 +95,6 @@ class ProductVariation(Base):
     id = mapped_column(Integer, primary_key=True)
     key = mapped_column(String(50), nullable=False)
     value = mapped_column(String(50), nullable=False)
-    product_id = mapped_column(Integer, ForeignKey("product.id"))
-
-    product = relationship("Product", back_populates="variations")
 
     def __repr__(self) -> str:
         return f"ProductVariation(id={self.id!r}, key={self.key!r}, value={self.value!r})"
