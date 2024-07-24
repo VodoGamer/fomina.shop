@@ -21,6 +21,7 @@ export default function MenuNav(props: {
 	return (
 		<>
 			<nav>
+				<h2 class={styles.title}>Категории товаров</h2>
 				<ul class={styles.nav__list}>
 					<Show when={props.categories.loading}>
 						<Loader />
