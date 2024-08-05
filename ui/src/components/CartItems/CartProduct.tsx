@@ -1,12 +1,12 @@
 import { createResource, For } from "solid-js";
 import type ProductInterface from "../../interfaces/product";
 import { CartItem } from "../../utils/cart";
-import { getCompressedImageUrl, getImageUrl } from "../../utils/images";
+import { getCompressedImageUrl } from "../../utils/images";
 import Button from "../Button";
 
 import styles from "./assets/cartItems.module.sass";
 import menu_cross from "./assets/menu_cross_white.svg";
-import { getVariation } from "../../utils/api/base";
+import { getVariation } from "../../utils/api";
 
 export default function CartProduct(props: {
 	product: ProductInterface;
@@ -17,7 +17,10 @@ export default function CartProduct(props: {
 }) {
 	const cartInfo: CartItem = props.cart[props.index];
 	const price: number = props.product.price * (cartInfo.count || 1);
-	const [variationInfo] = createResource(cartInfo.variations[0], getVariation);
+	const [variationInfo] = createResource(
+		cartInfo.variations[0].id,
+		getVariation,
+	);
 	props.addToSum(price);
 
 	return (
@@ -27,7 +30,7 @@ export default function CartProduct(props: {
 				style={{
 					"background-image": `url(${
 						props.product.images?.length
-							? getCompressedImageUrl(getImageUrl(props.product.images[0].url))
+							? getCompressedImageUrl(props.product.images[0].url)
 							: ""
 					})`,
 				}}
@@ -46,7 +49,7 @@ export default function CartProduct(props: {
 				<For each={cartInfo.variations || []}>
 					{(variation) => (
 						<p>
-							{variation.key} - {variation.value}
+							{variation.key} - {variation.key}
 						</p>
 					)}
 				</For>

@@ -8,6 +8,7 @@ import styles from "./productDetails.module.sass";
 import "../../assets/animations.sass";
 import { getVariations } from "../../utils/forms";
 import VariationsSelector from "../VariationsSelector";
+import { getDescription } from "../../utils/products";
 
 export default function ProductInfo(props: {
 	product?: ProductInterface;
@@ -17,14 +18,6 @@ export default function ProductInfo(props: {
 	const [productPrice, setProductPrice] = createSignal(
 		props.product?.price || 0,
 	);
-
-	function getDescription(text: string) {
-		const paragraphs = text.split("\n");
-		const pTags = paragraphs.map((paragraph, index) => {
-			return <p class={styles.description}>{paragraph}</p>;
-		});
-		return pTags;
-	}
 
 	function processAddToCart() {
 		addToCart(props.productId, getVariations());
@@ -42,7 +35,7 @@ export default function ProductInfo(props: {
 				productId={props.productId}
 				setProductPrice={setProductPrice}
 			/>
-			{getDescription(props.product.description)}
+			{getDescription(props.product.description, styles.description)}
 			<span class={styles.price}>{productPrice()}₽</span>
 			<Transition mode="outin" name="slide-fade">
 				<Switch>

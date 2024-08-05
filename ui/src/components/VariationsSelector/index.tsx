@@ -9,9 +9,9 @@ import {
 } from "solid-js";
 
 import styles from "./variationsSelector.module.sass";
-import { getProductVariations } from "../../utils/api/variations";
+import { getProductVariations } from "../../utils/variations";
 import VariationSelect from "./VariationSelect";
-import Error from "../ErrorBox";
+import ErrorBox from "../ErrorBox";
 import { Loader } from "../Loader";
 
 export default function VariationsSelector(props: {
@@ -45,7 +45,7 @@ export default function VariationsSelector(props: {
 				</Show>
 				<Switch>
 					<Match when={variations.error}>
-						<Error message={"Ошибка получения вариаций товара"} />
+						<ErrorBox message={"Ошибка получения вариаций товара"} />
 					</Match>
 					<Match when={variations()}>
 						<For each={variations()}>

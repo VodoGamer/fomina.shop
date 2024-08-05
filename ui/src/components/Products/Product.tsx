@@ -1,5 +1,5 @@
 import type ProductInterface from "../../interfaces/product";
-import { getCompressedImageUrl, getImageUrl } from "../../utils/images";
+import { getCompressedImageUrl } from "../../utils/images";
 import styles from "./products.module.sass";
 
 export default function Product(props: ProductInterface) {
@@ -11,7 +11,7 @@ export default function Product(props: ProductInterface) {
 						class={styles.image}
 						src={
 							props.images?.length && props.images[0]
-								? getCompressedImageUrl(getImageUrl(props.images[0].url))
+								? getCompressedImageUrl(props.images[0].url)
 								: ""
 						}
 						alt={

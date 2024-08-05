@@ -1,19 +1,14 @@
 import { Match, Show, Switch, createResource } from "solid-js";
 import { Transition } from "solid-transition-group";
 
-import type ProductInterface from "../../interfaces/product";
-import { getFromApi } from "../../utils/api/base";
-
+import { getProduct } from "../../utils/products";
 import { Loader } from "../Loader";
 import ProductImages from "./ProductImages";
 import ProductInfo from "./ProductInfo";
 
 import styles from "./productDetails.module.sass";
 import "../../assets/animations.sass";
-
-async function getProduct(id: number): Promise<ProductInterface> {
-	return (await getFromApi(`product/${id}`)).data;
-}
+import ErrorBox from "../ErrorBox";
 
 export default function ProductDetails(props: { productId: number }) {
 	const [product] = createResource(props.productId, getProduct);
@@ -26,7 +21,7 @@ export default function ProductDetails(props: { productId: number }) {
 			<Transition mode="outin" name="slide-fade">
 				<Switch>
 					<Match when={product.error}>
-						<p>Error... {product.error.message}</p>
+						<ErrorBox message={"Не удалось загрузить товар"} />
 					</Match>
 					<Match when={product()}>
 						<div class={styles.product}>

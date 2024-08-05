@@ -1,18 +1,11 @@
 import { For, Show, createResource } from "solid-js";
 
-import type ProductInterface from "../../interfaces/product";
 import Product from "./Product";
-
-import { getFromApi } from "../../utils/api/base";
+import { getProducts } from "../../utils/products";
 import { Loader } from "../Loader";
+
 import styles from "./products.module.sass";
 import "../../assets/animations.sass";
-import { TransitionGroup } from "solid-transition-group";
-
-async function getProducts(categoryId: number): Promise<ProductInterface[]> {
-	const response = await getFromApi(`products/category/${categoryId}`);
-	return response.data;
-}
 
 const Products = (props: { categoryId?: number }) => {
 	const [products] = createResource(props.categoryId, getProducts);

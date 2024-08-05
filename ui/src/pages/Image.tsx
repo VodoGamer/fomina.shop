@@ -1,14 +1,9 @@
 import { useParams } from "@solidjs/router";
 import { createResource, Match, Show, Switch, type Component } from "solid-js";
 import Carousel from "../components/Carousel";
-import { getFromApi } from "../utils/api/base";
 import { Loader } from "../components/Loader";
-import ProductInterface from "../interfaces/product";
 import { MetaProvider, Title } from "@solidjs/meta";
-
-async function getProduct(id: number): Promise<ProductInterface> {
-	return (await getFromApi(`product/${id}`)).data;
-}
+import { getProduct } from "../utils/products";
 
 const Image: Component = () => {
 	const params: { id: string; index: string } = useParams();

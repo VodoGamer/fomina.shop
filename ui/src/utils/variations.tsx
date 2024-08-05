@@ -1,6 +1,6 @@
-import { getFromApi } from "./base";
+import { getFromApi } from "./api";
 
-import ProductVariation from "../../interfaces/productVariation";
+import ProductVariation from "../interfaces/productVariation";
 
 function groupVariations(variations: ProductVariation[]) {
 	let variationsByKey: { [key: string]: ProductVariation[] } = {};

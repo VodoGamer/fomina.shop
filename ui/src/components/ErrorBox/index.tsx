@@ -1,7 +1,7 @@
 import styles from "./errorBox.module.css";
 import icon from "./error.svg";
 
-export default function Error(props: { message: string }) {
+export default function ErrorBox(props: { message: string }) {
 	return (
 		<div class={styles.box}>
 			<img

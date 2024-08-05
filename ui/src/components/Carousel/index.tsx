@@ -1,26 +1,26 @@
 import { Portal } from "solid-js/web";
+
 import type Image from "../../interfaces/image";
+import { getImagesFromIndex } from "../../utils/images";
+import ImagesSlider from "./slider";
 
 import styles from "./carousel.module.sass";
 import cross from "./menu_cross.svg";
 import "./slider.css";
-import ImagesSlider from "./slider";
 
 export default function Carousel(props: {
 	index: number;
 	productId: number;
-	images: Image[];
+	images?: Image[];
 }) {
-	function getImagesFromIndex() {
-		const buffer = props.images;
-		const result: Image[] = props.images.slice(props.index);
-		return result.concat(buffer.slice(0, props.index));
+	if (!props.images) {
+		return <></>;
 	}
 
 	return (
 		<Portal>
 			<div class={styles.container} data-portal="true">
-				<ImagesSlider images={getImagesFromIndex()} />
+				<ImagesSlider images={getImagesFromIndex(props.index, props.images)} />
 				<a
 					class={styles.button}
 					onClick={() => window.history.go(-1)}

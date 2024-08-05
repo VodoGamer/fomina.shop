@@ -6,15 +6,11 @@ import { Transition } from "solid-transition-group";
 import Hero from "../components/Hero";
 import { Loader } from "../components/Loader";
 import Products from "../components/Products";
-import type CategoryInterface from "../interfaces/category";
-import { getFromApi } from "../utils/api/base";
+import ErrorBox from "../components/ErrorBox";
+import { getCategory } from "../utils/categories";
 
 import hero_image from "../assets/hero.webp";
 import "../assets/animations.sass";
-
-async function getCategory(slug: string): Promise<CategoryInterface> {
-	return (await getFromApi("category/", { params: { id_or_slug: slug } })).data;
-}
 
 const RouterCategory = () => {
 	const params = useParams();
@@ -40,7 +36,7 @@ const Category = (props: { slug: string }) => {
 			<Transition mode="outin" name="slide-fade">
 				<Switch>
 					<Match when={category.error}>
-						<p>Error... {category.error.message}</p>
+						<ErrorBox message={"Не удалось загрузить категорию"} />
 					</Match>
 					<Match when={category()}>
 						<div>
