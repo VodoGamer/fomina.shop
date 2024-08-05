@@ -18,7 +18,12 @@ class ProductVariationRepository(ABCRepository):
             )
             return result.scalars().first()
 
-    async def get_by_product_id(self, id: int) -> list[ProductVariation]:
+    async def get_by_product(self, product_id: int) -> list[ProductVariation]:
         async with self.session() as session:
-            result = await session.execute(select(ProductVariation).where(Product.id == id))
+            result = await session.execute(
+                select(ProductVariation)
+                .select_from(Product)
+                .where(Product.id == product_id)
+                .order_by(ProductVariation.price_markup)
+            )
             return list(result.scalars().all())

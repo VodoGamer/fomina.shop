@@ -1,7 +1,7 @@
 import { useParams } from "@solidjs/router";
 import { createResource, Match, Show, Switch, type Component } from "solid-js";
 import Carousel from "../components/Carousel";
-import { getFromApi } from "../utils/api";
+import { getFromApi } from "../utils/api/base";
 import { Loader } from "../components/Loader";
 import ProductInterface from "../interfaces/product";
 import { MetaProvider, Title } from "@solidjs/meta";

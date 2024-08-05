@@ -1,41 +1,65 @@
-import { For } from "solid-js";
-import ProductVariation from "../../interfaces/productVariation";
+import {
+	createResource,
+	createSignal,
+	For,
+	Match,
+	Setter,
+	Show,
+	Switch,
+} from "solid-js";
 
 import styles from "./variationsSelector.module.sass";
+import { getProductVariations } from "../../utils/api/variations";
+import VariationSelect from "./VariationSelect";
+import Error from "../ErrorBox";
+import { Loader } from "../Loader";
 
-export default function VariationSelector(props: {
-	variations: ProductVariation[] | undefined;
+export default function VariationsSelector(props: {
+	productId: number;
+	setProductPrice: Setter<number>;
 }) {
-	if (!props.variations) {
-		return null;
+	const [variations] = createResource(props.productId, getProductVariations);
+	const [priceBuffer, setPriceBuffer] = createSignal(NaN);
+
+	function addMarkup(markup: number) {
+		if (!priceBuffer()) {
+			props.setProductPrice((prev) => {
+				setPriceBuffer(prev);
+				return prev;
+			});
+		}
+		props.setProductPrice(priceBuffer() + markup);
 	}
 
-	let variationsByKey: { [key: string]: ProductVariation[] } = {};
-	for (const variation of props.variations) {
-		if (!variationsByKey[variation.key]) {
-			variationsByKey[variation.key] = [];
-		}
-		variationsByKey[variation.key].push(variation);
+	function SelectVariation(e: Event & { target: HTMLSelectElement }) {
+		const field = e.target.options[e.target.options.selectedIndex];
+		const dataMarkup = field.dataset.price_markup;
+		addMarkup(Number(dataMarkup || 0));
 	}
 
 	return (
-		<form name="variations" class={styles.form}>
-			<For each={Object.entries(variationsByKey)}>
-				{([key, variations]) => (
-					<p class={styles.field}>
-						<label class={styles.label} for={`${key}-select`}>
-							{key}
-						</label>
-						<select name={key} id={`${key}-select`}>
-							<For each={variations}>
-								{(variation) => (
-									<option value={variation.value}>{variation.value}</option>
-								)}
-							</For>
-						</select>
-					</p>
-				)}
-			</For>
-		</form>
+		<div>
+			<form name="variations" class={styles.form}>
+				<Show when={variations.loading}>
+					<Loader />
+				</Show>
+				<Switch>
+					<Match when={variations.error}>
+						<Error message={"Ошибка получения вариаций товара"} />
+					</Match>
+					<Match when={variations()}>
+						<For each={variations()}>
+							{([key, variations]) => (
+								<VariationSelect
+									key={key}
+									variations={variations}
+									SelectVariation={SelectVariation}
+								/>
+							)}
+						</For>
+					</Match>
+				</Switch>
+			</form>
+		</div>
 	);
 }

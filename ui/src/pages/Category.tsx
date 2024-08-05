@@ -7,7 +7,7 @@ import Hero from "../components/Hero";
 import { Loader } from "../components/Loader";
 import Products from "../components/Products";
 import type CategoryInterface from "../interfaces/category";
-import { getFromApi } from "../utils/api";
+import { getFromApi } from "../utils/api/base";
 
 import hero_image from "../assets/hero.webp";
 import "../assets/animations.sass";

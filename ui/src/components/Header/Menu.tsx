@@ -2,7 +2,7 @@ import { type Component, Show, createResource, createSignal } from "solid-js";
 import { Portal } from "solid-js/web";
 import { Transition } from "solid-transition-group";
 
-import { getFromApi } from "../../utils/api";
+import { getFromApi } from "../../utils/api/base";
 import MenuNav from "./MenuNav";
 
 import cart_icon from "./assets/cart.svg";

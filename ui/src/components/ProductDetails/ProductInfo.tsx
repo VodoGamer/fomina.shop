@@ -1,20 +1,22 @@
 import { Match, Switch, createSignal } from "solid-js";
 import { Transition } from "solid-transition-group";
 import type ProductInterface from "../../interfaces/product";
-import { SelectedVariation } from "../../interfaces/productVariation";
 import { addToCart } from "../../utils/cart";
 import Button from "../Button";
 import styles from "./productDetails.module.sass";
 
 import "../../assets/animations.sass";
+import { getVariations } from "../../utils/forms";
 import VariationsSelector from "../VariationsSelector";
 
 export default function ProductInfo(props: {
 	product?: ProductInterface;
 	productId: number;
 }) {
-	let divRef!: HTMLDivElement;
 	const [productInCart, setProductInCart] = createSignal(false);
+	const [productPrice, setProductPrice] = createSignal(
+		props.product?.price || 0,
+	);
 
 	function getDescription(text: string) {
 		const paragraphs = text.split("\n");
@@ -29,27 +31,19 @@ export default function ProductInfo(props: {
 		setProductInCart(true);
 	}
 
-	function getVariations() {
-		const variations: SelectedVariation[] = [];
-		for (let i = 0; i < document.forms[0].length; i++) {
-			const field = document.forms[0][i];
-			const item: SelectedVariation = {
-				key: field.name,
-				value: field.value,
-			};
-			variations.push(item);
-		}
-		return variations;
+	if (!props.product) {
+		return null;
 	}
 
 	return (
 		<div class={styles.info}>
-			<h1>{props.product?.title}</h1>
-			<div ref={divRef}>
-				<VariationsSelector variations={props.product?.variations} />
-			</div>
-			{getDescription(props.product?.description || "")}
-			<span class={styles.price}>{props.product?.price}₽</span>
+			<h1>{props.product.title}</h1>
+			<VariationsSelector
+				productId={props.productId}
+				setProductPrice={setProductPrice}
+			/>
+			{getDescription(props.product.description)}
+			<span class={styles.price}>{productPrice()}₽</span>
 			<Transition mode="outin" name="slide-fade">
 				<Switch>
 					<Match when={!productInCart()}>

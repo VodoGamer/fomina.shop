@@ -1,4 +1,4 @@
-import { For } from "solid-js";
+import { createResource, For } from "solid-js";
 import type ProductInterface from "../../interfaces/product";
 import { CartItem } from "../../utils/cart";
 import { getCompressedImageUrl, getImageUrl } from "../../utils/images";
@@ -6,6 +6,7 @@ import Button from "../Button";
 
 import styles from "./assets/cartItems.module.sass";
 import menu_cross from "./assets/menu_cross_white.svg";
+import { getVariation } from "../../utils/api/base";
 
 export default function CartProduct(props: {
 	product: ProductInterface;
@@ -16,7 +17,9 @@ export default function CartProduct(props: {
 }) {
 	const cartInfo: CartItem = props.cart[props.index];
 	const price: number = props.product.price * (cartInfo.count || 1);
+	const [variationInfo] = createResource(cartInfo.variations[0], getVariation);
 	props.addToSum(price);
+
 	return (
 		<section class={styles.product}>
 			<div

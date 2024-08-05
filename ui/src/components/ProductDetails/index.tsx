@@ -2,7 +2,7 @@ import { Match, Show, Switch, createResource } from "solid-js";
 import { Transition } from "solid-transition-group";
 
 import type ProductInterface from "../../interfaces/product";
-import { getFromApi } from "../../utils/api";
+import { getFromApi } from "../../utils/api/base";
 
 import { Loader } from "../Loader";
 import ProductImages from "./ProductImages";

@@ -1,18 +1,20 @@
-import { SelectedVariation } from "../interfaces/productVariation";
+import { CartProductVariation } from "../interfaces/productVariation";
+
+const cartName = "cart1.2.0";
 
 export interface CartItem {
 	product_id: number;
-	variations: SelectedVariation[];
+	variations: CartProductVariation[];
 	count: number;
 }
 
 export function getCart(): CartItem[] {
-	return JSON.parse(localStorage.getItem("newCart") || "[]");
+	return JSON.parse(localStorage.getItem(cartName) || "[]");
 }
 
 export function addToCart(
 	product_id: number,
-	variations: SelectedVariation[],
+	variations: CartProductVariation[],
 	count: number | undefined = 1,
 ) {
 	const cart = getCart();
@@ -22,7 +24,7 @@ export function addToCart(
 		count: count,
 	};
 	cart.push(item);
-	localStorage.setItem("newCart", JSON.stringify(cart));
+	localStorage.setItem(cartName, JSON.stringify(cart));
 }
 
 export function removeFromCart(index: number) {
@@ -30,5 +32,5 @@ export function removeFromCart(index: number) {
 	if (index > -1) {
 		cart.splice(index, 1);
 	}
-	localStorage.setItem("newCart", JSON.stringify(cart));
+	localStorage.setItem(cartName, JSON.stringify(cart));
 }

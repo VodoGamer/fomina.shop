@@ -1,4 +1,4 @@
-import apiURL from "./api";
+import apiURL from "./api/base";
 
 export function getImageUrl(filename: string) {
 	return `${apiURL}/files/${filename}`;

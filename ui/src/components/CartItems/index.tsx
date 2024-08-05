@@ -1,6 +1,6 @@
 import { For, Match, Show, Switch, createResource } from "solid-js";
 import type ProductInterface from "../../interfaces/product";
-import { getFromApi } from "../../utils/api";
+import { getFromApi } from "../../utils/api/base";
 import { CartItem, getCart, removeFromCart } from "../../utils/cart";
 import Button from "../Button";
 import CartProduct from "./CartProduct";

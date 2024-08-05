@@ -1,6 +1,7 @@
 import datetime
+import enum
 
-from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, Table, Text, func
+from sqlalchemy import Column, DateTime, Enum, ForeignKey, Integer, String, Table, Text, func
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 from src.client import storage
@@ -43,9 +44,7 @@ class Product(Base):
 
     images: Mapped[list["ProductImage"]] = relationship(back_populates="product", lazy="selectin")
     categories: Mapped[list["Category"]] = relationship(secondary=products_categories)
-    variations: Mapped[list["ProductVariation"]] = relationship(
-        secondary=products_variations, lazy="selectin"
-    )
+    variations: Mapped[list["ProductVariation"]] = relationship(secondary=products_variations)
 
     def __repr__(self) -> str:
         return f"Product(id={self.id!r}, title={self.title!r})"
@@ -90,11 +89,17 @@ class ProductImage(Base):
         return f"ProductImage(id={self.id!r}, description={self.description!r})"
 
 
+class VariationType(enum.Enum):
+    SIZE = "Размер"
+    COLOR = "Цвет"
+
+
 class ProductVariation(Base):
     __tablename__ = "product_variation"
     id = mapped_column(Integer, primary_key=True)
-    key = mapped_column(String(50), nullable=False)
+    key = mapped_column(Enum(VariationType), nullable=False)
     value = mapped_column(String(50), nullable=False)
+    price_markup = mapped_column(Integer, default=0, server_default="0")
 
     def __repr__(self) -> str:
         return f"ProductVariation(id={self.id!r}, key={self.key!r}, value={self.value!r})"

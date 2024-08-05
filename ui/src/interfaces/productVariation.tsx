@@ -2,10 +2,10 @@ export default interface ProductVariation {
 	id: number;
 	key: string;
 	value: string;
-	product_id: number;
+	price_markup: number;
 }
 
-export interface SelectedVariation {
-	key: string;
-	value: string;
+export interface CartProductVariation {
+	id: number;
+	key: "SIZE" | "COLOR";
 }
