@@ -1,6 +1,6 @@
 import apiURL from "./api";
 
-import Image from "../interfaces/image";
+import type Image from "../interfaces/image";
 
 export function getImageUrl(filename: string) {
 	return `${apiURL}/files/${filename}`;

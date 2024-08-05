@@ -1,25 +1,25 @@
 import {
-	createResource,
-	createSignal,
 	For,
 	Match,
-	Setter,
+	type Setter,
 	Show,
 	Switch,
+	createResource,
+	createSignal,
 } from "solid-js";
 
-import styles from "./variationsSelector.module.sass";
 import { getProductVariations } from "../../utils/variations";
-import VariationSelect from "./VariationSelect";
 import ErrorBox from "../ErrorBox";
 import { Loader } from "../Loader";
+import VariationSelect from "./VariationSelect";
+import styles from "./variationsSelector.module.sass";
 
 export default function VariationsSelector(props: {
 	productId: number;
 	setProductPrice: Setter<number>;
 }) {
 	const [variations] = createResource(props.productId, getProductVariations);
-	const [priceBuffer, setPriceBuffer] = createSignal(NaN);
+	const [priceBuffer, setPriceBuffer] = createSignal(Number.NaN);
 
 	function addMarkup(markup: number) {
 		if (!priceBuffer()) {

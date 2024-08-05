@@ -1,4 +1,4 @@
-import ProductInterface from "../interfaces/product";
+import type ProductInterface from "../interfaces/product";
 import { getFromApi } from "./api";
 
 export async function getProducts(
@@ -13,10 +13,14 @@ export async function getProduct(id: number): Promise<ProductInterface> {
 	return response.data;
 }
 
-export function getDescription(text: string, className: any) {
+export function getDescription(text: string, className: string) {
 	const paragraphs = text.split("\n");
-	const pTags = paragraphs.map((paragraph, _) => {
-		return <p class={className}>{paragraph}</p>;
+	const pTags = paragraphs.map((paragraph, index) => {
+		return (
+			<p class={className} key={paragraph}>
+				{paragraph}
+			</p>
+		);
 	});
 	return pTags;
 }

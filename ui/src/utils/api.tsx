@@ -1,5 +1,5 @@
 import axios, { type AxiosRequestConfig } from "axios";
-import ProductVariation from "../interfaces/productVariation";
+import type ProductVariation from "../interfaces/productVariation";
 
 const apiURL = import.meta.env.VITE_BASE_API_URL;
 

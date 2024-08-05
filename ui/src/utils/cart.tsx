@@ -1,4 +1,4 @@
-import { CartProductVariation } from "../interfaces/productVariation";
+import type { CartProductVariation } from "../interfaces/productVariation";
 
 const cartName = "cart1.2.0";
 

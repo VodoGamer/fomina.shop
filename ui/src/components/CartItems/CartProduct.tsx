@@ -1,12 +1,12 @@
-import { createResource, For } from "solid-js";
+import { For, createResource } from "solid-js";
 import type ProductInterface from "../../interfaces/product";
-import { CartItem } from "../../utils/cart";
+import type { CartItem } from "../../utils/cart";
 import { getCompressedImageUrl } from "../../utils/images";
 import Button from "../Button";
 
+import { getVariation } from "../../utils/api";
 import styles from "./assets/cartItems.module.sass";
 import menu_cross from "./assets/menu_cross_white.svg";
-import { getVariation } from "../../utils/api";
 
 export default function CartProduct(props: {
 	product: ProductInterface;

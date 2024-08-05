@@ -3,10 +3,10 @@ import { useParams } from "@solidjs/router";
 import { Match, Show, Switch, createResource } from "solid-js";
 import { Transition } from "solid-transition-group";
 
+import ErrorBox from "../components/ErrorBox";
 import Hero from "../components/Hero";
 import { Loader } from "../components/Loader";
 import Products from "../components/Products";
-import ErrorBox from "../components/ErrorBox";
 import { getCategory } from "../utils/categories";
 
 import hero_image from "../assets/hero.webp";

@@ -1,9 +1,9 @@
 import { getFromApi } from "./api";
 
-import ProductVariation from "../interfaces/productVariation";
+import type ProductVariation from "../interfaces/productVariation";
 
 function groupVariations(variations: ProductVariation[]) {
-	let variationsByKey: { [key: string]: ProductVariation[] } = {};
+	const variationsByKey: { [key: string]: ProductVariation[] } = {};
 	for (const variation of variations) {
 		if (!variationsByKey[variation.key]) {
 			variationsByKey[variation.key] = [];

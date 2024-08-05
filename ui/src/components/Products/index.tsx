@@ -1,8 +1,8 @@
 import { For, Show, createResource } from "solid-js";
 
-import Product from "./Product";
 import { getProducts } from "../../utils/products";
 import { Loader } from "../Loader";
+import Product from "./Product";
 
 import styles from "./products.module.sass";
 import "../../assets/animations.sass";

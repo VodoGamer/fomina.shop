@@ -1,8 +1,8 @@
+import { MetaProvider, Title } from "@solidjs/meta";
 import { useParams } from "@solidjs/router";
-import { createResource, Match, Show, Switch, type Component } from "solid-js";
+import { type Component, Match, Show, Switch, createResource } from "solid-js";
 import Carousel from "../components/Carousel";
 import { Loader } from "../components/Loader";
-import { MetaProvider, Title } from "@solidjs/meta";
 import { getProduct } from "../utils/products";
 
 const Image: Component = () => {

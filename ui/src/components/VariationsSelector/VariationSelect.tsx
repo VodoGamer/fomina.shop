@@ -1,5 +1,5 @@
 import { For } from "solid-js";
-import ProductVariation from "../../interfaces/productVariation";
+import type ProductVariation from "../../interfaces/productVariation";
 
 import styles from "./variationsSelector.module.sass";
 

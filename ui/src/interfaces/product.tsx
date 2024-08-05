@@ -1,5 +1,5 @@
 import type Image from "./image";
-import ProductVariation from "./productVariation";
+import type ProductVariation from "./productVariation";
 
 export default interface ProductInterface {
 	id: number;

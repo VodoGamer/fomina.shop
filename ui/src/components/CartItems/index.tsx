@@ -1,15 +1,15 @@
 import { For, Match, Show, Switch, createResource } from "solid-js";
 import type ProductInterface from "../../interfaces/product";
 import { getFromApi } from "../../utils/api";
-import { CartItem, getCart, removeFromCart } from "../../utils/cart";
+import { type CartItem, getCart, removeFromCart } from "../../utils/cart";
 import Button from "../Button";
 import CartProduct from "./CartProduct";
 
+import { createStore } from "solid-js/store";
 import { Transition } from "solid-transition-group";
 import CartOrder from "../CartOrder";
 import { Loader } from "../Loader";
 import styles from "./assets/cartItems.module.sass";
-import { createStore } from "solid-js/store";
 
 async function getProducts(productIds: number[]): Promise<ProductInterface[]> {
 	if (productIds.length === 0) {

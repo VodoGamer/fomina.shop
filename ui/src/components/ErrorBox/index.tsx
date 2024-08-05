@@ -1,5 +1,5 @@
-import styles from "./errorBox.module.css";
 import icon from "./error.svg";
+import styles from "./errorBox.module.css";
 
 export default function ErrorBox(props: { message: string }) {
 	return (

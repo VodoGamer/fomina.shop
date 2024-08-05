@@ -7,8 +7,8 @@ import styles from "./productDetails.module.sass";
 
 import "../../assets/animations.sass";
 import { getVariations } from "../../utils/forms";
-import VariationsSelector from "../VariationsSelector";
 import { getDescription } from "../../utils/products";
+import VariationsSelector from "../VariationsSelector";
 
 export default function ProductInfo(props: {
 	product?: ProductInterface;
