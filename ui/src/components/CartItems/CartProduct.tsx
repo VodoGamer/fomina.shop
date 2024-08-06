@@ -1,10 +1,13 @@
-import { For, createResource } from "solid-js";
+import { For, Match, Show, Switch, createResource } from "solid-js";
 import type ProductInterface from "../../interfaces/product";
 import type { CartItem } from "../../utils/cart";
 import { getCompressedImageUrl } from "../../utils/images";
 import Button from "../Button";
 
-import { getVariation } from "../../utils/api";
+import type ProductVariation from "../../interfaces/productVariation";
+import { getVariations } from "../../utils/variations";
+import ErrorBox from "../ErrorBox";
+import { Loader } from "../Loader";
 import styles from "./assets/cartItems.module.sass";
 import menu_cross from "./assets/menu_cross_white.svg";
 
@@ -16,12 +19,10 @@ export default function CartProduct(props: {
 	addToSum: (price: number) => void;
 }) {
 	const cartInfo: CartItem = props.cart[props.index];
-	const price: number = props.product.price * (cartInfo.count || 1);
-	const [variationInfo] = createResource(
-		cartInfo.variations[0].id,
-		getVariation,
+	const [variations] = createResource(
+		cartInfo.variations.length ? cartInfo.variations : [0],
+		getVariations,
 	);
-	props.addToSum(price);
 
 	return (
 		<section class={styles.product}>
@@ -45,14 +46,40 @@ export default function CartProduct(props: {
 			</div>
 			<div class={styles.info}>
 				<h1>{props.product.title}</h1>
-				<p>{price}₽</p>
-				<For each={cartInfo.variations || []}>
-					{(variation) => (
-						<p>
-							{variation.key} - {variation.key}
-						</p>
-					)}
-				</For>
+				<Show
+					fallback={
+						<CartProductPrice
+							productPrice={props.product.price}
+							count={cartInfo.count}
+							addToSum={props.addToSum}
+						/>
+					}
+					when={cartInfo.variations.length}
+				>
+					<Show when={variations.loading}>
+						<Loader />
+					</Show>
+					<Switch>
+						<Match when={variations.error}>
+							<ErrorBox message={"Не удалось загрузить вариации"} />
+						</Match>
+						<Match when={variations()}>
+							<CartProductPrice
+								productPrice={props.product.price}
+								count={cartInfo.count}
+								variations={variations()}
+								addToSum={props.addToSum}
+							/>
+							<For each={variations()}>
+								{(variation) => (
+									<p>
+										{variation.key} - {variation.value}
+									</p>
+								)}
+							</For>
+						</Match>
+					</Switch>
+				</Show>
 				<p>Количество - {cartInfo.count || 1}</p>
 				<Button
 					text="Сведения о товаре"
@@ -61,4 +88,22 @@ export default function CartProduct(props: {
 			</div>
 		</section>
 	);
+}
+
+function CartProductPrice(props: {
+	productPrice: number;
+	count: number;
+	addToSum: (price: number) => void;
+	variations?: ProductVariation[];
+}) {
+	if (!props.variations) {
+		const price: number = props.productPrice * (props.count || 1);
+		props.addToSum(price);
+		return <p>{price}₽</p>;
+	}
+	const variationSum = props.variations.reduce((a, b) => a + b.price_markup, 0);
+	const price: number =
+		(props.productPrice + variationSum) * (props.count || 1);
+	props.addToSum(price);
+	return <p>{price}₽</p>;
 }

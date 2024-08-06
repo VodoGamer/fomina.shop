@@ -1,10 +1,8 @@
-import type { CartProductVariation } from "../interfaces/productVariation";
-
 const cartName = "cart1.2.0";
 
 export interface CartItem {
 	product_id: number;
-	variations: CartProductVariation[];
+	variations: number[];
 	count: number;
 }
 
@@ -14,7 +12,7 @@ export function getCart(): CartItem[] {
 
 export function addToCart(
 	product_id: number,
-	variations: CartProductVariation[],
+	variations: number[],
 	count: number | undefined = 1,
 ) {
 	const cart = getCart();

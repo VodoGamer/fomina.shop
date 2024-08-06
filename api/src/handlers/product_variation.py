@@ -1,8 +1,15 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Query
 
 from src.database.repository import DatabaseRepository
 
 router = APIRouter(tags=["variations"])
+
+
+@router.get("/variations")
+async def get_variations(ids: list[int] = Query(alias="ids[]", default=[])):
+    if ids == []:
+        return await DatabaseRepository().product_variation.get_all()
+    return [await DatabaseRepository().product_variation.get_by_id(id) for id in ids]
 
 
 @router.get("/variation/{id}")

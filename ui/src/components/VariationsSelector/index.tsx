@@ -4,8 +4,8 @@ import {
 	type Setter,
 	Show,
 	Switch,
+	createEffect,
 	createResource,
-	createSignal,
 } from "solid-js";
 
 import { getProductVariations } from "../../utils/variations";
@@ -16,25 +16,31 @@ import styles from "./variationsSelector.module.sass";
 
 export default function VariationsSelector(props: {
 	productId: number;
-	setProductPrice: Setter<number>;
+	productPrice: number;
+	setProductPrice: Setter<number | undefined>;
 }) {
 	const [variations] = createResource(props.productId, getProductVariations);
-	const [priceBuffer, setPriceBuffer] = createSignal(Number.NaN);
 
-	function addMarkup(markup: number) {
-		if (!priceBuffer()) {
-			props.setProductPrice((prev) => {
-				setPriceBuffer(prev);
-				return prev;
-			});
+	createEffect(() => {
+		if (variations()?.length) {
+			props.setProductPrice(props.productPrice + getCurrentPriceMarkup());
+		} else {
+			props.setProductPrice(props.productPrice);
 		}
-		props.setProductPrice(priceBuffer() + markup);
+	});
+
+	function getCurrentPriceMarkup() {
+		const target: HTMLSelectElement = document.forms[0]?.getElementsByTagName(
+			"select",
+		)?.[0] as HTMLSelectElement;
+		const field = target.options[target.selectedIndex];
+		const dataMarkup = field.dataset.price_markup;
+		return Number(dataMarkup);
 	}
 
-	function SelectVariation(e: Event & { target: HTMLSelectElement }) {
-		const field = e.target.options[e.target.options.selectedIndex];
-		const dataMarkup = field.dataset.price_markup;
-		addMarkup(Number(dataMarkup || 0));
+	function SelectVariation() {
+		const dataMarkup = getCurrentPriceMarkup();
+		props.setProductPrice(props.productPrice + Number(dataMarkup));
 	}
 
 	return (

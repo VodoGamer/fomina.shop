@@ -19,3 +19,12 @@ export async function getProductVariations(productId: number) {
 	).data;
 	return Object.entries(groupVariations(response));
 }
+
+export async function getVariations(
+	ids: number[],
+): Promise<ProductVariation[]> {
+	const response = await getFromApi("variations/", {
+		params: { ids: ids },
+	});
+	return response.data;
+}

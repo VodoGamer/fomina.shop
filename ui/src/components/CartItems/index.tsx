@@ -1,37 +1,20 @@
 import { For, Match, Show, Switch, createResource } from "solid-js";
-import type ProductInterface from "../../interfaces/product";
-import { getFromApi } from "../../utils/api";
 import { type CartItem, getCart, removeFromCart } from "../../utils/cart";
 import Button from "../Button";
 import CartProduct from "./CartProduct";
 
 import { createStore } from "solid-js/store";
 import { Transition } from "solid-transition-group";
+import { getBulkProducts } from "../../utils/products";
 import CartOrder from "../CartOrder";
+import ErrorBox from "../ErrorBox";
 import { Loader } from "../Loader";
 import styles from "./assets/cartItems.module.sass";
-
-async function getProducts(productIds: number[]): Promise<ProductInterface[]> {
-	if (productIds.length === 0) {
-		return [];
-	}
-	const response = await getFromApi("products", {
-		params: { ids: productIds },
-	});
-	for (const [key, product] of Object.entries(response.data)) {
-		if (product == null) {
-			removeFromCart(Number(key));
-			response.data.splice(Number(key), 1);
-		}
-	}
-
-	return response.data;
-}
 
 export default function CartItems() {
 	const cart: CartItem[] = getCart();
 	const productIds = cart.map((item) => item.product_id);
-	const [products, { mutate }] = createResource(productIds, getProducts);
+	const [products, { mutate }] = createResource(productIds, getBulkProducts);
 	const [productsPrice, setProductsPrice] = createStore<number[]>([]);
 
 	function deleteFromCart(index: number) {
@@ -72,7 +55,7 @@ export default function CartItems() {
 			<Transition mode="outin" name="slide-fade">
 				<Switch>
 					<Match when={products.error}>
-						<p>Error...</p>
+						<ErrorBox message={"Не удалось загрузить товары из корзины"} />
 					</Match>
 					<Match when={products()}>
 						<div class={styles.products}>

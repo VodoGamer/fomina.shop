@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Query
+from fastapi.responses import HTMLResponse
 
 from src.database import DatabaseRepository
 
@@ -14,7 +15,8 @@ async def get_products(ids: list[int] = Query(alias="ids[]", default=[])):
 
 @router.get("/product/{id}")
 async def get_product(id: int):
-    return await DatabaseRepository().product.get_by_id(id)
+    response = await DatabaseRepository().product.get_by_id(id)
+    return response or HTMLResponse(status_code=404)
 
 
 @router.get("/products/category/{id}")

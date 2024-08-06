@@ -5,7 +5,7 @@ import styles from "./variationsSelector.module.sass";
 
 export default function VariationSelect(props: {
 	key: string;
-	SelectVariation: (e: Event & { target: HTMLSelectElement }) => void;
+	SelectVariation: () => void;
 	variations: ProductVariation[];
 }) {
 	return (
@@ -16,7 +16,7 @@ export default function VariationSelect(props: {
 			<select
 				name={props.key}
 				id={`${props.key}-select`}
-				onChange={(e) => props.SelectVariation(e)}
+				onChange={props.SelectVariation}
 			>
 				<For each={props.variations}>
 					{(variation) => (

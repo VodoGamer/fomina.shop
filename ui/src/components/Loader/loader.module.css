@@ -3,6 +3,7 @@
 	aspect-ratio: 1;
 	border-radius: 50%;
 	padding: 6px;
+	display: inline-block;
 	background:
 		conic-gradient(from 135deg at top, currentColor 90deg, #0000 0) 0
 			calc(50% - 4px) / 17px 8.5px,

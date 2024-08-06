@@ -18,19 +18,17 @@ export default function ProductDetails(props: { productId: number }) {
 			<Show when={product.loading}>
 				<Loader />
 			</Show>
-			<Transition mode="outin" name="slide-fade">
-				<Switch>
-					<Match when={product.error}>
-						<ErrorBox message={"Не удалось загрузить товар"} />
-					</Match>
-					<Match when={product()}>
-						<div class={styles.product}>
-							<ProductImages product={product()} />
-							<ProductInfo product={product()} productId={props.productId} />
-						</div>
-					</Match>
-				</Switch>
-			</Transition>
+			<Switch>
+				<Match when={product.error}>
+					<ErrorBox message={"Не удалось загрузить товар"} />
+				</Match>
+				<Match when={product()}>
+					<div class={styles.product}>
+						<ProductImages product={product()} />
+						<ProductInfo product={product()} productId={props.productId} />
+					</div>
+				</Match>
+			</Switch>
 		</>
 	);
 }

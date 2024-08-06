@@ -24,3 +24,22 @@ export function getDescription(text: string, className: string) {
 	});
 	return pTags;
 }
+
+export async function getBulkProducts(
+	productIds: number[],
+): Promise<ProductInterface[]> {
+	if (productIds.length === 0) {
+		return [];
+	}
+	const response = await getFromApi("products", {
+		params: { ids: productIds },
+	});
+	for (const [key, product] of Object.entries(response.data)) {
+		if (product == null) {
+			removeFromCart(Number(key));
+			response.data.splice(Number(key), 1);
+		}
+	}
+
+	return response.data;
+}

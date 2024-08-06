@@ -1,6 +1,6 @@
 from sqlalchemy import select
 
-from src.database.models import Product, ProductVariation
+from src.database.models import Product, ProductVariation, products_variations
 
 from .abc import ABCRepository
 
@@ -22,7 +22,10 @@ class ProductVariationRepository(ABCRepository):
         async with self.session() as session:
             result = await session.execute(
                 select(ProductVariation)
-                .select_from(Product)
+                .join(
+                    products_variations, ProductVariation.id == products_variations.c.variation_id
+                )
+                .join(Product, products_variations.c.product_id == Product.id)
                 .where(Product.id == product_id)
                 .order_by(ProductVariation.price_markup)
             )
