@@ -5,6 +5,7 @@ import CartProduct from "./CartProduct";
 
 import { createStore } from "solid-js/store";
 import { Transition } from "solid-transition-group";
+import type { CartStore } from "../../interfaces/cart";
 import { getBulkProducts } from "../../utils/products";
 import CartOrder from "../CartOrder";
 import ErrorBox from "../ErrorBox";
@@ -15,25 +16,25 @@ export default function CartItems() {
 	const cart: CartItem[] = getCart();
 	const productIds = cart.map((item) => item.product_id);
 	const [products, { mutate }] = createResource(productIds, getBulkProducts);
-	const [productsPrice, setProductsPrice] = createStore<number[]>([]);
+	const [productsPrice, setProductsPrice] = createStore<CartStore[]>([]);
 
 	function deleteFromCart(index: number) {
 		mutate((prevItems) => {
 			if (!prevItems) return;
 			const newItems = [...prevItems];
 			newItems.splice(index, 1);
-			setProductsPrice(productsPrice.filter((_, i) => i !== index));
+			setProductsPrice(productsPrice.filter((item, _) => item.index !== index));
 			return newItems;
 		});
 		removeFromCart(index);
 	}
 
-	function addToSum(price: number) {
-		setProductsPrice([...productsPrice, price]);
+	function addToSum(item: CartStore) {
+		setProductsPrice([...productsPrice, item]);
 	}
 
 	function sum() {
-		return productsPrice.reduce((a, b) => a + b, 0);
+		return productsPrice.reduce((a, b) => a + b.price, 0);
 	}
 
 	return (

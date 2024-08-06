@@ -4,6 +4,7 @@ import type { CartItem } from "../../utils/cart";
 import { getCompressedImageUrl } from "../../utils/images";
 import Button from "../Button";
 
+import type { CartStore } from "../../interfaces/cart";
 import type ProductVariation from "../../interfaces/productVariation";
 import { getVariations } from "../../utils/variations";
 import ErrorBox from "../ErrorBox";
@@ -16,7 +17,7 @@ export default function CartProduct(props: {
 	deleteFromCart: (id: number) => void;
 	index: number;
 	cart: CartItem[];
-	addToSum: (price: number) => void;
+	addToSum: (item: CartStore) => void;
 }) {
 	const cartInfo: CartItem = props.cart[props.index];
 	const [variations] = createResource(
@@ -51,6 +52,7 @@ export default function CartProduct(props: {
 						<CartProductPrice
 							productPrice={props.product.price}
 							count={cartInfo.count}
+							index={props.index}
 							addToSum={props.addToSum}
 						/>
 					}
@@ -68,6 +70,7 @@ export default function CartProduct(props: {
 								productPrice={props.product.price}
 								count={cartInfo.count}
 								variations={variations()}
+								index={props.index}
 								addToSum={props.addToSum}
 							/>
 							<For each={variations()}>
@@ -93,17 +96,18 @@ export default function CartProduct(props: {
 function CartProductPrice(props: {
 	productPrice: number;
 	count: number;
-	addToSum: (price: number) => void;
+	index: number;
+	addToSum: (price: CartStore) => void;
 	variations?: ProductVariation[];
 }) {
 	if (!props.variations) {
 		const price: number = props.productPrice * (props.count || 1);
-		props.addToSum(price);
+		props.addToSum({ price: price, index: props.index });
 		return <p>{price}₽</p>;
 	}
 	const variationSum = props.variations.reduce((a, b) => a + b.price_markup, 0);
 	const price: number =
 		(props.productPrice + variationSum) * (props.count || 1);
-	props.addToSum(price);
+	props.addToSum({ price: price, index: props.index });
 	return <p>{price}₽</p>;
 }
