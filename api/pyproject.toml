@@ -1,6 +1,6 @@
 [project]
 name = "fomina-shop-api"
-version = "1.1.1"
+version = "1.2.0"
 description = "API for fomina-shop"
 authors = [{ name = "VodoGamer", email = "vodogamer@yandex.ru" }]
 dependencies = [
@@ -25,11 +25,7 @@ build-backend = "hatchling.build"
 
 [tool.rye]
 managed = true
-dev-dependencies = [
-    "pyright>=1.1.359",
-    "pre-commit>=3.7.0",
-    "ruff>=0.4.4",
-]
+dev-dependencies = ["pyright>=1.1.359", "pre-commit>=3.7.0", "ruff>=0.4.4"]
 
 [tool.ruff]
 lint.select = ["I", "E", "F", "B", "Q"]
