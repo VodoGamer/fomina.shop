@@ -1,0 +1,33 @@
+import {
+	type InferOutput,
+	email,
+	integer,
+	maxLength,
+	nonEmpty,
+	number,
+	object,
+	pipe,
+	regex,
+	string,
+} from "valibot";
+
+export const PurchaseSchema = object({
+	name: pipe(
+		string("Имя должно быть строкой"),
+		nonEmpty("Имя не может быть пустым"),
+		maxLength(255, "Имя не должно превышать 255 символов"),
+	),
+	phone_number: pipe(string(), regex(/^\+[\d]+$/, "Неверный формат телефона")),
+	email: pipe(
+		string("Электронная почта должна быть строкой"),
+		nonEmpty("Электронная почта не может быть пустой"),
+		email("Неверный формат электронной почты"),
+		maxLength(255, "Электронная почта не должна превышать 255 символов"),
+	),
+	address: pipe(
+		string("Адрес должен быть строкой"),
+		maxLength(255, "Адрес не должен превышать 255 символов"),
+	),
+});
+
+export type PurchaseType = InferOutput<typeof PurchaseSchema>;
