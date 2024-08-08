@@ -1,5 +1,6 @@
 import type ProductInterface from "../interfaces/product";
 import { getFromApi } from "./api";
+import { removeFromCart } from "./cart";
 
 export async function getProducts(
 	categoryId: number,

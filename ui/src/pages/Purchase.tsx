@@ -1,5 +1,6 @@
 import { MetaProvider, Title } from "@solidjs/meta";
 import PurchaseForm from "../components/PurchaseForm";
+import PurchaseReceipt from "../components/PurchaseReceipt";
 
 export default function Purchase() {
 	return (
@@ -9,6 +10,7 @@ export default function Purchase() {
 			</MetaProvider>
 			<h1>Оформление заказа</h1>
 			<PurchaseForm />
+			<PurchaseReceipt />
 		</>
 	);
 }
