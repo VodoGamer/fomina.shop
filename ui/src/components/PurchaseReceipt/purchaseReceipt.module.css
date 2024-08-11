@@ -1,5 +1,5 @@
 .receipt {
-	width: calc(50% - 8px);
+	width: 100%;
 }
 
 @media screen and (max-width: 576px) {

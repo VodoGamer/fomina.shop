@@ -20,3 +20,14 @@
 .nested .dots {
 	border-bottom: dotted 3px rgb(85, 85, 85);
 }
+
+@media screen and (max-width: 480px) {
+	.nested {
+		grid-template-columns: 1fr min-content;
+		grid-template-rows: 1fr 1fr;
+	}
+
+	.nested__title {
+		grid-column: 1 / 3;
+	}
+}

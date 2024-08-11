@@ -1,10 +1,8 @@
 import {
 	type InferOutput,
 	email,
-	integer,
 	maxLength,
 	nonEmpty,
-	number,
 	object,
 	pipe,
 	regex,
@@ -26,6 +24,7 @@ export const PurchaseSchema = object({
 	),
 	address: pipe(
 		string("Адрес должен быть строкой"),
+		nonEmpty("Адрес не может быть пустой"),
 		maxLength(255, "Адрес не должен превышать 255 символов"),
 	),
 });
