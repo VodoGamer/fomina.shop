@@ -1,4 +1,4 @@
-import { For, Show, createSignal } from "solid-js";
+import { type Accessor, For, createSignal } from "solid-js";
 
 import { createPurchase } from "../../utils/purchase";
 import Button from "../Button";
@@ -6,7 +6,7 @@ import ErrorBox from "../ErrorBox";
 import Input from "../Input";
 import styles from "./PurchaseForm.module.css";
 
-export default function PurchaseForm() {
+export default function PurchaseForm(props: { sum: Accessor<number> }) {
 	const [issues, setIssues] = createSignal<string[]>([]);
 
 	return (
@@ -46,7 +46,7 @@ export default function PurchaseForm() {
 			</div>
 			<Button
 				style={{ "margin-top": "24px" }}
-				text="Оформить заказ"
+				text={`Оформить заказ на ${props.sum()}₽`}
 				onClick={() => createPurchase(setIssues)}
 			/>
 		</>
