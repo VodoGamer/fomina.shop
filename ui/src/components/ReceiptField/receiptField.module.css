@@ -1,0 +1,34 @@
+.dots {
+	border-bottom: dotted 3px black;
+    position: relative;
+    display: block;
+    height: 18px;
+    margin: 0 5px 0 5px;
+}
+
+.field, .nested {
+	display: grid;
+	grid-template-columns: max-content 1fr max-content;
+}
+
+.nested {
+	color: rgb(85, 85, 85);
+	font-weight: 300;
+	padding-left: 2em;
+}
+
+.nested .dots {
+	border-bottom: dotted 3px rgb(85, 85, 85);
+}
+
+@media screen and (max-width: 480px) {
+	.nested {
+		grid-template-columns: 1fr min-content;
+		grid-template-rows: 1fr 1fr;
+	}
+
+	.nested__title {
+		grid-column: 1 / 3;
+		justify-self: end;
+	}
+}
