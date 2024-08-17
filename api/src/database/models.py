@@ -1,7 +1,7 @@
 import datetime
 import enum
 
-from sqlalchemy import Column, DateTime, Enum, ForeignKey, Integer, String, Table, Text, func
+from sqlalchemy import UUID, Column, DateTime, Enum, ForeignKey, Integer, String, Table, Text, func
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 from src.client import storage
@@ -26,8 +26,8 @@ products_variations = Table(
     Column("variation_id", ForeignKey("product_variation.id")),
 )
 
-products_orders = Table(
-    "products_orders",
+orders_products = Table(
+    "orders_products",
     Base.metadata,
     Column("product_id", ForeignKey("product.id")),
     Column("order_id", ForeignKey("order.id")),
@@ -52,7 +52,6 @@ class Product(Base):
     images: Mapped[list["ProductImage"]] = relationship(back_populates="product", lazy="selectin")
     categories: Mapped[list["Category"]] = relationship(secondary=products_categories)
     variations: Mapped[list["ProductVariation"]] = relationship(secondary=products_variations)
-    orders: Mapped[list["Order"]] = relationship(secondary=products_orders)
 
     def __repr__(self) -> str:
         return f"Product(id={self.id!r}, title={self.title!r})"
@@ -115,11 +114,36 @@ class ProductVariation(Base):
 
 class Order(Base):
     __tablename__ = "order"
-    id = mapped_column(Integer, primary_key=True)
+    id = mapped_column(Integer(), primary_key=True)
     name: Mapped[str] = mapped_column(String(255))
     address: Mapped[str] = mapped_column(String(255))
     phone_number: Mapped[str] = mapped_column(String(255))
     email: Mapped[str] = mapped_column(String(255))
+    products: Mapped[list["Product"]] = relationship(secondary=orders_products)
+
+    payment: Mapped["Payment"] = relationship(
+        back_populates="order", uselist=False, lazy="selectin"
+    )
 
     def __repr__(self) -> str:
         return f"Order(id={self.id!r}, name={self.name!r})"
+
+
+class PaymentStatus(enum.Enum):
+    pending = "pending"
+    waiting_for_capture = "waiting_for_capture"
+    succeeded = "succeeded"
+    canceled = "canceled"
+
+
+class Payment(Base):
+    __tablename__ = "payment"
+    id = mapped_column(UUID(), primary_key=True)
+    order_id = mapped_column(Integer(), ForeignKey("order.id"))
+    status: Mapped[PaymentStatus] = mapped_column(Enum(PaymentStatus))
+    price: Mapped[int] = mapped_column(Integer())
+
+    order: Mapped["Order"] = relationship(back_populates="payment")
+
+    def __repr__(self) -> str:
+        return f"Payment(id={self.id!r}, order_id={self.order_id!r}, status={self.status!r})"
