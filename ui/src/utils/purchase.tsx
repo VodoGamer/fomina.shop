@@ -1,6 +1,6 @@
 import type { Setter } from "solid-js";
-import { StringIssue, safeParse } from "valibot";
-import { PurchaseSchema } from "../schemas/purchase";
+import { safeParse } from "valibot";
+import { PurchaseSchema, type PurchaseType } from "../schemas/purchase";
 
 function getValueById(id: string) {
 	return (document.getElementById(id) as HTMLInputElement).value;
@@ -16,11 +16,15 @@ function parseForm() {
 	return purchase;
 }
 
-export function createPurchase(setIssues: Setter<string[]>): void {
+export function createPurchase(
+	setIssues: Setter<string[] | undefined>,
+	setPurchase: Setter<PurchaseType | undefined>,
+): void {
 	const purchase = parseForm();
 	if (!purchase.success) {
 		setIssues(purchase.issues.map((issue) => issue.message));
 	} else {
 		setIssues([]);
+		setPurchase(purchase.output);
 	}
 }

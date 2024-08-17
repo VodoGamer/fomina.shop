@@ -1,13 +1,17 @@
-import { type Accessor, For, createSignal } from "solid-js";
+import { type Accessor, For, type Setter, createSignal } from "solid-js";
 
+import type { PurchaseType } from "../../schemas/purchase";
 import { createPurchase } from "../../utils/purchase";
 import Button from "../Button";
 import ErrorBox from "../ErrorBox";
 import Input from "../Input";
 import styles from "./PurchaseForm.module.css";
 
-export default function PurchaseForm(props: { sum: Accessor<number> }) {
-	const [issues, setIssues] = createSignal<string[]>([]);
+export default function PurchaseForm(props: {
+	sum: Accessor<number>;
+	setPurchase: Setter<PurchaseType | undefined>;
+}) {
+	const [issues, setIssues] = createSignal<string[] | undefined>();
 
 	return (
 		<>
@@ -47,7 +51,7 @@ export default function PurchaseForm(props: { sum: Accessor<number> }) {
 			<Button
 				style={{ "margin-top": "24px" }}
 				text={`Оформить заказ на ${props.sum()}₽`}
-				onClick={() => createPurchase(setIssues)}
+				onClick={() => createPurchase(setIssues, props.setPurchase)}
 			/>
 		</>
 	);
