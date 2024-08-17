@@ -7,6 +7,7 @@
 #   all-features: false
 #   with-sources: false
 #   generate-hashes: false
+#   universal: false
 
 -e file:.
 alembic==1.13.1
@@ -22,12 +23,20 @@ boto3==1.34.94
 botocore==1.34.94
     # via boto3
     # via s3transfer
+certifi==2024.7.4
+    # via requests
 cfgv==3.4.0
     # via pre-commit
+charset-normalizer==3.3.2
+    # via requests
 click==8.1.7
     # via uvicorn
+deprecated==1.2.14
+    # via yookassa
 distlib==0.3.8
     # via virtualenv
+distro==1.9.0
+    # via yookassa
 fastapi==0.110.3
     # via fomina-shop-api
 fastapi-storages==0.3.0
@@ -42,6 +51,7 @@ identify==2.5.36
     # via pre-commit
 idna==3.7
     # via anyio
+    # via requests
 itsdangerous==2.2.0
     # via fomina-shop-api
 jinja2==3.1.3
@@ -55,6 +65,8 @@ markupsafe==2.1.5
     # via jinja2
     # via mako
     # via wtforms
+netaddr==1.3.0
+    # via yookassa
 nodeenv==1.8.0
     # via pre-commit
     # via pyright
@@ -77,6 +89,8 @@ python-multipart==0.0.9
     # via sqladmin
 pyyaml==6.0.1
     # via pre-commit
+requests==2.32.3
+    # via yookassa
 ruff==0.4.4
 s3transfer==0.10.1
     # via boto3
@@ -103,9 +117,15 @@ typing-extensions==4.11.0
     # via sqlalchemy
 urllib3==2.2.1
     # via botocore
+    # via requests
+    # via yookassa
 uvicorn==0.29.0
     # via fomina-shop-api
 virtualenv==20.26.1
     # via pre-commit
+wrapt==1.16.0
+    # via deprecated
 wtforms==3.1.2
     # via sqladmin
+yookassa==3.3.0
+    # via fomina-shop-api

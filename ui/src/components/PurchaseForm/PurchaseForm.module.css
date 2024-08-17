@@ -1,0 +1,45 @@
+.validation {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 16px;
+	align-items: start;
+}
+
+.issues {
+	display: grid;
+	gap: 16px;
+}
+
+.input label {
+	display: block;
+	font-size: 16px;
+	font-weight: 300;
+}
+
+.input input {
+	display: block;
+	border: 2px solid black;
+	padding: 4px;
+	width: 100%;
+	outline-color: lightgrey;
+	outline-width: 1px;
+	outline-offset: 2px;
+}
+
+@media screen and (max-width: 576px) {
+	.input input {
+		min-width: 100%;
+		padding: 6px;
+		font-size: 16px;
+	}
+}
+
+@media screen and (max-width: 576px) {
+	.validation {
+		grid-template-columns: 1fr;
+	}
+
+	.issues:has(*) {
+		margin-top: 24px;
+	}
+}
