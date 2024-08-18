@@ -28,10 +28,7 @@ export default function Purchase() {
 				<PurchaseReceipt cart={cart} addToSum={addToSum} />
 			</Suspense>
 			<Show when={purchase()}>
-				<PurchasePopup
-					purchaseData={purchase()}
-					productIds={cart.map((item) => item.product_id)}
-				/>
+				<PurchasePopup purchaseData={purchase()} products={cart} />
 			</Show>
 		</>
 	);

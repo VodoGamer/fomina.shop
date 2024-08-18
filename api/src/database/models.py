@@ -26,13 +26,6 @@ products_variations = Table(
     Column("variation_id", ForeignKey("product_variation.id")),
 )
 
-orders_products = Table(
-    "orders_products",
-    Base.metadata,
-    Column("product_id", ForeignKey("product.id")),
-    Column("order_id", ForeignKey("order.id")),
-)
-
 
 class Product(Base):
     __tablename__ = "product"
@@ -52,6 +45,7 @@ class Product(Base):
     images: Mapped[list["ProductImage"]] = relationship(back_populates="product", lazy="selectin")
     categories: Mapped[list["Category"]] = relationship(secondary=products_categories)
     variations: Mapped[list["ProductVariation"]] = relationship(secondary=products_variations)
+    orders: Mapped[list["OrderAssociation"]] = relationship(back_populates="product")
 
     def __repr__(self) -> str:
         return f"Product(id={self.id!r}, title={self.title!r})"
@@ -112,15 +106,29 @@ class ProductVariation(Base):
         return f"ProductVariation(id={self.id!r}, key={self.key!r}, value={self.value!r})"
 
 
+class OrderAssociation(Base):
+    __tablename__ = "order_association"
+    order_id: Mapped[int] = mapped_column(ForeignKey("order.id"), primary_key=True)
+    product_id: Mapped[int] = mapped_column(ForeignKey("product.id"), primary_key=True)
+    variation_id: Mapped[int | None] = mapped_column(
+        ForeignKey("product_variation.id"), primary_key=True, nullable=True
+    )
+    quantity: Mapped[int] = mapped_column(Integer(), nullable=False, server_default="1")
+
+    order: Mapped["Order"] = relationship(back_populates="products")
+    product: Mapped["Product"] = relationship(back_populates="orders")
+    variation: Mapped["ProductVariation | None"] = relationship()
+
+
 class Order(Base):
     __tablename__ = "order"
     id = mapped_column(Integer(), primary_key=True)
-    name: Mapped[str] = mapped_column(String(255))
-    address: Mapped[str] = mapped_column(String(255))
-    phone_number: Mapped[str] = mapped_column(String(255))
-    email: Mapped[str] = mapped_column(String(255))
-    products: Mapped[list["Product"]] = relationship(secondary=orders_products)
+    name: Mapped[str] = mapped_column(String(255), nullable=False)
+    address: Mapped[str] = mapped_column(String(255), nullable=False)
+    phone_number: Mapped[str] = mapped_column(String(255), nullable=False)
+    email: Mapped[str] = mapped_column(String(255), nullable=False)
 
+    products: Mapped[list["OrderAssociation"]] = relationship(back_populates="order")
     payment: Mapped["Payment"] = relationship(
         back_populates="order", uselist=False, lazy="selectin"
     )
@@ -138,10 +146,10 @@ class PaymentStatus(enum.Enum):
 
 class Payment(Base):
     __tablename__ = "payment"
-    id = mapped_column(UUID(), primary_key=True)
-    order_id = mapped_column(Integer(), ForeignKey("order.id"))
-    status: Mapped[PaymentStatus] = mapped_column(Enum(PaymentStatus))
-    price: Mapped[int] = mapped_column(Integer())
+    id: Mapped[UUID] = mapped_column(UUID(), primary_key=True)
+    order_id: Mapped[int] = mapped_column(Integer(), ForeignKey("order.id"), nullable=False)
+    status: Mapped[PaymentStatus] = mapped_column(Enum(PaymentStatus), nullable=False)
+    price: Mapped[int] = mapped_column(Integer(), nullable=False)
 
     order: Mapped["Order"] = relationship(back_populates="payment")
 

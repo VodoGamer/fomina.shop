@@ -18,7 +18,7 @@ class PaymentRepository(ABCRepository):
             result = await session.execute(select(Payment).where(Payment.id == id))
             return result.scalars().first()
 
-    async def create(self, id: UUID, order_id: int, status: str, price: int) -> int:
+    async def create(self, id: UUID, order_id: int, status: str, price: int):
         async with self.session() as session:
             payment = Payment(id=id, order_id=order_id, status=status, price=price)
             session.add(payment)
