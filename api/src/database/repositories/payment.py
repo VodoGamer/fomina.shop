@@ -4,10 +4,11 @@ from sqlalchemy import select, update
 
 from src.database.models import Payment, PaymentStatus
 
-from .abc import ABCRepository
 
+class PaymentRepository:
+    def __init__(self, session):
+        self.session = session
 
-class PaymentRepository(ABCRepository):
     async def get_all(self) -> list[Payment]:
         async with self.session() as session:
             result = await session.execute(select(Payment))
