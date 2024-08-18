@@ -7,6 +7,7 @@ from pydantic import BaseModel
 
 from src.database.models import PaymentStatus
 from src.database.repository import DatabaseRepository
+from src.services.telegram import get_notification_text, send_notification_to_admins
 
 router = APIRouter(tags=["notifications"])
 
@@ -42,5 +43,7 @@ async def notification(item: Notification, request: Request):
         range_network = ip_network(range)
         if client_ip in range_network:
             await DatabaseRepository().payment.change_status(item.object.id, item.object.status)
+            text = await get_notification_text(item.object.id)
+            await send_notification_to_admins(text)
             return HTMLResponse(status_code=200)
     return HTMLResponse(status_code=401)

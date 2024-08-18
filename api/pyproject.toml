@@ -16,6 +16,7 @@ dependencies = [
     "pillow>=10.3.0",
     "itsdangerous>=2.2.0",
     "yookassa>=3.3.0",
+    "telegrinder>=0.1.dev171",
 ]
 readme = "README.md"
 requires-python = ">= 3.12"

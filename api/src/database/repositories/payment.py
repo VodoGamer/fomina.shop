@@ -13,7 +13,7 @@ class PaymentRepository(ABCRepository):
             result = await session.execute(select(Payment))
             return list(result.scalars().all())
 
-    async def get_by_id(self, id: int) -> Payment | None:
+    async def get_by_id(self, id: UUID) -> Payment | None:
         async with self.session() as session:
             result = await session.execute(select(Payment).where(Payment.id == id))
             return result.scalars().first()

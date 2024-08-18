@@ -1,6 +1,6 @@
-from sqlalchemy import select
+from sqlalchemy import join, select
 
-from src.database.models import OrderAssociation
+from src.database.models import OrderAssociation, Product, ProductVariation
 
 from .abc import ABCRepository
 
@@ -17,6 +17,32 @@ class OrderAssociationRepository(ABCRepository):
                 select(OrderAssociation).where(OrderAssociation.order_id == id)
             )
             return result.scalars().first()
+
+    async def get_products_by_order(self, order_id: int) -> list[Product]:
+        async with self.session() as session:
+            result = await session.execute(
+                select(Product)
+                .where(OrderAssociation.order_id == order_id)
+                .select_from(
+                    join(
+                        OrderAssociation, Product, OrderAssociation.product_id == Product.id
+                    ).join(ProductVariation, OrderAssociation.variation_id == ProductVariation.id)
+                )
+            )
+            return list(result.scalars().all())
+
+    async def get_variations_by_order(self, order_id: int) -> list[ProductVariation]:
+        async with self.session() as session:
+            result = await session.execute(
+                select(ProductVariation)
+                .where(OrderAssociation.order_id == order_id)
+                .select_from(
+                    join(
+                        OrderAssociation, Product, OrderAssociation.product_id == Product.id
+                    ).join(ProductVariation, OrderAssociation.variation_id == ProductVariation.id)
+                )
+            )
+            return list(result.scalars().all())
 
     async def create(
         self, product_id: int, order_id: int, variation_ids: list[int], quantity: int

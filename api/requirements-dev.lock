@@ -10,6 +10,12 @@
 #   universal: false
 
 -e file:.
+aiohappyeyeballs==2.3.7
+    # via aiohttp
+aiohttp==3.10.4
+    # via telegrinder
+aiosignal==1.3.1
+    # via aiohttp
 alembic==1.13.1
     # via fomina-shop-api
 annotated-types==0.6.0
@@ -18,6 +24,8 @@ anyio==4.3.0
     # via starlette
 asyncpg==0.29.0
     # via fomina-shop-api
+attrs==24.2.0
+    # via aiohttp
 boto3==1.34.94
     # via fastapi-storages
 botocore==1.34.94
@@ -25,24 +33,36 @@ botocore==1.34.94
     # via s3transfer
 certifi==2024.7.4
     # via requests
+    # via telegrinder
 cfgv==3.4.0
     # via pre-commit
 charset-normalizer==3.3.2
     # via requests
+choicelib==0.1.5
+    # via telegrinder
 click==8.1.7
     # via uvicorn
+colorama==0.4.6
+    # via telegrinder
 deprecated==1.2.14
     # via yookassa
 distlib==0.3.8
     # via virtualenv
 distro==1.9.0
     # via yookassa
+envparse==0.2.0
+    # via telegrinder
 fastapi==0.110.3
     # via fomina-shop-api
 fastapi-storages==0.3.0
     # via fomina-shop-api
 filelock==3.14.0
     # via virtualenv
+fntypes==0.1.3
+    # via telegrinder
+frozenlist==1.4.1
+    # via aiohttp
+    # via aiosignal
 greenlet==3.0.3
     # via sqlalchemy
 h11==0.14.0
@@ -52,6 +72,7 @@ identify==2.5.36
 idna==3.7
     # via anyio
     # via requests
+    # via yarl
 itsdangerous==2.2.0
     # via fomina-shop-api
 jinja2==3.1.3
@@ -65,6 +86,11 @@ markupsafe==2.1.5
     # via jinja2
     # via mako
     # via wtforms
+msgspec==0.18.6
+    # via telegrinder
+multidict==6.0.5
+    # via aiohttp
+    # via yarl
 netaddr==1.3.0
     # via yookassa
 nodeenv==1.8.0
@@ -89,7 +115,9 @@ python-multipart==0.0.9
     # via sqladmin
 pyyaml==6.0.1
     # via pre-commit
+    # via telegrinder
 requests==2.32.3
+    # via telegrinder
     # via yookassa
 ruff==0.4.4
 s3transfer==0.10.1
@@ -109,23 +137,32 @@ sqlalchemy==2.0.29
 starlette==0.37.2
     # via fastapi
     # via sqladmin
+telegrinder==0.1.dev171
+    # via fomina-shop-api
 typing-extensions==4.11.0
     # via alembic
+    # via choicelib
     # via fastapi
     # via pydantic
     # via pydantic-core
     # via sqlalchemy
+    # via telegrinder
+    # via vbml
 urllib3==2.2.1
     # via botocore
     # via requests
     # via yookassa
 uvicorn==0.29.0
     # via fomina-shop-api
+vbml==1.1.post1
+    # via telegrinder
 virtualenv==20.26.1
     # via pre-commit
 wrapt==1.16.0
     # via deprecated
 wtforms==3.1.2
     # via sqladmin
+yarl==1.9.4
+    # via aiohttp
 yookassa==3.3.0
     # via fomina-shop-api
