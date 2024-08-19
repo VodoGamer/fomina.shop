@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   db:
-    image: postgres:latest
+    image: postgres:16.4
     container_name: ${PROJECT_NAME}-db
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
@@ -10,6 +10,9 @@ services:
       POSTGRES_DB: ${POSTGRES_TABLE}
     volumes:
       - db:/var/lib/postgresql/data
+    ports:
+      - "${POSTGRES_PORT}:5173"
+    network_mode: host
   api:
     build:
       context: ./api
@@ -24,6 +27,7 @@ services:
     volumes:
       - uploads:/app/uploads:rw
     restart: unless-stopped
+    network_mode: host
   ui:
     build:
       context: ./ui
@@ -34,6 +38,7 @@ services:
     ports:
       - "${UI_PORT}:4173"
     restart: unless-stopped
+    network_mode: host
 
 volumes:
   uploads:
