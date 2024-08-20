@@ -8,7 +8,7 @@ from src.services.pay import cancel_payment, create_payment
 
 router = APIRouter(tags=["orders"])
 
-DELIVERY_PRICE = 700
+DELIVERY_PRICE = 450
 
 
 class ProductOrder(BaseModel):

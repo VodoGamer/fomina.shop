@@ -15,6 +15,8 @@ const Image = lazy(() => import("./pages/Image"));
 const Cart = lazy(() => import("./pages/Cart"));
 const Purchase = lazy(() => import("./pages/Purchase"));
 const Order = lazy(() => import("./pages/Order"));
+const DeliveryTerms = lazy(() => import("./pages/DeliveryTerms"));
+const ContactDetails = lazy(() => import("./pages/ContactDetails"));
 
 import "./index.css";
 
@@ -36,6 +38,8 @@ render(
 					<Route path="/cart" component={Cart} />
 					<Route path="/purchase" component={Purchase} />
 					<Route path="/order/:id" component={Order} />
+					<Route path="/delivery_terms" component={DeliveryTerms} />
+					<Route path="/contact_details" component={ContactDetails} />
 				</Router>
 			</main>
 			<Footer />

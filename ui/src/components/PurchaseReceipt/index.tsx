@@ -31,7 +31,7 @@ export default function PurchaseReceipt(props: {
 				</Match>
 			</Switch>
 			<ReceiptField
-				headerItem={{ title: "Стоимость доставки", price: 700 }}
+				headerItem={{ title: "Стоимость доставки", price: 450 }}
 				addToSum={props.addToSum}
 			/>
 		</div>
