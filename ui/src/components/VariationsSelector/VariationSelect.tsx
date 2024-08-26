@@ -15,6 +15,7 @@ export default function VariationSelect(props: {
 			</label>
 			<select
 				name={props.key}
+				class="px-1 py-2 rounded-sm bg-gray-100 duration-100 hover:shadow-sm"
 				id={`${props.key}-select`}
 				onChange={props.SelectVariation}
 			>

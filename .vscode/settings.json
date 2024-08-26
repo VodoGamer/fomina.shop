@@ -2,5 +2,9 @@
 	"biome.lspBin": "ui/node_modules/@biomejs/biome/bin/biome",
 	"editor.codeActionsOnSave":{
 		"source.organizeImports.biome": "explicit"
-	},
+    },
+    "cSpell.words": [
+        "Огрнип",
+        "СДЭК"
+    ],
 }
