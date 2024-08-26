@@ -144,6 +144,7 @@ export default function OrderTerms() {
 							class="underline text-blue-700"
 							href="https://wa.me/79180581755"
 							target="_blank"
+							rel="noreferrer"
 						>
 							Whats'app
 						</a>{" "}
@@ -152,6 +153,7 @@ export default function OrderTerms() {
 							class="underline text-blue-700"
 							href="https://t.me/elen_fomi"
 							target="_blank"
+							rel="noreferrer"
 						>
 							Telegram
 						</a>{" "}

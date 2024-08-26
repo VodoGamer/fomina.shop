@@ -56,6 +56,7 @@ export default function ReturnTerms() {
 					class="underline text-blue-700"
 					target="_blank"
 					href="https://docs.google.com/document/d/1sutZhiK_jAV3U1bL5JweA8t8q0xv1TYiASA5PkPjdLA/edit"
+					rel="noreferrer"
 				>
 					здесь.
 				</a>
