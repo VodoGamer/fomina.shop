@@ -1,7 +1,6 @@
 import { MetaProvider, Title } from "@solidjs/meta";
-import { Show, Suspense, createSignal } from "solid-js";
+import { Show, createSignal } from "solid-js";
 
-import { Loader } from "../components/Loader";
 import PurchaseForm from "../components/PurchaseForm";
 import PurchasePopup from "../components/PurchasePopup";
 import PurchaseReceipt from "../components/PurchaseReceipt";
@@ -23,10 +22,8 @@ export default function Purchase() {
 				<Title>Оформление заказа - Fomina Style</Title>
 			</MetaProvider>
 			<h1>Оформление заказа</h1>
-			<Suspense fallback={<Loader />}>
-				<PurchaseForm sum={sum} setPurchase={setPurchase} />
-				<PurchaseReceipt cart={cart} addToSum={addToSum} />
-			</Suspense>
+			<PurchaseForm sum={sum} setPurchase={setPurchase} />
+			<PurchaseReceipt cart={cart} addToSum={addToSum} />
 			<Show when={purchase()}>
 				<PurchasePopup purchaseData={purchase()} products={cart} />
 			</Show>
