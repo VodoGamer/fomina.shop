@@ -166,6 +166,13 @@ export default function OrderTerms() {
 				<p>ИП Фомина Елена Петровна</p>
 				<p>ИНН 425305525990 </p>
 				<p>Огрнип 321420500039191</p>
+				<p>Номер телефона: +79180581755</p>
+				<p>
+					Почта:{" "}
+					<a class="underline text-blue-700" href="mailto:fominakids@mail.ru">
+						fominakids@mail.ru
+					</a>
+				</p>
 			</div>
 		</>
 	);
