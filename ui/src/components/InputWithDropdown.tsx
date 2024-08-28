@@ -6,7 +6,6 @@ interface InputWithDropdownProps {
 	setInputText: Setter<string | undefined>;
 	setChecked: Setter<boolean>;
 	labelText: string;
-	id: string;
 	options?: string[];
 }
 
@@ -25,7 +24,7 @@ export function InputWithDropdown(props: InputWithDropdownProps) {
 		<div class="relative">
 			<Input
 				labelText={props.labelText}
-				id={props.id}
+				id="city"
 				onInput={(e) => {
 					props.setInputText(e.target.value);
 					props.setChecked(false);

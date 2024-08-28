@@ -1,13 +1,16 @@
 import { Match, type Setter, Show, Switch, createSignal } from "solid-js";
+
 import Input from "./Input";
 
 enum DeliveryService {
 	SDEK = "СДЭК",
+	SDEK_COURIER = "СДЭК Курьер",
 	RussianPost = "Почта России",
 }
 
 export default function DeliveryServices() {
 	const [service, setService] = createSignal<DeliveryService>();
+	const [address, setAddress] = createSignal<string>("");
 
 	return (
 		<form>
@@ -18,17 +21,24 @@ export default function DeliveryServices() {
 					setService={setService}
 				/>
 				<ServiceCheckbox
+					service={DeliveryService.SDEK_COURIER}
+					setService={setService}
+				/>
+				<ServiceCheckbox
 					service={DeliveryService.RussianPost}
 					setService={setService}
 				/>
 			</div>
 			<Show when={service()}>
 				<Switch>
-					<Match when={service() === DeliveryService.SDEK}>
-						<Input
-							labelText="Адрес доставки (улица, дом, квартира)"
-							id="address"
-						/>
+					<Match when={service() === DeliveryService.SDEK_COURIER}>
+						<div class="mb-6">
+							<Input
+								labelText="Адрес доставки (улица, дом, квартира)"
+								id="address"
+								onChange={(e) => setAddress(e.target.value)}
+							/>
+						</div>
 					</Match>
 				</Switch>
 			</Show>

@@ -21,6 +21,13 @@ TELEGRAM_ADMIN_IDS: Final[list[int]] = list(
 YOOKASSA_ACCOUNT_ID: Final[int] = int(os.getenv("YOOKASSA_ACCOUNT_ID", 123))
 YOOKASSA_SECRET_KEY: Final[str] = os.getenv("YOOKASSA_SECRET_KEY", "SUPER_SECRET_KEY")
 
+SDEK_API_URL: Final[str] = os.getenv("SDEK_API_URL", "https://api.edu.cdek.ru/v2")
+SDEK_CLIENT_ID: Final[str] = os.getenv("SDEK_CLIENT_ID", "wqGwiQx0gg8mLtiEKsUinjVSICCjtTEP")
+SDEK_CLIENT_SECRET: Final[str] = os.getenv(
+    "SDEK_CLIENT_SECRET", "RmAmgvSgSl1yirlz9QupbzOJVqhCxcP5"
+)
+SDEK_SENDER_ADDRESS: Final[str] = os.getenv("SDEK_SENDER_ADDRESS", "г. Москва, ул. Ленина, д. 1")
+
 UI_URL: Final[str] = os.getenv("UI_URL", "http://localhost:3000")
 
 ADMIN_USERNAME: Final[str] = os.getenv("ADMIN_USERNAME", "admin")

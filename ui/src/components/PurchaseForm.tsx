@@ -7,14 +7,14 @@ import {
 	createSignal,
 } from "solid-js";
 
-import type { PurchaseType } from "../../schemas/purchase";
-import { getCities } from "../../utils/geonames";
-import { createPurchase } from "../../utils/purchase";
-import Button from "../Button";
-import DeliveryServices from "../DeliveryServices";
-import ErrorBox from "../ErrorBox";
-import Input from "../Input";
-import InputWithDropdown from "../InputWithDropdown";
+import type { PurchaseType } from "../schemas/purchase";
+import { getCities } from "../utils/geonames";
+import { createPurchase } from "../utils/purchase";
+import Button from "./Button";
+import DeliveryServices from "./DeliveryServices";
+import ErrorBox from "./ErrorBox";
+import Input from "./Input";
+import InputWithDropdown from "./InputWithDropdown";
 
 export default function PurchaseForm(props: {
 	sum: Accessor<number>;
@@ -34,7 +34,6 @@ export default function PurchaseForm(props: {
 					<Input labelText="Адрес электронной почты" id="email" type="email" />
 					<InputWithDropdown
 						labelText="Город"
-						id="address"
 						setInputText={setCityText}
 						setChecked={setCityChecked}
 						options={cities()?.geonames.map(

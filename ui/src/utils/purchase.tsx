@@ -3,13 +3,16 @@ import { safeParse } from "valibot";
 import { PurchaseSchema, type PurchaseType } from "../schemas/purchase";
 
 function getValueById(id: string) {
-	return (document.getElementById(id) as HTMLInputElement).value;
+	const element = document.getElementById(id);
+	if (!element) return "";
+	return (element as HTMLInputElement).value;
 }
 
 function parseForm() {
 	const purchase = safeParse(PurchaseSchema, {
 		name: getValueById("name"),
 		address: getValueById("address"),
+		city: getValueById("city"),
 		phone_number: getValueById("phone_number"),
 		email: getValueById("email"),
 	});
