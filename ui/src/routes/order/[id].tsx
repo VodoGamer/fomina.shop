@@ -1,6 +1,6 @@
 import { MetaProvider, Title } from "@solidjs/meta";
 import { useParams } from "@solidjs/router";
-import OrderConfirmation from "../components/OrderConfirmation";
+import OrderConfirmation from "~/components/OrderConfirmation";
 
 export default function Order() {
 	const params: { id: string } = useParams();

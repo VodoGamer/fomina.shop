@@ -1,4 +1,4 @@
-import styles from "./hero.module.sass";
+import styles from "./hero.module.css";
 
 export default function Hero(props: { image?: string }) {
 	return (

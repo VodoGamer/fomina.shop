@@ -2,7 +2,7 @@ import type { Component } from "solid-js";
 
 import Menu from "./Menu";
 
-import styles from "./assets/header.module.sass";
+import styles from "./assets/header.module.css";
 import logo from "./assets/logo.svg";
 
 const Header: Component = () => {

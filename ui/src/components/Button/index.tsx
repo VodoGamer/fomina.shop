@@ -1,4 +1,4 @@
-import styles from "./button.module.sass";
+import styles from "./button.module.css";
 
 import { type JSX, splitProps } from "solid-js";
 

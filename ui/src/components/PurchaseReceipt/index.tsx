@@ -1,4 +1,11 @@
-import { Match, Show, Switch, createResource } from "solid-js";
+import {
+	type Accessor,
+	Match,
+	Show,
+	Switch,
+	createEffect,
+	createResource,
+} from "solid-js";
 
 import type { CartItem } from "../../utils/cart";
 import { getReceiptProducts } from "../../utils/receipt";

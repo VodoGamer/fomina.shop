@@ -1,7 +1,7 @@
 import { For } from "solid-js";
 import type ProductVariation from "../../interfaces/productVariation";
 
-import styles from "./variationsSelector.module.sass";
+import styles from "./variationsSelector.module.css";
 
 export default function VariationSelect(props: {
 	key: string;

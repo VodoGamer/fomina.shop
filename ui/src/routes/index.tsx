@@ -1,8 +1,8 @@
 import { MetaProvider, Title } from "@solidjs/meta";
 import type { Component } from "solid-js";
 
-import hero_image from "../assets/hero.webp";
-import Hero from "../components/Hero";
+import hero_image from "~/assets/hero.webp";
+import Hero from "~/components/Hero";
 
 const Home: Component = () => {
 	return (

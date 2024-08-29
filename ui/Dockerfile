@@ -1,13 +1,15 @@
-FROM node:slim
+FROM oven/bun:latest
 
 WORKDIR /app/
 
-COPY package*.json ./
-RUN npm install
+COPY ui/package*.json ui/bun.lockb ./
+RUN bun install
 
-COPY src/ ./src/
-COPY index.html vite.config.ts tsconfig.json tailwind.config.cjs postcss.config.js ./
+COPY ui/src/ ./src/
+COPY ui/app.config.ts ui/tsconfig.json ui/tsconfig.json ui/tailwind.config.cjs ui/postcss.config.cjs .env ./
 
-COPY docker-entrypoint.sh ./
+RUN bun run --env-file /app/.env build
+
+COPY ui/docker-entrypoint.sh ./
 RUN chmod u+rx docker-entrypoint.sh
 ENTRYPOINT [ "./docker-entrypoint.sh" ]

@@ -6,8 +6,8 @@ import { Loader } from "../Loader";
 import ProductImages from "./ProductImages";
 import ProductInfo from "./ProductInfo";
 
-import styles from "./productDetails.module.sass";
-import "../../assets/animations.sass";
+import styles from "./productDetails.module.css";
+import "../../assets/animations.css";
 import ErrorBox from "../ErrorBox";
 
 export default function ProductDetails(props: { productId: number }) {

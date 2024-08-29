@@ -4,8 +4,8 @@ import { getProducts } from "../../utils/products";
 import { Loader } from "../Loader";
 import Product from "./Product";
 
-import styles from "./products.module.sass";
-import "../../assets/animations.sass";
+import styles from "./products.module.css";
+import "../../assets/animations.css";
 
 const Products = (props: { categoryId?: number }) => {
 	const [products] = createResource(props.categoryId, getProducts);

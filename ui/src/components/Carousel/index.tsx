@@ -4,7 +4,7 @@ import type Image from "../../interfaces/image";
 import { getImagesFromIndex } from "../../utils/images";
 import ImagesSlider from "./slider";
 
-import styles from "./carousel.module.sass";
+import styles from "./carousel.module.css";
 import cross from "./menu_cross.svg";
 import "./slider.css";
 

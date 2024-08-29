@@ -12,7 +12,7 @@ import { getProductVariations } from "../../utils/variations";
 import ErrorBox from "../ErrorBox";
 import { Loader } from "../Loader";
 import VariationSelect from "./VariationSelect";
-import styles from "./variationsSelector.module.sass";
+import styles from "./variationsSelector.module.css";
 
 export default function VariationsSelector(props: {
 	productId: number;

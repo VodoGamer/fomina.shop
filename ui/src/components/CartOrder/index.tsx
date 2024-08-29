@@ -1,5 +1,5 @@
 import Button from "../Button";
-import styles from "./assets/cartOrder.module.sass";
+import styles from "./assets/cartOrder.module.css";
 
 export default function CartOrder(props: { cartSum: number }) {
 	return (

@@ -1,33 +1,31 @@
 {
-	"name": "fomina-shop",
-	"version": "1.3.0",
-	"description": "",
-	"scripts": {
-		"start": "vite",
-		"dev": "vite",
-		"build": "vite build",
-		"serve": "vite preview"
-	},
-	"license": "MIT",
-	"devDependencies": {
-		"@biomejs/biome": "1.8.3",
-		"@types/uuid": "^10.0.0",
-		"autoprefixer": "^10.4.20",
-		"postcss": "^8.4.41",
-		"sass": "^1.77.8",
-		"solid-devtools": "^0.29.3",
-		"tailwindcss": "^3.4.10",
-		"typescript": "^5.5.4",
-		"vite": "^5.4.1",
-		"vite-plugin-solid": "^2.10.2"
-	},
-	"dependencies": {
-		"@solidjs/meta": "^0.29.4",
-		"@solidjs/router": "^0.13.6",
-		"axios": "^1.7.4",
-		"solid-js": "^1.8.21",
-		"solid-slider": "^1.3.17",
-		"solid-transition-group": "^0.2.3",
-		"valibot": "^0.37.0"
-	}
+  "name": "fominakids",
+  "type": "module",
+  "scripts": {
+    "dev": "vinxi dev",
+    "build": "vinxi build",
+    "start": "vinxi start"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.8.3",
+    "sass": "^1.77.8",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "@solidjs/router": "^0.14.1",
+    "@solidjs/start": "^1.0.6",
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "solid-js": "^1.8.18",
+    "tailwindcss": "^3.4.3",
+    "vinxi": "^0.4.1",
+    "@solidjs/meta": "^0.29.4",
+    "axios": "^1.7.4",
+    "solid-slider": "^1.3.17",
+    "solid-transition-group": "^0.2.3",
+    "valibot": "^0.37.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
 }

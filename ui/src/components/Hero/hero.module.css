@@ -1,0 +1,13 @@
+.hero {
+  height: 60vh;
+}
+.hero:has(.hero__image:not([src])) {
+  background-color: #888;
+}
+.image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  display: block;
+}
+

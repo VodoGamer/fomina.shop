@@ -1,10 +1,10 @@
-import { Match, Show, Switch, createSignal } from "solid-js";
+import { Match, Show, Switch, createSignal, onMount } from "solid-js";
 import { Transition } from "solid-transition-group";
 import type ProductInterface from "../../interfaces/product";
 import { addToCart } from "../../utils/cart";
 import Button from "../Button";
-import styles from "./productDetails.module.sass";
-import "../../assets/animations.sass";
+import styles from "./productDetails.module.css";
+import "../../assets/animations.css";
 import { getVariations } from "../../utils/forms";
 import { getDescription } from "../../utils/products";
 import { Loader } from "../Loader";
@@ -24,7 +24,7 @@ export default function ProductInfo(props: {
 	);
 
 	function processAddToCart() {
-		addToCart(props.productId, getVariations());
+		onMount(() => addToCart(props.productId, getVariations()));
 		setProductInCart(true);
 	}
 

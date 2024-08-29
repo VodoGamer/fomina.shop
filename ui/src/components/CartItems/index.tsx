@@ -1,19 +1,21 @@
 import { For, Match, Show, Switch, createResource } from "solid-js";
-import { type CartItem, getCart, removeFromCart } from "../../utils/cart";
-import Button from "../Button";
-import CartProduct from "./CartProduct";
-
 import { createStore } from "solid-js/store";
 import { Transition } from "solid-transition-group";
-import type { CartStore } from "../../interfaces/cart";
-import { getBulkProducts } from "../../utils/products";
-import CartOrder from "../CartOrder";
-import ErrorBox from "../ErrorBox";
-import { Loader } from "../Loader";
-import styles from "./assets/cartItems.module.sass";
+
+import type { CartStore } from "~/interfaces/cart";
+import { getCart, removeFromCart } from "~/utils/cart";
+import { getBulkProducts } from "~/utils/products";
+
+import Button from "~/components/Button";
+import CartOrder from "~/components/CartOrder";
+import ErrorBox from "~/components/ErrorBox";
+import { Loader } from "~/components/Loader";
+
+import CartProduct from "./CartProduct";
+import styles from "./assets/cartItems.module.css";
 
 export default function CartItems() {
-	const cart: CartItem[] = getCart();
+	const cart = getCart();
 	const productIds = cart.map((item) => item.product_id);
 	const [products, { mutate }] = createResource(productIds, getBulkProducts);
 	const [productsPrice, setProductsPrice] = createStore<CartStore[]>([]);

@@ -2,7 +2,7 @@ import { MetaProvider, Title } from "@solidjs/meta";
 import { useParams } from "@solidjs/router";
 import type { Component } from "solid-js";
 
-import ProductDetails from "../components/ProductDetails";
+import ProductDetails from "~/components/ProductDetails";
 
 const Product: Component = () => {
 	const params: { id: string } = useParams();

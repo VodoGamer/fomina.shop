@@ -9,7 +9,7 @@ import type ProductVariation from "../../interfaces/productVariation";
 import { getVariations } from "../../utils/variations";
 import ErrorBox from "../ErrorBox";
 import { Loader } from "../Loader";
-import styles from "./assets/cartItems.module.sass";
+import styles from "./assets/cartItems.module.css";
 import menu_cross from "./assets/menu_cross_white.svg";
 
 export default function CartProduct(props: {

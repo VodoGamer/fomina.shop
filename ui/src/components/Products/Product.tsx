@@ -1,6 +1,6 @@
 import type ProductInterface from "../../interfaces/product";
 import { getCompressedImageUrl } from "../../utils/images";
-import styles from "./products.module.sass";
+import styles from "./products.module.css";
 
 export default function Product(props: ProductInterface) {
 	return (

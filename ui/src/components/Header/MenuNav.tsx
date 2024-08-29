@@ -4,9 +4,9 @@ import type CategoryInterface from "../../interfaces/category";
 import { Loader } from "../Loader";
 
 import { TransitionGroup } from "solid-transition-group";
-import styles from "./assets/header.module.sass";
+import styles from "./assets/header.module.css";
 
-import "../../assets/animations.sass";
+import "../../assets/animations.css";
 
 const AllProductsCategory: CategoryInterface = {
 	id: -1,
