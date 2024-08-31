@@ -1,4 +1,4 @@
-import { Match, Show, Switch, createEffect } from "solid-js";
+import { Match, Switch, createEffect } from "solid-js";
 
 import type OrderInterface from "../../interfaces/order";
 import { PaymentStatus } from "../../interfaces/payment";

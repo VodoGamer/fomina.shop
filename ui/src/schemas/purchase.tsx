@@ -23,6 +23,7 @@ export const PurchaseSchema = object({
 		maxLength(64, "Электронная почта не должна превышать 64 символа"),
 	),
 	city: string("Город должен быть строкой"),
+	delivery_method: string("Метод доставки должен быть строкой"),
 	address: pipe(
 		string("Адрес должен быть строкой"),
 		nonEmpty("Адрес не может быть пустой"),

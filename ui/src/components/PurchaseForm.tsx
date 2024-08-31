@@ -1,29 +1,32 @@
-import {
-	type Accessor,
-	For,
-	type Setter,
-	Show,
-	createResource,
-	createSignal,
-} from "solid-js";
+import { For, type Setter, Show, createResource, createSignal } from "solid-js";
+import type { SetStoreFunction } from "solid-js/store";
 
 import type { PurchaseType } from "../schemas/purchase";
 import { getCities } from "../utils/geonames";
 import { createPurchase } from "../utils/purchase";
 import Button from "./Button";
-import DeliveryServices from "./DeliveryServices";
+import DeliveryServices from "./Delivery/DeliveryServices";
 import ErrorBox from "./ErrorBox";
 import Input from "./Input";
 import InputWithDropdown from "./InputWithDropdown";
+import type { purchaseSumStore } from "./purchase";
+
+export enum DeliveryMethod {
+	SDEK = "СДЭК",
+	SDEK_COURIER = "СДЭК Курьер",
+	RussianPost = "Почта России",
+}
 
 export default function PurchaseForm(props: {
-	sum: Accessor<number>;
+	sumStore: purchaseSumStore;
+	setSumStore: SetStoreFunction<purchaseSumStore>;
 	setPurchase: Setter<PurchaseType | undefined>;
 }) {
 	const [issues, setIssues] = createSignal<string[] | undefined>();
 	const [cityText, setCityText] = createSignal<string>();
 	const [cities] = createResource(cityText, getCities);
 	const [cityChecked, setCityChecked] = createSignal<boolean>(false);
+	const [deliveryMethod, setDeliveryMethod] = createSignal<DeliveryMethod>();
 
 	return (
 		<>
@@ -41,17 +44,24 @@ export default function PurchaseForm(props: {
 						)}
 					/>
 					<Show when={cityChecked()}>
-						<DeliveryServices />
+						<DeliveryServices
+							deliveryMethod={deliveryMethod}
+							setDeliveryMethod={setDeliveryMethod}
+							setSumStore={props.setSumStore}
+							city={cityText()}
+						/>
 					</Show>
 				</form>
 				<div class="grid gap-4">
 					<For each={issues()}>{(issue) => <ErrorBox message={issue} />}</For>
 				</div>
 			</div>
-			<Show when={cityChecked()}>
+			<Show when={cityChecked() && props.sumStore.delivery > 0}>
 				<Button
-					text={`Оформить заказ на ${props.sum()}₽`}
-					onClick={() => createPurchase(setIssues, props.setPurchase)}
+					text={`Оформить заказ на ${props.sumStore.products.reduce((a, b) => a + b, 0) + props.sumStore.delivery}₽`}
+					onClick={() =>
+						createPurchase(setIssues, props.setPurchase, deliveryMethod())
+					}
 				/>
 			</Show>
 		</>

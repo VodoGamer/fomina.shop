@@ -8,6 +8,12 @@ from src.database.models import Base
 T = TypeVar("T", bound=Base)
 
 
+def _get_locals(locals: dict):
+    locals.pop("self", None)
+    locals.pop("session", None)
+    return locals
+
+
 class ABCRepository(Generic[T], ABC):
     """Abstract base class for all repositories."""
 

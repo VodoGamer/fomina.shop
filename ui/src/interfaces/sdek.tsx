@@ -4,6 +4,15 @@ export interface SdekCalculateRequest {
 	count: number;
 }
 
+interface SdekError {
+	code: string;
+	message: string;
+}
+
+export interface SdekErrorResponse {
+	errors: SdekError[];
+}
+
 export interface SdekCalculateResponse {
 	period_min: number;
 	period_max: number;

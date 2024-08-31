@@ -43,6 +43,7 @@ async def get_notification_text(payment_id: UUID) -> str:
         f"Поступил новый заказ №{payment.order_id}!\n\nСтатус платежа: "
         f"{payment_status_to_str[payment.status]}\nСумма: {payment.price}"
         f"₽\n\nСостав заказа:\n{products_str}\n\nИнформация о заказчике:\n"
-        f"Имя - {order.name}\nАдрес - {order.address}\n"
+        f"Имя - {order.name}\nГород - {order.city}\nМетод доставки - {order.delivery_method}"
+        f"\nАдрес - {order.address}\n"
         f"Телефон - {order.phone_number}\nПочта - {order.email}"
     )

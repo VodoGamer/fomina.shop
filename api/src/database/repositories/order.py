@@ -2,7 +2,7 @@ from sqlalchemy import select
 
 from src.database.models import Order
 
-from .abc import ABCRepository
+from .abc import ABCRepository, _get_locals
 
 
 class OrderRepository(ABCRepository):
@@ -16,14 +16,17 @@ class OrderRepository(ABCRepository):
             result = await session.execute(select(Order).where(Order.id == id))
             return result.scalars().first()
 
-    async def create(self, name: str, address: str, phone_number: str, email: str) -> Order:
+    async def create(
+        self,
+        name: str,
+        city: str,
+        delivery_method: str,
+        address: str,
+        phone_number: str,
+        email: str,
+    ) -> Order:
         async with self.session() as session:
-            order = Order(
-                name=name,
-                address=address,
-                phone_number=phone_number,
-                email=email,
-            )
+            order = Order(**_get_locals(locals()))
             session.add(order)
             await session.commit()
             return order

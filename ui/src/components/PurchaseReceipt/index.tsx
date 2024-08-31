@@ -1,24 +1,29 @@
-import {
-	type Accessor,
-	Match,
-	Show,
-	Switch,
-	createEffect,
-	createResource,
-} from "solid-js";
+import { Match, Show, Switch, createEffect, createResource } from "solid-js";
+import type { SetStoreFunction } from "solid-js/store";
 
-import type { CartItem } from "../../utils/cart";
-import { getReceiptProducts } from "../../utils/receipt";
-import ErrorBox from "../ErrorBox";
-import { Loader } from "../Loader";
-import ReceiptField from "../ReceiptField";
+import type { CartItem } from "~/utils/cart";
+import { getReceiptProducts } from "~/utils/receipt";
+
+import ErrorBox from "~/components/ErrorBox";
+import { Loader } from "~/components/Loader";
+import ReceiptField from "~/components/ReceiptField";
+import type { purchaseSumStore } from "~/components/purchase";
+
 import styles from "./purchaseReceipt.module.css";
 
 export default function PurchaseReceipt(props: {
 	cart: CartItem[];
-	addToSum: (item: number) => void;
+	sumStore: purchaseSumStore;
+	setSumStore: SetStoreFunction<purchaseSumStore>;
 }) {
 	const [products] = createResource(props.cart, getReceiptProducts);
+	createEffect(() => {
+		const productsList = products();
+		if (!productsList) return;
+		for (const product of productsList) {
+			props.setSumStore("products", (prev) => [...prev, product.price]);
+		}
+	});
 
 	return (
 		<div class={styles.receipt}>
@@ -33,14 +38,17 @@ export default function PurchaseReceipt(props: {
 					<ReceiptField
 						headerItem={{ title: "Товары в корзине" }}
 						nestedItems={products()}
-						addToSum={props.addToSum}
 					/>
 				</Match>
 			</Switch>
-			<ReceiptField
-				headerItem={{ title: "Стоимость доставки", price: 450 }}
-				addToSum={props.addToSum}
-			/>
+			<Show when={props.sumStore.delivery > 0}>
+				<ReceiptField
+					headerItem={{
+						title: "Стоимость доставки",
+						price: props.sumStore.delivery,
+					}}
+				/>
+			</Show>
 		</div>
 	);
 }

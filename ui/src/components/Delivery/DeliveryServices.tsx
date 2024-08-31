@@ -1,0 +1,106 @@
+import {
+	type Accessor,
+	type JSX,
+	type Setter,
+	Show,
+	createEffect,
+	createResource,
+	createSignal,
+	splitProps,
+} from "solid-js";
+import type { SetStoreFunction } from "solid-js/store";
+
+import type { SdekCalculateRequest } from "~/interfaces/sdek";
+import { calculateSdekDelivery } from "~/utils/delivery";
+import Input from "../Input";
+import { DeliveryMethod } from "../PurchaseForm";
+import type { purchaseSumStore } from "../purchase";
+import DeliveryPeriod from "./DeliveryPeriod";
+
+export default function DeliveryServices(props: {
+	deliveryMethod: Accessor<DeliveryMethod | undefined>;
+	setDeliveryMethod: Setter<DeliveryMethod | undefined>;
+	setSumStore: SetStoreFunction<purchaseSumStore>;
+	city?: string;
+}) {
+	const [address, setAddress] = createSignal<string>();
+
+	function deliveryProps(): SdekCalculateRequest | undefined {
+		if (!address()) return undefined;
+		return {
+			is_courier: props.deliveryMethod() === DeliveryMethod.SDEK_COURIER,
+			to_address: `${props.city} ${address()}`,
+			count: 1,
+		};
+	}
+
+	const [deliveryInfo] = createResource(deliveryProps, calculateSdekDelivery);
+
+	createEffect(() => {
+		if (deliveryInfo.error) return;
+		const info = deliveryInfo();
+		if (info) {
+			props.setSumStore("delivery", info.total_sum);
+		}
+	});
+
+	function resetDelivery() {
+		createEffect(() => {
+			props.setSumStore("delivery", 0);
+		});
+	}
+
+	return (
+		<form>
+			<span class="font-bold block">Доставка</span>
+			<div class="flex flex-wrap gap-4">
+				<ServiceCheckbox
+					service={DeliveryMethod.SDEK}
+					setService={props.setDeliveryMethod}
+					onClick={resetDelivery}
+				/>
+				<ServiceCheckbox
+					service={DeliveryMethod.SDEK_COURIER}
+					setService={props.setDeliveryMethod}
+					onClick={resetDelivery}
+				/>
+				{/* <ServiceCheckbox
+					service={DeliveryService.RussianPost}
+					setService={setService}
+				/> */}
+			</div>
+			<Show when={props.deliveryMethod()}>
+				<div class="mb-6">
+					<Input
+						labelText="Адрес доставки (улица, дом, квартира)"
+						id="address"
+						onChange={(e) => setAddress(e.target.value)}
+						onInput={resetDelivery}
+					/>
+				</div>
+				<DeliveryPeriod deliveryInfo={deliveryInfo} />
+			</Show>
+		</form>
+	);
+}
+
+function ServiceCheckbox(
+	props: {
+		service: DeliveryMethod;
+		setService: Setter<DeliveryMethod | undefined>;
+	} & JSX.HTMLAttributes<HTMLLabelElement>,
+) {
+	const [local, others] = splitProps(props, ["service", "setService"]);
+
+	return (
+		<label class="flex gap-1 items-center" {...others}>
+			{props.service}
+			<input
+				type="radio"
+				name="delivery"
+				value={props.service}
+				onChange={() => props.setService(props.service)}
+			/>
+		</label>
+	);
+}
