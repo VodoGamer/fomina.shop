@@ -11,7 +11,9 @@ api = API(Token(TELEGRAM_TOKEN))
 
 async def send_notification_to_admins(message: str) -> None:
     for admin_id in TELEGRAM_ADMIN_IDS:
-        print((await api.send_message(admin_id, message)).unwrap())
+        response = await api.send_message(admin_id, message)
+        if response.unwrap_or_none() is None:
+            await api.send_message(admin_id, "❌ Ошибка при отправке сообщения")
 
 
 async def get_notification_text(payment_id: UUID) -> str:

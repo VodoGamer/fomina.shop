@@ -1,20 +1,14 @@
 from fastapi import APIRouter
 from fastapi.responses import HTMLResponse
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 from sdek.calculator import Size, calculate_delivery
 from sdek.models import DeliveryTariff
 from src.database.repository import DatabaseRepository
 from src.env import UI_URL
-from src.services.pay import cancel_payment, create_payment
+from src.services.pay import ProductOrder, cancel_payment, create_payment
 
 router = APIRouter(tags=["orders"])
-
-
-class ProductOrder(BaseModel):
-    id: int = Field(validation_alias="product_id")
-    quantity: int = Field(default=1, validation_alias="count")
-    variation_ids: list[int] = Field(validation_alias="variations")
 
 
 class OrderItem(BaseModel):
@@ -28,7 +22,8 @@ class OrderItem(BaseModel):
 
 
 async def calculate_price(
-    order_products: list[ProductOrder], tariff: DeliveryTariff, city: str, address: str
+    order_products: list[ProductOrder],
+    delivery_price: int,
 ) -> int:
     price = 0
     for order_product in order_products:
@@ -41,9 +36,7 @@ async def calculate_price(
                 raise ValueError
             product.price += variation.price_markup if variation else 0
         price += product.price * order_product.quantity
-    price += (
-        await calculate_delivery(tariff, f"{city} {address}", Size(20, 20, 4), 300)
-    ).total_sum
+    price += delivery_price
     return price
 
 
@@ -60,13 +53,22 @@ async def create_order(item: OrderItem):
             product.id, order.id, product.variation_ids, product.quantity
         )
 
-    price = await calculate_price(
-        item.products, converter_map[item.delivery_method], item.city, item.address
+    delivery_info = await calculate_delivery(
+        tariff=converter_map[item.delivery_method],
+        to_address=item.address,
+        size=Size(20, 20, 4),
+        weight=sum(300 for _ in item.products),
     )
-    payment = create_payment(
+    price = await calculate_price(item.products, delivery_info.total_sum)
+    payment = await create_payment(
         price=price,
         return_url=UI_URL + f"/order/{order.id}",
         description=f"Оплата заказа №{order.id} от {item.email}",
+        order_products=item.products,
+        full_name=item.name,
+        email=item.email,
+        phone_number=item.phone_number[1:],
+        delivery_price=delivery_info.total_sum,
     )
     if not payment.confirmation or not payment.status or not payment.id:
         if payment.id:
