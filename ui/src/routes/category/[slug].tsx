@@ -8,7 +8,7 @@ import Hero from "~/components/Hero";
 import { Loader } from "~/components/Loader";
 import Products from "~/components/Products";
 import { getCategory } from "~/utils/categories";
-import { getImageUrl } from "~/utils/images";
+import { getCompressedImageUrl } from "~/utils/images";
 
 import "~/assets/animations.css";
 
@@ -29,7 +29,7 @@ const Category = (props: { slug: string }) => {
 			<MetaProvider>
 				<Title>Категория товаров - Fomina Style</Title>
 			</MetaProvider>
-			<Hero image={getImageUrl(category()?.image)} />
+			<Hero image={getCompressedImageUrl(category()?.image)} />
 			<Show when={category.loading}>
 				<Loader />
 			</Show>

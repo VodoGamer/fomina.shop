@@ -10,6 +10,8 @@ COPY sdek/ ./sdek/
 COPY alembic.ini docker-entrypoint.sh ./
 COPY ./alembic/ ./alembic/
 
+RUN alembic upgrade head
+
 RUN chmod +x docker-entrypoint.sh
 
 ENTRYPOINT ["/app/docker-entrypoint.sh"]

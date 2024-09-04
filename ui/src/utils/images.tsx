@@ -7,8 +7,9 @@ export function getImageUrl(filename?: string): string | undefined {
 	return `${apiURL}/files/${filename}`;
 }
 
-export function getCompressedImageUrl(url: string): string {
-	return `${getImageUrl(url)}?fm=webp`;
+export function getCompressedImageUrl(filename?: string): string | undefined {
+	if (!filename) return undefined;
+	return `${getImageUrl(filename)}?fm=webp`;
 }
 
 export function getImagesFromIndex(index: number, images: Image[]) {
