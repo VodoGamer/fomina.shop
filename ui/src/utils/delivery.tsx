@@ -1,4 +1,5 @@
 import type {
+	DeliveryPoint,
 	SdekCalculateRequest,
 	SdekCalculateResponse,
 } from "~/interfaces/sdek";
@@ -13,4 +14,13 @@ export async function calculateSdekDelivery(
 			params: props,
 		})
 	).data;
+}
+
+export async function getSdekPoints(
+	cityName: string,
+): Promise<DeliveryPoint[]> {
+	const response = await getFromApi("sdek/handout_points", {
+		params: { city_name: cityName },
+	});
+	return response.data;
 }

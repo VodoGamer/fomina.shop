@@ -1,7 +1,5 @@
 from typing import NamedTuple
 
-import orjson
-
 from sdek.http_client import HttpClient
 from sdek.models import CalculatorResponse, DeliveryTariff
 from src.env import SDEK_SENDER_ADDRESS
@@ -19,4 +17,4 @@ async def calculate_delivery(
     response = await HttpClient().calculate_delivery(
         tariff, SDEK_SENDER_ADDRESS, to_address, *size, weight
     )
-    return CalculatorResponse(**orjson.loads(response))
+    return CalculatorResponse(**response)

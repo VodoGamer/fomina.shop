@@ -1,5 +1,4 @@
 import { Match, Show, Switch, createResource } from "solid-js";
-import { Transition } from "solid-transition-group";
 
 import { getProduct } from "../../utils/products";
 import { Loader } from "../Loader";

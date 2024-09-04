@@ -28,10 +28,6 @@ export default function ProductInfo(props: {
 		setProductInCart(true);
 	}
 
-	if (!props.product) {
-		return null;
-	}
-
 	return (
 		<div class={styles.info}>
 			<h1>{props.product.title}</h1>
@@ -40,13 +36,13 @@ export default function ProductInfo(props: {
 				productPrice={props.product.price}
 				setProductPrice={setProductPrice}
 			/>
-			{getDescription(props.product.description, styles.description)}
 			<span class={styles.price}>
 				Цена:{" "}
 				<Show fallback={<Loader />} when={productPrice()}>
 					{productPrice()}₽
 				</Show>
 			</span>
+			{getDescription(props.product.description, styles.description)}
 			<Transition mode="outin" name="slide-fade">
 				<Switch>
 					<Match when={!productInCart()}>

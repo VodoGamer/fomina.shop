@@ -19,3 +19,15 @@ export interface SdekCalculateResponse {
 	total_sum: number;
 	currency: string;
 }
+
+interface DeliveryPointLocation {
+	latitude: number;
+	longitude: number;
+	address: string;
+}
+
+export interface DeliveryPoint {
+	code: string;
+	uuid: string;
+	location: DeliveryPointLocation;
+}

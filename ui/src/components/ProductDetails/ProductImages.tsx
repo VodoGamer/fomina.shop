@@ -7,7 +7,7 @@ import styles from "./productDetails.module.css";
 
 export default function ProductImages(props: { product?: ProductInterface }) {
 	return (
-		<div class={styles.images}>
+		<div class="grid grid-cols-2 gap-4 sm:gap-6">
 			<For each={props.product?.images}>
 				{(image, index) => (
 					<a href={`/product/${props.product?.id}/image/${index()}`}>

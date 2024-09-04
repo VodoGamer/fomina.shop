@@ -2,14 +2,14 @@ import { type Component, Show, createResource, createSignal } from "solid-js";
 import { Portal } from "solid-js/web";
 import { Transition } from "solid-transition-group";
 
-import { getFromApi } from "../../utils/api";
-import MenuNav from "./MenuNav";
+import { getFromApi } from "~/utils/api";
+import "~/assets/animations.css";
 
+import MenuNav from "./MenuNav";
 import cart_icon from "./assets/cart.svg";
+import styles from "./assets/header.module.css";
 import menu_icon from "./assets/menu.svg";
 import menu_cross from "./assets/menu_cross.svg";
-import "../../assets/animations.css";
-import styles from "./assets/header.module.css";
 
 async function fetchCategories() {
 	const response = await getFromApi("categories/");

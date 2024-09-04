@@ -3,6 +3,7 @@ from fastapi.responses import JSONResponse
 from pydantic import ValidationError
 
 from sdek.calculator import Size, calculate_delivery
+from sdek.delivery_points import DeliveryPoint, get_handout_points
 from sdek.models import CalculatorResponse, DeliveryTariff, ErrorsResponse
 
 sdek_app = FastAPI(title="SDEK API")
@@ -25,3 +26,8 @@ async def calculate(is_courier: bool, to_address: str, count: int = 1) -> Calcul
         Size(20, 20, 5),
         count * 300,
     )
+
+
+@sdek_app.get("/handout_points")
+async def handout_points(city_name: str) -> list[DeliveryPoint]:
+    return await get_handout_points(city_name)

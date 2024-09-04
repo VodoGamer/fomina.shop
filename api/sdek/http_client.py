@@ -23,6 +23,33 @@ class HttpClient:
     def __init__(self, headers: dict[str, str] | None = None) -> None:
         self.headers = headers or {}
 
+    async def calculate_delivery(
+        self,
+        tariff: DeliveryTariff,
+        from_address: str,
+        to_address: str,
+        width: int,
+        height: int,
+        length: int,
+        weight: int,
+    ) -> dict:
+        data = {
+            "tariff_code": tariff.value,
+            "from_location": {"address": from_address},
+            "to_location": {"address": to_address},
+            "packages": [{"width": width, "height": height, "length": length, "weight": weight}],
+        }
+        return await self._post(url="/calculator/tariff", data=orjson.dumps(data))
+
+    async def get_delivery_points(self, city_code: int, is_handout: bool = True) -> list:
+        return await self._get(
+            url="/deliverypoints",
+            params={"city_code": city_code, "is_handout": int(is_handout), "size": 9999999},
+        )
+
+    async def get_city_info(self, city_name: str) -> list:
+        return await self._get(url="/location/cities", params={"city": city_name})
+
     async def _update_base_headers(self):
         if self.headers.get("Authorization"):
             return
@@ -33,27 +60,18 @@ class HttpClient:
         }
         self.headers.update(base_headers)
 
+    async def _get(self, url: str, params: dict | None = None):
+        await self._update_base_headers()
+        async with ClientSession() as session:
+            async with session.get(
+                SDEK_API_URL + url, headers=self.headers, params=params
+            ) as resp:
+                result = await resp.text()
+            return orjson.loads(result)
+
     async def _post(self, url: str, data: bytes | str | None = None):
         await self._update_base_headers()
         async with ClientSession() as session:
             async with session.post(SDEK_API_URL + url, data=data, headers=self.headers) as resp:
                 result = await resp.text()
-            return result
-
-    async def calculate_delivery(
-        self,
-        tariff: DeliveryTariff,
-        from_address: str,
-        to_address: str,
-        width: int,
-        height: int,
-        length: int,
-        weight: int,
-    ) -> str:
-        data = {
-            "tariff_code": tariff.value,
-            "from_location": {"address": from_address},
-            "to_location": {"address": to_address},
-            "packages": [{"width": width, "height": height, "length": length, "weight": weight}],
-        }
-        return await self._post(url="/calculator/tariff", data=orjson.dumps(data))
+            return orjson.loads(result)

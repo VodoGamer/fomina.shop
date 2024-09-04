@@ -1,8 +1,9 @@
 import {
 	type Accessor,
 	type JSX,
+	Match,
 	type Setter,
-	Show,
+	Switch,
 	createEffect,
 	createResource,
 	createSignal,
@@ -16,6 +17,7 @@ import Input from "../Input";
 import { DeliveryMethod } from "../PurchaseForm";
 import type { purchaseSumStore } from "../purchase";
 import DeliveryPeriod from "./DeliveryPeriod";
+import SdekPoints from "./SdekPoints";
 
 export default function DeliveryServices(props: {
 	deliveryMethod: Accessor<DeliveryMethod | undefined>;
@@ -69,17 +71,22 @@ export default function DeliveryServices(props: {
 					setService={setService}
 				/> */}
 			</div>
-			<Show when={props.deliveryMethod()}>
-				<div class="mb-6">
-					<Input
-						labelText="Адрес доставки (улица, дом, квартира)"
-						id="address"
-						onChange={(e) => setAddress(e.target.value)}
-						onInput={resetDelivery}
-					/>
-				</div>
-				<DeliveryPeriod deliveryInfo={deliveryInfo} />
-			</Show>
+			<div class="mb-6">
+				<Switch>
+					<Match when={props.deliveryMethod() === DeliveryMethod.SDEK_COURIER}>
+						<Input
+							labelText="Адрес доставки (улица, дом, квартира)"
+							id="address"
+							onChange={(e) => setAddress(e.target.value)}
+							onInput={resetDelivery}
+						/>
+					</Match>
+					<Match when={props.deliveryMethod() === DeliveryMethod.SDEK}>
+						<SdekPoints city={props.city} setAddress={setAddress} />
+					</Match>
+				</Switch>
+			</div>
+			<DeliveryPeriod deliveryInfo={deliveryInfo} />
 		</form>
 	);
 }

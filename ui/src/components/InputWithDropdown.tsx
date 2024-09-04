@@ -35,7 +35,7 @@ export function InputWithDropdown(props: InputWithDropdownProps) {
 			/>
 			<Suspense>
 				<Show when={open() && props.options && props.options.length > 0}>
-					<ul class="absolute mt-1 w-max bg-white border border-gray-300 rounded-md shadow-lg z-10">
+					<ul class="absolute mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg z-10 max-h-60 overflow-y-auto">
 						<For each={props.options}>
 							{(option) => (
 								<li

@@ -2,7 +2,7 @@ import { type JSX, splitProps } from "solid-js";
 
 export default function Input(
 	props: {
-		labelText: string;
+		labelText?: string;
 		containerClass?: string;
 	} & JSX.InputHTMLAttributes<HTMLInputElement>,
 ) {
