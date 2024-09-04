@@ -56,6 +56,7 @@ class Category(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     title: Mapped[str] = mapped_column(String(50))
     slug: Mapped[str] = mapped_column(String(50))
+    image = mapped_column(CompressedImageType(storage), nullable=True)
     position_order: Mapped[int] = mapped_column(
         Integer(), default=0, server_default="0", nullable=False
     )

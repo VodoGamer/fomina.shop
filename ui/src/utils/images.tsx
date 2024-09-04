@@ -1,12 +1,13 @@
 import apiURL from "./api";
 
-import type Image from "../interfaces/image";
+import type Image from "~/interfaces/image";
 
-export function getImageUrl(filename: string) {
+export function getImageUrl(filename?: string): string | undefined {
+	if (!filename) return undefined;
 	return `${apiURL}/files/${filename}`;
 }
 
-export function getCompressedImageUrl(url: string) {
+export function getCompressedImageUrl(url: string): string {
 	return `${getImageUrl(url)}?fm=webp`;
 }
 

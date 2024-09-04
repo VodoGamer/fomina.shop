@@ -8,8 +8,8 @@ import Hero from "~/components/Hero";
 import { Loader } from "~/components/Loader";
 import Products from "~/components/Products";
 import { getCategory } from "~/utils/categories";
+import { getImageUrl } from "~/utils/images";
 
-import hero_image from "~/assets/hero.webp";
 import "~/assets/animations.css";
 
 const RouterCategory = () => {
@@ -29,7 +29,7 @@ const Category = (props: { slug: string }) => {
 			<MetaProvider>
 				<Title>Категория товаров - Fomina Style</Title>
 			</MetaProvider>
-			<Hero image={hero_image} />
+			<Hero image={getImageUrl(category()?.image)} />
 			<Show when={category.loading}>
 				<Loader />
 			</Show>
