@@ -6,6 +6,7 @@ COPY ui/package*.json ui/bun.lockb ./
 RUN bun install
 
 COPY ui/src/ ./src/
+COPY ui/public/ ./public/
 COPY ui/app.config.ts ui/tsconfig.json ui/tsconfig.json ui/tailwind.config.cjs ui/postcss.config.cjs .env ./
 
 RUN bun run --env-file /app/.env build
