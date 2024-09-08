@@ -9,6 +9,9 @@ const Footer: Component = () => {
 			<FooterLink href="https://t.me/fominakids" target="_blank">
 				telegram
 			</FooterLink>
+			<FooterLink href="https://vk.com/fomina_style" target="_blank">
+				vk
+			</FooterLink>
 			<FooterLink
 				href="https://www.ozon.ru/brand/fominakids-100260931/"
 				target="_blank"
