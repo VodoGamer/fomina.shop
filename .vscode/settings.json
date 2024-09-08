@@ -1,12 +1,9 @@
 {
 	"biome.lspBin": "ui/node_modules/@biomejs/biome/bin/biome",
-	"editor.codeActionsOnSave":{
+	"editor.defaultFormatter": "biomejs.biome",
+	"editor.formatOnSave": true,
+	"editor.codeActionsOnSave": {
 		"source.organizeImports.biome": "explicit"
-    },
-    "cSpell.words": [
-        "deliverypoints",
-        "Geoname",
-        "Огрнип",
-        "СДЭК"
-    ],
+	},
+	"cSpell.words": ["deliverypoints", "Geoname", "Огрнип", "СДЭК"]
 }
