@@ -1,4 +1,5 @@
 import type CategoryInterface from "~/interfaces/category";
+
 import { getFromApi } from "./api";
 
 export async function getCategory(slug: string): Promise<CategoryInterface> {

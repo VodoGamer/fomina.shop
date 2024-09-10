@@ -1,5 +1,6 @@
 import { Match, Show, Switch, createSignal, onMount } from "solid-js";
 import { Transition } from "solid-transition-group";
+
 import type ProductInterface from "../../interfaces/product";
 import { addToCart } from "../../utils/cart";
 import Button from "../Button";

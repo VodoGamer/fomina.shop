@@ -1,9 +1,9 @@
 .form {
-  display: grid;
-  gap: 8px;
+	display: grid;
+	gap: 8px;
 }
 
 .label {
-  margin-right: 8px;
-  font-size: 16px;
+	margin-right: 8px;
+	font-size: 16px;
 }

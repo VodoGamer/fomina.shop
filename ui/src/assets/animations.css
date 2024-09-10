@@ -1,7 +1,9 @@
 /* slide-fade */
 .slide-fade-enter-active,
 .slide-fade-exit-active {
-	transition: opacity 0.3s, transform 0.3s;
+	transition:
+		opacity 0.3s,
+		transform 0.3s;
 }
 
 .slide-fade-enter,
@@ -28,4 +30,3 @@
 .list-item-exit-active {
 	position: absolute;
 }
-

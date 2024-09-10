@@ -1,11 +1,11 @@
 import { Portal } from "solid-js/web";
 
-import type Image from "../../interfaces/image";
-import { getImagesFromIndex } from "../../utils/images";
-import ImagesSlider from "./slider";
-
 import styles from "./carousel.module.css";
 import cross from "./menu_cross.svg";
+import ImagesSlider from "./slider";
+import type Image from "../../interfaces/image";
+import { getImagesFromIndex } from "../../utils/images";
+
 import "./slider.css";
 
 export default function Carousel(props: {

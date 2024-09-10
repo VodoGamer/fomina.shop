@@ -4,10 +4,17 @@
   "scripts": {
     "dev": "vinxi dev",
     "build": "vinxi build",
-    "start": "vinxi start"
+    "start": "vinxi start",
+    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
+    "fmt": "prettier -w src"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.8.3",
+    "@typescript-eslint/eslint-plugin": "^8.5.0",
+    "eslint": "^8",
+    "eslint-plugin-import": "^2.30.0",
+    "eslint-plugin-solid": "^0.14.3",
+    "prettier": "^3.3.3",
+    "prettier-plugin-tailwindcss": "^0.6.6",
     "typescript": "^5.5.4"
   },
   "dependencies": {

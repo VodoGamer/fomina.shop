@@ -8,7 +8,7 @@ export default function OrderTerms() {
 			</MetaProvider>
 			<div>
 				<h1>Условия оплаты</h1>
-				<ul class="list-disc list-inside">
+				<ul class="list-inside list-disc">
 					<li class="list-item">
 						Услуга оплаты через интернет осуществляется в соответствии с
 						Правилами международных платёжных систем Visa, MasterCard и
@@ -59,7 +59,7 @@ export default function OrderTerms() {
 			</div>
 			<div class="mt-2">
 				<h3 class="text-2xl">Доставка по Москве</h3>
-				<ul class="list-disc list-inside">
+				<ul class="list-inside list-disc">
 					<li class="list-item">
 						Комплектация заказов производится в рабочие часы: в будние дни с
 						10.00 до 21.00.
@@ -72,7 +72,7 @@ export default function OrderTerms() {
 			</div>
 			<div class="mt-2">
 				<h3 class="text-2xl">Доставка по России и странам ЕАЭС</h3>
-				<ul class="list-disc list-inside">
+				<ul class="list-inside list-disc">
 					<li class="list-item">
 						Доставка осуществляется в течение 3 – 7 рабочих дней после 100%
 						оплаты заказа на сайте, сроки доставки зависят от вашего населенного
@@ -120,7 +120,7 @@ export default function OrderTerms() {
 			</div>
 			<div class="mt-2">
 				<h3 class="text-2xl">Международная доставка</h3>
-				<ul class="list-disc list-inside">
+				<ul class="list-inside list-disc">
 					<li class="list-item">
 						В данный момент по независящим от нас обстоятельствам доставка
 						осуществляется не во все страны.
@@ -141,7 +141,7 @@ export default function OrderTerms() {
 						Для оформления заказа на международную доставку просим связаться с
 						нами в{" "}
 						<a
-							class="underline text-blue-700"
+							class="text-blue-700 underline"
 							href="https://wa.me/79180581755"
 							target="_blank"
 							rel="noreferrer"
@@ -150,7 +150,7 @@ export default function OrderTerms() {
 						</a>{" "}
 						или{" "}
 						<a
-							class="underline text-blue-700"
+							class="text-blue-700 underline"
 							href="https://t.me/elen_fomi"
 							target="_blank"
 							rel="noreferrer"
@@ -169,7 +169,7 @@ export default function OrderTerms() {
 				<p>Номер телефона: +79180581755</p>
 				<p>
 					Почта:{" "}
-					<a class="underline text-blue-700" href="mailto:fominakids@mail.ru">
+					<a class="text-blue-700 underline" href="mailto:fominakids@mail.ru">
 						fominakids@mail.ru
 					</a>
 				</p>

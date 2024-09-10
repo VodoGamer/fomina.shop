@@ -2,7 +2,7 @@ import { type Component, type JSX, children, splitProps } from "solid-js";
 
 const Footer: Component = () => {
 	return (
-		<footer class="flex flex-wrap gap-x-6 gap-y-2 mt-6">
+		<footer class="mt-6 flex flex-wrap gap-x-6 gap-y-2">
 			<FooterLink href="https://instagram.com/fominakids" target="_blank">
 				instagram
 			</FooterLink>

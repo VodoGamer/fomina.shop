@@ -12,7 +12,7 @@ export default function Input(
 		<label class="block font-light">
 			{local.labelText}
 			<input
-				class="w-full border-2 border-gray-300 rounded-md p-2 focus:outline focus:outline-2 focus:outline-blue-300"
+				class="w-full rounded-md border-2 border-gray-300 p-2 focus:outline focus:outline-2 focus:outline-blue-300"
 				type="text"
 				{...others}
 			/>

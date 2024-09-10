@@ -1,6 +1,6 @@
-import apiURL from "./api";
-
 import type Image from "~/interfaces/image";
+
+import apiURL from "./api";
 
 export function getImageUrl(filename?: string): string | undefined {
 	if (!filename) return undefined;

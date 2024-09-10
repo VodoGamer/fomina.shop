@@ -1,9 +1,8 @@
 import { For, type Resource, Show } from "solid-js";
+import { TransitionGroup } from "solid-transition-group";
 
 import type CategoryInterface from "../../interfaces/category";
 import { Loader } from "../Loader";
-
-import { TransitionGroup } from "solid-transition-group";
 import styles from "./assets/header.module.css";
 
 import "../../assets/animations.css";

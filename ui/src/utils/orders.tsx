@@ -1,7 +1,7 @@
-import type OrderInterface from "../interfaces/order";
-import type { PurchaseType } from "../schemas/purchase";
 import { getFromApi, postApi } from "./api";
 import type { CartItem } from "./cart";
+import type OrderInterface from "../interfaces/order";
+import type { PurchaseType } from "../schemas/purchase";
 
 export async function getOrder(orderId: number): Promise<OrderInterface> {
 	return (await getFromApi(`order/${orderId}`)).data;

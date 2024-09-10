@@ -1,7 +1,7 @@
 import { For, type JSX, Show, splitProps } from "solid-js";
 
-import type { ReceiptItem } from "../../interfaces/receipt";
 import styles from "./receiptField.module.css";
+import type { ReceiptItem } from "../../interfaces/receipt";
 
 export default function ReceiptField(
 	props: {

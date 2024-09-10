@@ -1,7 +1,7 @@
-import type { ReceiptItem } from "../interfaces/receipt";
 import type { CartItem } from "./cart";
 import { getBulkProducts } from "./products";
 import { getVariations } from "./variations";
+import type { ReceiptItem } from "../interfaces/receipt";
 
 export async function getReceiptProducts(
 	cart: CartItem[],

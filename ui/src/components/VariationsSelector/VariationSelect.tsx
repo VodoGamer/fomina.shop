@@ -1,7 +1,7 @@
 import { For } from "solid-js";
-import type ProductVariation from "../../interfaces/productVariation";
 
 import styles from "./variationsSelector.module.css";
+import type ProductVariation from "../../interfaces/productVariation";
 
 export default function VariationSelect(props: {
 	key: string;
@@ -15,7 +15,7 @@ export default function VariationSelect(props: {
 			</label>
 			<select
 				name={props.key}
-				class="px-1 py-2 rounded-sm bg-gray-100 duration-100 hover:shadow-sm"
+				class="rounded-sm bg-gray-100 px-1 py-2 duration-100 hover:shadow-sm"
 				id={`${props.key}-select`}
 				onChange={props.SelectVariation}
 			>

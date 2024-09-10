@@ -17,7 +17,7 @@ export default function ReturnTerms() {
 				Возврат изделия надлежащего качества производится при выполнении
 				условий:
 			</p>
-			<ul class="list-disc list-inside">
+			<ul class="list-inside list-disc">
 				<li>изделие не было в употреблении*;</li>
 				<li>
 					сохранены товарный вид изделия, его потребительские свойства,
@@ -53,7 +53,7 @@ export default function ReturnTerms() {
 				Заполните и подпишите заявление на возврат товаров по образцу. Образец
 				заявления можно посмотреть{" "}
 				<a
-					class="underline text-blue-700"
+					class="text-blue-700 underline"
 					target="_blank"
 					href="https://docs.google.com/document/d/1sutZhiK_jAV3U1bL5JweA8t8q0xv1TYiASA5PkPjdLA/edit"
 					rel="noreferrer"
@@ -71,7 +71,7 @@ export default function ReturnTerms() {
 				Отправьте позиции, которые хотите вернуть, не позднее 7-го дня с момента
 				получения вами заказа любым из перечисленных ниже способов:
 			</p>
-			<ul class="list-disc list-inside">
+			<ul class="list-inside list-disc">
 				<li>
 					Отправка возврата через СДЭК: г.Москва, ПВЗ: ул. Мнёвники, 23. На имя
 					Фомина Елена Петровна, тел.+7-918-058-17-55.
@@ -120,7 +120,7 @@ export default function ReturnTerms() {
 				Покупателем.
 			</p>
 			<p>Гарантия не распространяется на следующие случаи:</p>
-			<ul class="list-disc list-inside">
+			<ul class="list-inside list-disc">
 				<li>Износ во время эксплуатации;</li>
 				<li>Разрывы, порезы и потертости, прожигание ткани;</li>
 				<li>Выцветание, загрязнение ткани;</li>

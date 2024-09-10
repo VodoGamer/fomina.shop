@@ -2,17 +2,16 @@ import { For, Match, Show, Switch, createResource } from "solid-js";
 import { createStore } from "solid-js/store";
 import { Transition } from "solid-transition-group";
 
-import type { CartStore } from "~/interfaces/cart";
-import { getCart, removeFromCart } from "~/utils/cart";
-import { getBulkProducts } from "~/utils/products";
-
 import Button from "~/components/Button";
 import CartOrder from "~/components/CartOrder";
 import ErrorBox from "~/components/ErrorBox";
 import { Loader } from "~/components/Loader";
+import type { CartStore } from "~/interfaces/cart";
+import { getCart, removeFromCart } from "~/utils/cart";
+import { getBulkProducts } from "~/utils/products";
 
-import CartProduct from "./CartProduct";
 import styles from "./assets/cartItems.module.css";
+import CartProduct from "./CartProduct";
 
 export default function CartItems() {
 	const cart = getCart();
@@ -25,7 +24,7 @@ export default function CartItems() {
 			if (!prevItems) return;
 			const newItems = [...prevItems];
 			newItems.splice(index, 1);
-			setProductsPrice(productsPrice.filter((item, _) => item.index !== index));
+			setProductsPrice(productsPrice.filter((item) => item.index !== index));
 			return newItems;
 		});
 		removeFromCart(index);

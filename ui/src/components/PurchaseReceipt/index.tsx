@@ -1,13 +1,12 @@
 import { Match, Show, Switch, createEffect, createResource } from "solid-js";
 import type { SetStoreFunction } from "solid-js/store";
 
-import type { CartItem } from "~/utils/cart";
-import { getReceiptProducts } from "~/utils/receipt";
-
 import ErrorBox from "~/components/ErrorBox";
 import { Loader } from "~/components/Loader";
-import ReceiptField from "~/components/ReceiptField";
 import type { purchaseSumStore } from "~/components/purchase";
+import ReceiptField from "~/components/ReceiptField";
+import type { CartItem } from "~/utils/cart";
+import { getReceiptProducts } from "~/utils/receipt";
 
 import styles from "./purchaseReceipt.module.css";
 

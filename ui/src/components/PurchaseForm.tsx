@@ -1,15 +1,15 @@
 import { For, type Setter, Show, createResource, createSignal } from "solid-js";
 import type { SetStoreFunction } from "solid-js/store";
 
-import type { PurchaseType } from "../schemas/purchase";
-import { getCities } from "../utils/geonames";
-import { createPurchase } from "../utils/purchase";
 import Button from "./Button";
 import DeliveryServices from "./Delivery/DeliveryServices";
 import ErrorBox from "./ErrorBox";
 import Input from "./Input";
 import InputWithDropdown from "./InputWithDropdown";
 import type { purchaseSumStore } from "./purchase";
+import type { PurchaseType } from "../schemas/purchase";
+import { getCities } from "../utils/geonames";
+import { createPurchase } from "../utils/purchase";
 
 export enum DeliveryMethod {
 	SDEK = "СДЭК",
@@ -30,7 +30,7 @@ export default function PurchaseForm(props: {
 
 	return (
 		<>
-			<div class="grid md:grid-cols-2 gap-4">
+			<div class="grid gap-4 md:grid-cols-2">
 				<form>
 					<Input labelText="Ф.И.О" id="name" />
 					<Input labelText="Номер телефона" id="phone_number" type="tel" />

@@ -1,12 +1,11 @@
 import { Show, createSignal } from "solid-js";
 import { createStore } from "solid-js/store";
 
-import type { PurchaseType } from "~/schemas/purchase";
-import { getCart } from "~/utils/cart";
-
 import PurchaseForm from "~/components/PurchaseForm";
 import PurchasePopup from "~/components/PurchasePopup";
 import PurchaseReceipt from "~/components/PurchaseReceipt";
+import type { PurchaseType } from "~/schemas/purchase";
+import { getCart } from "~/utils/cart";
 
 export interface purchaseSumStore {
 	products: number[];

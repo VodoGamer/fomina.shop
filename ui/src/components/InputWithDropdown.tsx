@@ -35,11 +35,11 @@ export function InputWithDropdown(props: InputWithDropdownProps) {
 			/>
 			<Suspense>
 				<Show when={open() && props.options && props.options.length > 0}>
-					<ul class="absolute mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg z-10 max-h-60 overflow-y-auto">
+					<ul class="absolute z-10 mt-1 max-h-60 w-full overflow-y-auto rounded-md border border-gray-300 bg-white shadow-lg">
 						<For each={props.options}>
 							{(option) => (
 								<li
-									class="p-2 cursor-pointer rounded-md hover:bg-blue-100"
+									class="cursor-pointer rounded-md p-2 hover:bg-blue-100"
 									onClick={() => handleOptionClick(option)}
 									onKeyPress={() => handleOptionClick(option)}
 								>

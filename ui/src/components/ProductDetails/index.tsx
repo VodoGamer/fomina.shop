@@ -2,10 +2,9 @@ import { Match, Show, Switch, createResource } from "solid-js";
 
 import { getProduct } from "../../utils/products";
 import { Loader } from "../Loader";
+import styles from "./productDetails.module.css";
 import ProductImages from "./ProductImages";
 import ProductInfo from "./ProductInfo";
-
-import styles from "./productDetails.module.css";
 import "../../assets/animations.css";
 import ErrorBox from "../ErrorBox";
 

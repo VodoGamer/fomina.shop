@@ -1,16 +1,16 @@
 import { For, Match, Show, Switch, createResource } from "solid-js";
-import type ProductInterface from "../../interfaces/product";
-import type { CartItem } from "../../utils/cart";
-import { getCompressedImageUrl } from "../../utils/images";
-import Button from "../Button";
 
-import type { CartStore } from "../../interfaces/cart";
-import type ProductVariation from "../../interfaces/productVariation";
-import { getVariations } from "../../utils/variations";
-import ErrorBox from "../ErrorBox";
-import { Loader } from "../Loader";
 import styles from "./assets/cartItems.module.css";
 import menu_cross from "./assets/menu_cross_white.svg";
+import type { CartStore } from "../../interfaces/cart";
+import type ProductInterface from "../../interfaces/product";
+import type ProductVariation from "../../interfaces/productVariation";
+import type { CartItem } from "../../utils/cart";
+import { getCompressedImageUrl } from "../../utils/images";
+import { getVariations } from "../../utils/variations";
+import Button from "../Button";
+import ErrorBox from "../ErrorBox";
+import { Loader } from "../Loader";
 
 export default function CartProduct(props: {
 	product: ProductInterface;

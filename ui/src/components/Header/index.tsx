@@ -2,7 +2,6 @@ import { useIsRouting } from "@solidjs/router";
 import { type Component, Show } from "solid-js";
 
 import Menu from "./Menu";
-
 import { HeaderLoader } from "../HeaderLoader";
 import styles from "./assets/header.module.css";
 import logo from "./assets/logo.svg";

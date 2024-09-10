@@ -1,9 +1,8 @@
 import { For } from "solid-js";
 
+import styles from "./productDetails.module.css";
 import type ProductInterface from "../../interfaces/product";
 import { getCompressedImageUrl } from "../../utils/images";
-
-import styles from "./productDetails.module.css";
 
 export default function ProductImages(props: { product?: ProductInterface }) {
 	return (

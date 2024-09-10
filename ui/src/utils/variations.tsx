@@ -1,5 +1,4 @@
 import { getFromApi } from "./api";
-
 import type ProductVariation from "../interfaces/productVariation";
 
 function groupVariations(variations: ProductVariation[]) {

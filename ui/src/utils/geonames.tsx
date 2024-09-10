@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import type { GeonamesResponse } from "../interfaces/geonames";
 
 const geonamesUser = import.meta.env.VITE_GEONAMES_USER;

@@ -13,9 +13,10 @@ import type { SetStoreFunction } from "solid-js/store";
 
 import type { SdekCalculateRequest } from "~/interfaces/sdek";
 import { calculateSdekDelivery } from "~/utils/delivery";
+
 import Input from "../Input";
-import { DeliveryMethod } from "../PurchaseForm";
 import type { purchaseSumStore } from "../purchase";
+import { DeliveryMethod } from "../PurchaseForm";
 import DeliveryPeriod from "./DeliveryPeriod";
 import SdekPoints from "./SdekPoints";
 
@@ -54,7 +55,7 @@ export default function DeliveryServices(props: {
 
 	return (
 		<form>
-			<span class="font-bold block">Доставка</span>
+			<span class="block font-bold">Доставка</span>
 			<div class="flex flex-wrap gap-4">
 				<ServiceCheckbox
 					service={DeliveryMethod.SDEK}
@@ -97,10 +98,10 @@ function ServiceCheckbox(
 		setService: Setter<DeliveryMethod | undefined>;
 	} & JSX.HTMLAttributes<HTMLLabelElement>,
 ) {
-	const [local, others] = splitProps(props, ["service", "setService"]);
+	const [, others] = splitProps(props, ["service", "setService"]);
 
 	return (
-		<label class="flex gap-1 items-center" {...others}>
+		<label class="flex items-center gap-1" {...others}>
 			{props.service}
 			<input
 				type="radio"
