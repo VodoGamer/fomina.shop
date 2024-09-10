@@ -1,0 +1,4 @@
+Sitemap: https://fominakids.ru/sitemap.xml
+
+User-agent: *
+Disallow: /purchase
