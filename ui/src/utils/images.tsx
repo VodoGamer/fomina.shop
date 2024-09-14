@@ -2,14 +2,17 @@ import type Image from "~/interfaces/image";
 
 import apiURL from "./api";
 
-export function getImageUrl(filename?: string): string | undefined {
+export function getImageUrl(
+	filename?: string,
+	isCompressed: boolean = true,
+): string | undefined {
 	if (!filename) return undefined;
-	return `${apiURL}/files/${filename}`;
+	return `${apiURL}/files/${filename}${isCompressed ? "?fm=webp" : ""}`;
 }
 
 export function getCompressedImageUrl(filename?: string): string | undefined {
 	if (!filename) return undefined;
-	return `${getImageUrl(filename)}?fm=webp`;
+	return getImageUrl(filename, true);
 }
 
 export function getImagesFromIndex(index: number, images: Image[]) {

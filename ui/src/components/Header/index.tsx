@@ -1,28 +1,34 @@
 import { useIsRouting } from "@solidjs/router";
-import { type Component, Show } from "solid-js";
+import { createResource, Show } from "solid-js";
 
-import Menu from "./Menu";
+import cart_icon from "~/assets/cart.svg";
+import { getCategories } from "~/utils/categories";
+
 import { HeaderLoader } from "../HeaderLoader";
-import styles from "./assets/header.module.css";
-import logo from "./assets/logo.svg";
+import BurgerMenu from "./BurgerMenu";
 
-const Header: Component = () => {
+export default function Header() {
 	const isRouting = useIsRouting();
+	const [categories] = createResource(getCategories);
+
 	return (
-		<header class={styles.header}>
+		<header class="mx-3 flex rounded-b-sm border-x border-b border-gray-300 lg:mx-6">
 			<Show when={isRouting()}>
 				<HeaderLoader />
 			</Show>
-			<div class={styles.header__logo}>
-				<a href="/">
-					<img class={styles.header__image} src={logo} alt="" />
+			<a href="/" class="flex items-center border-r p-4">
+				<span class="text-lg font-bold">Fomina</span>
+			</a>
+
+			<div class="ml-auto flex border-l">
+				<a href="/cart" class="border-r p-4">
+					<img src={cart_icon} alt="cart icon" class="w-6" />
 				</a>
-			</div>
-			<div class={styles.header__buttons}>
-				<Menu />
+
+				<Show when={categories()}>
+					{(categories) => <BurgerMenu categories={categories()} />}
+				</Show>
 			</div>
 		</header>
 	);
-};
-
-export default Header;
+}

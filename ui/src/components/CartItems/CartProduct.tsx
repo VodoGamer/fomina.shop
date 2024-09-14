@@ -1,113 +1,82 @@
-import { For, Match, Show, Switch, createResource } from "solid-js";
+import { Accessor, createEffect, createSignal, For, Suspense } from "solid-js";
 
-import styles from "./assets/cartItems.module.css";
-import menu_cross from "./assets/menu_cross_white.svg";
-import type { CartStore } from "../../interfaces/cart";
-import type ProductInterface from "../../interfaces/product";
-import type ProductVariation from "../../interfaces/productVariation";
-import type { CartItem } from "../../utils/cart";
-import { getCompressedImageUrl } from "../../utils/images";
-import { getVariations } from "../../utils/variations";
-import Button from "../Button";
-import ErrorBox from "../ErrorBox";
-import { Loader } from "../Loader";
+import trash from "~/assets/trash.svg";
+import { Badge } from "~/components/ui/badge";
+import { Button } from "~/components/ui/button";
+import { Card, CardContent, CardFooter } from "~/components/ui/card";
+import type ProductInterface from "~/interfaces/product";
+import VariationInterface from "~/interfaces/variations";
+import { getImageUrl } from "~/utils/images";
 
-export default function CartProduct(props: {
+interface CartProductProps {
 	product: ProductInterface;
-	deleteFromCart: (id: number) => void;
-	index: number;
-	cart: CartItem[];
-	addToSum: (item: CartStore) => void;
-}) {
-	const cartInfo: CartItem = props.cart[props.index];
-	const [variations] = createResource(
-		cartInfo.variations.length ? cartInfo.variations : [0],
-		getVariations,
-	);
+	variations: VariationInterface[];
+	deleteFromCart: (index: number) => void;
+	index: Accessor<number>;
+	addToSum: (item: number) => void;
+}
+
+function CartProduct(props: CartProductProps) {
+	const [price, setPrice] = createSignal<number>(0);
+
+	createEffect(() => {
+		setPrice(
+			props.product.price +
+				props.variations.reduce(
+					(acc, variation) => acc + variation.price_markup,
+					0,
+				),
+		);
+		props.addToSum(price());
+	});
 
 	return (
-		<section class={styles.product}>
-			<div
-				class={styles.image}
-				style={{
-					"background-image": `url(${
-						props.product.images?.length
-							? getCompressedImageUrl(props.product.images[0].url)
-							: ""
-					})`,
-				}}
-			>
-				<button
-					class={styles.remove_button}
-					onClick={() => props.deleteFromCart(props.index)}
-					type="button"
-				>
-					<img class={styles.remove_icon} src={menu_cross} alt="" />
-				</button>
-			</div>
-			<div class={styles.info}>
-				<h1>{props.product.title}</h1>
-				<Show
-					fallback={
-						<CartProductPrice
-							productPrice={props.product.price}
-							count={cartInfo.count}
-							index={props.index}
-							addToSum={props.addToSum}
+		<Suspense>
+			<Card class="flex flex-col justify-between">
+				<CardContent class="p-4">
+					<div class="relative mb-2 aspect-square w-full">
+						<img
+							src={getImageUrl(
+								props.product.images && props.product.images[0].url,
+							)}
+							alt={props.product.title}
+							class="h-full w-full rounded-md object-cover"
 						/>
-					}
-					when={cartInfo.variations.length}
-				>
-					<Show when={variations.loading}>
-						<Loader />
-					</Show>
-					<Switch>
-						<Match when={variations.error}>
-							<ErrorBox message={"Не удалось загрузить вариации"} />
-						</Match>
-						<Match when={variations()}>
-							<CartProductPrice
-								productPrice={props.product.price}
-								count={cartInfo.count}
-								variations={variations()}
-								index={props.index}
-								addToSum={props.addToSum}
-							/>
-							<For each={variations()}>
-								{(variation) => (
-									<p>
-										{variation.key} - {variation.value}
-									</p>
-								)}
-							</For>
-						</Match>
-					</Switch>
-				</Show>
-				<p>Количество - {cartInfo.count || 1}</p>
-				<Button
-					text="Сведения о товаре"
-					link={`/product/${props.product.id}`}
-				/>
-			</div>
-		</section>
+						<For each={props.variations}>
+							{(variation) => (
+								<Badge class="absolute right-2 top-2 bg-blue-500">
+									{variation.key}: {variation.value}
+								</Badge>
+							)}
+						</For>
+					</div>
+					<h3 class="text-lg font-semibold">{props.product.title}</h3>
+					<p class="line-clamp-3 text-sm text-gray-500">
+						{props.product.description}
+					</p>
+					<p class="mt-2 text-lg font-bold">{price()}₽</p>
+				</CardContent>
+				<CardFooter class="gap-2 p-4">
+					<a class="w-full" href={`/product/${props.product.id}`}>
+						<Button class="w-full" variant="outline">
+							Перейти к товару
+						</Button>
+					</a>
+					<Button
+						class="w-max"
+						onClick={() => props.deleteFromCart(props.index())}
+					>
+						<img
+							class="block h-full text-white"
+							src={trash}
+							alt="Иконка корзины"
+							aria-label="Удалить из корзины"
+						/>
+					</Button>
+				</CardFooter>
+			</Card>
+		</Suspense>
 	);
 }
 
-function CartProductPrice(props: {
-	productPrice: number;
-	count: number;
-	index: number;
-	addToSum: (price: CartStore) => void;
-	variations?: ProductVariation[];
-}) {
-	if (!props.variations) {
-		const price: number = props.productPrice * (props.count || 1);
-		props.addToSum({ price: price, index: props.index });
-		return <p>{price}₽</p>;
-	}
-	const variationSum = props.variations.reduce((a, b) => a + b.price_markup, 0);
-	const price: number =
-		(props.productPrice + variationSum) * (props.count || 1);
-	props.addToSum({ price: price, index: props.index });
-	return <p>{price}₽</p>;
-}
+export default CartProduct;

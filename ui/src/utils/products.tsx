@@ -1,5 +1,8 @@
+import VariationInterface from "~/interfaces/variations";
+
 import { getFromApi } from "./api";
-import { removeFromCart } from "./cart";
+import { CartItem, removeFromCart } from "./cart";
+import { getVariations } from "./variations";
 import type ProductInterface from "../interfaces/product";
 
 export async function getProducts(
@@ -15,7 +18,8 @@ export async function getProduct(id: number): Promise<ProductInterface> {
 }
 
 export function getDescription(text: string, className: string) {
-	const paragraphs = text.split("\n");
+	let paragraphs = text.split("\n");
+	paragraphs = paragraphs.filter((paragraph) => paragraph !== "\r");
 	const pTags = paragraphs.map((paragraph) => {
 		return <p class={className}>{paragraph}</p>;
 	});
@@ -39,4 +43,19 @@ export async function getBulkProducts(
 	}
 
 	return response.data;
+}
+
+export async function getCartProducts(
+	cart: CartItem[],
+): Promise<{ product: ProductInterface; variations: VariationInterface[] }[]> {
+	const result: {
+		product: ProductInterface;
+		variations: VariationInterface[];
+	}[] = [];
+	for (const item of cart) {
+		const product = await getProduct(item.product_id);
+		const variations = await getVariations(item.variations);
+		result.push({ product, variations });
+	}
+	return result;
 }

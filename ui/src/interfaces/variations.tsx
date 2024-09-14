@@ -1,4 +1,4 @@
-export default interface ProductVariation {
+export default interface VariationInterface {
 	id: number;
 	key: string;
 	value: string;

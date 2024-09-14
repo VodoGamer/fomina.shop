@@ -1,6 +1,6 @@
 import axios, { type AxiosRequestConfig } from "axios";
 
-import type ProductVariation from "../interfaces/productVariation";
+import type VariationInterface from "../interfaces/variations";
 
 const apiURL = import.meta.env.VITE_BASE_API_URL;
 
@@ -20,7 +20,7 @@ export async function postApi(
 	);
 }
 
-export async function getVariation(id: number): Promise<ProductVariation> {
+export async function getVariation(id: number): Promise<VariationInterface> {
 	return (await getFromApi(`variation/${id}`)).data;
 }
 

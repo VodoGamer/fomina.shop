@@ -1,27 +1,27 @@
 import { getFromApi } from "./api";
-import type ProductVariation from "../interfaces/productVariation";
+import type VariationInterface from "../interfaces/variations";
 
-function groupVariations(variations: ProductVariation[]) {
-	const variationsByKey: { [key: string]: ProductVariation[] } = {};
+function groupVariations(variations: VariationInterface[]) {
+	const sortedVariations: Record<string, VariationInterface[]> = {};
 	for (const variation of variations) {
-		if (!variationsByKey[variation.key]) {
-			variationsByKey[variation.key] = [];
-		}
-		variationsByKey[variation.key].push(variation);
+		sortedVariations[variation.key] = [
+			...(sortedVariations[variation.key] || []),
+			variation,
+		];
 	}
-	return variationsByKey;
+	return sortedVariations;
 }
 
-export async function getProductVariations(productId: number) {
-	const response: ProductVariation[] = (
+export async function getSortedVariations(productId: number) {
+	const response: VariationInterface[] = (
 		await getFromApi(`product/${productId}/variations/`)
 	).data;
-	return Object.entries(groupVariations(response));
+	return groupVariations(response);
 }
 
 export async function getVariations(
 	ids: number[],
-): Promise<ProductVariation[]> {
+): Promise<VariationInterface[]> {
 	const response = await getFromApi("variations/", {
 		params: { ids: ids },
 	});

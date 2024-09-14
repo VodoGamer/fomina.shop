@@ -4,26 +4,21 @@ import "~/assets/animations.css";
 
 import { getProducts } from "~/utils/products";
 
-import { Loader } from "../Loader";
 import Product from "./Product";
+import ErrorBox from "../ErrorBox";
 
-const Products = (props: { categoryId?: number }) => {
-	const [products] = createResource(props.categoryId, getProducts);
+const Products = (props: { categoryId: number }) => {
+	const [products] = createResource(() => props.categoryId, getProducts);
 
 	return (
-		<>
-			<Show when={products.loading}>
-				<Loader />
+		<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+			<Show
+				when={!products.error}
+				fallback={<ErrorBox message="Не удалось загрузить продукты" />}
+			>
+				<For each={products()}>{(product) => <Product {...product} />}</For>
 			</Show>
-			<div class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-				<Show
-					when={!products.error}
-					fallback={<p>Error... {products.error.message}</p>}
-				>
-					<For each={products()}>{(product) => <Product {...product} />}</For>
-				</Show>
-			</div>
-		</>
+		</div>
 	);
 };
 

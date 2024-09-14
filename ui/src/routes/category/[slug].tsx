@@ -5,7 +5,6 @@ import { Transition } from "solid-transition-group";
 
 import ErrorBox from "~/components/ErrorBox";
 import Hero from "~/components/Hero";
-import { Loader } from "~/components/Loader";
 import Products from "~/components/Products";
 import { getCategory } from "~/utils/categories";
 import { getCompressedImageUrl } from "~/utils/images";
@@ -22,16 +21,15 @@ const RouterCategory = () => {
 };
 
 const Category = (props: { slug: string }) => {
-	const [category] = createResource(props.slug, getCategory);
+	const [category] = createResource(() => props.slug, getCategory);
 
 	return (
 		<>
 			<MetaProvider>
 				<Title>Категория товаров - Fomina Style</Title>
 			</MetaProvider>
-			<Hero image={getCompressedImageUrl(category()?.image)} />
-			<Show when={category.loading}>
-				<Loader />
+			<Show when={category()}>
+				{(category) => <Hero image={getCompressedImageUrl(category().image)} />}
 			</Show>
 			<Transition mode="outin" name="slide-fade">
 				<Switch>
@@ -39,10 +37,12 @@ const Category = (props: { slug: string }) => {
 						<ErrorBox message={"Не удалось загрузить категорию"} />
 					</Match>
 					<Match when={category()}>
-						<div>
-							<h1 style={{ margin: "24px 0" }}>{category()?.title}</h1>
-							<Products categoryId={category()?.id} />
-						</div>
+						{(category) => (
+							<div>
+								<h1 class="my-6 text-2xl font-bold">{category().title}</h1>
+								<Products categoryId={category().id} />
+							</div>
+						)}
 					</Match>
 				</Switch>
 			</Transition>
