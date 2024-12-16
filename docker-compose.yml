@@ -12,7 +12,6 @@ services:
       - db:/var/lib/postgresql/data
     ports:
       - "${POSTGRES_PORT}:5173"
-    network_mode: host
   api:
     build:
       context: ./api
@@ -27,17 +26,6 @@ services:
     volumes:
       - uploads:/app/uploads:rw
     restart: unless-stopped
-    network_mode: host
-  ui:
-    build:
-      dockerfile: ./ui/Dockerfile
-    container_name: ${PROJECT_NAME}-ui
-    env_file:
-      - .env
-    ports:
-      - "${UI_PORT}:3000"
-    restart: unless-stopped
-    network_mode: host
 
 volumes:
   uploads:

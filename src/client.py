@@ -9,9 +9,7 @@ from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 from src.env import DB_CONNECT_URL
 from src.services.admin.auth import authentication_backend
 
-storage = FileSystemStorage("uploads/")
-
-app = FastAPI()
+app = FastAPI(prefix="/v2")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -19,6 +17,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+storage = FileSystemStorage("uploads/")
 
 
 @app.exception_handler(ValidationError)

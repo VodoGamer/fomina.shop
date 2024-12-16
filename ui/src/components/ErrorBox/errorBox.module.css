@@ -1,8 +1,0 @@
-.box {
-	display: flex;
-	align-items: center;
-	background-color: #ff755d;
-	padding: 8px;
-	color: black;
-	gap: 16px;
-}

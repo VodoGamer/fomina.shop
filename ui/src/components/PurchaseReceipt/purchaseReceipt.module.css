@@ -1,9 +1,0 @@
-.receipt {
-	width: 100%;
-}
-
-@media screen and (max-width: 576px) {
-	.receipt {
-		width: 100%;
-	}
-}
